@@ -1,0 +1,19 @@
+{% extends "website/base.html" %}
+{% load material_form %}
+
+{% block title_block %} login | 360 MedNet {% endblock %}
+{% block content %}
+
+
+<form id="login" method="post" class="viewform" action="." enctype="multipart/form-data" role="form" >
+
+    {% csrf_token %}
+    {{ form }}
+
+
+  <button type="submit" class="btn btn-primary" >Login
+    <input type="hidden" name="next" value="logged_in" />
+  </button>
+
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{% load staticfiles %}
+
+    {% include 'material/includes/material_css.html' %}
+    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+    {% include 'material/includes/material_js.html' %}
+    <meta charset="UTF-8">
+    <title>{% block title_block %} {% endblock %}</title>
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

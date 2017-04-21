@@ -1,0 +1,28 @@
+{% extends "website/base.html" %}
+{% load material_form %}
+
+{% block title_block %} SignUp | 360 MedNet {% endblock %}
+{% block content %}
+    {% if registered  %}
+        <div class="container">
+            <strong> Your account has been successfully registered with <strong>360 Med Net</strong> </strong>
+        Click <a href="{% url 'login' %}"> here.</a> to proceed to login.<br />
+        </div>
+
+        {% else %}
+    <div class="container">
+    <h5>Hello {{ other_name }} ! </h5>
+    Your details have not been verified.
+        <br>You can register with <strong>360 Med Net</strong> and connect with other medics but you
+        will have limited access till you get verified.
+<form method="POST">
+    {% csrf_token %}
+   {% form form=doctor_form %}{% endform %}
+    {% form form=user_form %}{% endform %}
+
+
+    <button type="submit" name="_submit" class="btn">Register</button>
+</form>
+    </div>
+    {% endif %}
+{% endblock %}
