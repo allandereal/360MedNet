@@ -8,10 +8,6 @@ class VerifyForm(forms.Form):
     surname = forms.CharField(required=True)
     other_name = forms.CharField(required=True)
 
-    #class Meta:
-        #model = Doctor
-        #fields = ('first_name', 'last_name', 'middle_name')
-
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -31,7 +27,7 @@ class DoctorForm(forms.ModelForm):
 class SocialSiteForm(forms.ModelForm):
     class Meta:
         model = SocialSite
-        fields = ('doctor', 'facebook', 'linkedIn', 'twitter', 'website')
+        fields = ('doctor', 'social_site', 'username')
 
 
 class ProfileForm(forms.ModelForm):

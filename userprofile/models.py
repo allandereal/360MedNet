@@ -7,7 +7,7 @@ from PIL import Image
 
 
 class Doctor(models.Model):
-    user = models.OneToOneField(User)
+    username = models.OneToOneField(User)
     GENDER = (('Female', 'Female'), ('Male', 'Male'))
     first_name = models.CharField(max_length=100, blank=False, null=False)
     middle_name = models.CharField(max_length=100, blank=True, null=True)
@@ -24,20 +24,26 @@ class Doctor(models.Model):
     city = models.CharField(max_length=30, blank=True, null=True)
     hospital = models.CharField(max_length=30, blank=True, null=True)
     work_number = models.CharField(max_length=30, blank=True, null=True)
-    avatar = models.ImageField(upload_to=None, height_field=None, width_field=None, blank=True, null=True)
+    avatar = models.ImageField(upload_to="avatars", default='avatars/none/default.jpeg', height_field=None,
+                               width_field=None, blank=True, null=True)
+    website = models.URLField()
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return ' %s %s' % (self.first_name, self.last_name)
 
+    @classmethod
+    def view_profile(cls):
+        return cls.objects.all()
+
 
 class SocialSite(models.Model):
+    SOCIAL_SITE = (('LinkedIn', 'LinkedIn'), ('Facebook', 'Facebook'), ('Twitter', 'Twitter'), ('Youtube', 'Youtube'))
+
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    facebook = models.CharField(max_length=100, blank=True, null=True)
-    linkedIn = models.CharField(max_length=100, blank=True, null=True)
-    twitter = models.CharField(max_length=100, blank=True, null=True)
-    website = models.CharField(max_length=100, blank=True, null=True)
+    social_site = models.CharField(max_length=50, choices=SOCIAL_SITE)
+    username = models.CharField(max_length=100)
 
     def __str__(self):
         return '%s', self.doctor_id
@@ -109,7 +115,6 @@ class Medic(models.Model):
     @classmethod
     def medic_exists(cls, reg_number):
         return cls.objects.filter(reg_number=reg_number).exists()
-
 
     def __str__(self):
         return self.reg_number

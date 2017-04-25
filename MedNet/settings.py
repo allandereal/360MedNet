@@ -32,10 +32,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Third party apps
+
     'material',
     'material.frontend',
-    'material.admin',
+    #'material.admin',
 
+    'jet',
+    'jet.dashboard',
     # Framework apps
     'django.contrib.admin',
     'django.contrib.auth',
