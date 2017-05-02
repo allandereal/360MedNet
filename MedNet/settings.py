@@ -130,6 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -153,7 +154,7 @@ if os.getcwd() == '/app':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     #Allow only heroku to host the project
-    ALLOWED_HOSTS = ['360mednet.herokuapp.com']
+    ALLOWED_HOSTS = ['mednet360.herokuapp.com']
 
     DEBUG = False
 
@@ -163,7 +164,7 @@ if os.getcwd() == '/app':
     STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 
     MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
-    MEDIA_URL = "http://360mednet.herokuapp.com/None/"
+    MEDIA_URL = "http://mednet360.herokuapp.com/None/"
     MEDIAFILES_DIRS = (MEDIA_ROOT)
 
 
