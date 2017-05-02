@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,7 +33,7 @@ INSTALLED_APPS = [
 
     'material',
     'material.frontend',
-    #'material.admin',
+    # 'material.admin',
 
     'jet',
     'jet.dashboard',
@@ -85,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MedNet.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -95,7 +92,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -115,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -129,11 +124,47 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#  For Gmail or Google Apps
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'info360mednet@gmail.com'
+EMAIL_HOST_PASSWORD = 'testing01'  # app specfic password generated from support.google.com/accounts/answer/185833
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = '360MedNet Support Team <info360mednet@gmail.com>'
+
+#  Heroku Settings
+if os.getcwd() == '/app':
+    import dj_database_url
+    DATABASES = {
+        'default':dj_database_url.config(default = 'postgres://localhost')
+    }
+
+    #Honor the 'X_Forwarded-Proto' header for request.is_secure().
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    #Allow only heroku to host the project
+    ALLOWED_HOSTS = ['360mednet.herokuapp.com']
+
+    DEBUG = False
+
+    #Static asset configuration
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
+    MEDIA_URL = "http://360mednet.herokuapp.com/None/"
+    MEDIAFILES_DIRS = (MEDIA_ROOT)
+
+
+
