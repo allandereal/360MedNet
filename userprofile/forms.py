@@ -5,9 +5,9 @@ from userprofile.models import Doctor, SocialSite
 
 
 class VerifyForm(forms.Form):
-    registration_number = forms.CharField(required=True)
-    surname = forms.CharField(required=True)
-    other_name = forms.CharField(required=True)
+    registration_number = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    other_name = forms.CharField(required=False)
 
     layout = Layout(
         Row('registration_number', 'surname', 'other_name')

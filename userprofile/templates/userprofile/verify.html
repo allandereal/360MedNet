@@ -1,32 +1,3 @@
-{#{% extends "website/base.html" %}#}
-{#{% load material_form %}#}
-{##}
-{#{% block title_block %} 360 MedNet {% endblock %}#}
-{##}
-{#{% block content %}#}
-{#<div class="container">#}
-{##}
-{#<h4>Are you a medic?</h4>#}
-{#<div class="col-xs-2"></div>#}
-{##}
-{#<div class="col-xs-8">#}
-{##}
-{#<form method="post" class="viewform">#}
-{#    {% csrf_token %}#}
-{#    {% form form=form %}#}
-{#        {% part form.registration_number prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}#}
-{#        {% part form.surname prefix %}<i class="material-icons prefix">email</i>{% endpart %}#}
-{#        {% part form.other_name prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}#}
-{#    {% endform %}#}
-{#    <button type="submit" name="_submit" class="btn">Verify</button>#}
-{#</form>#}
-{##}
-{#</div>#}
-{##}
-{##}
-{#<div class="col-xs-2"></div>#}
-{#</div>#}
-{#{% endblock %}#}
 
 {% extends "website/base.html" %}
 {% load staticfiles %}
@@ -42,8 +13,8 @@
 {% block content %}
     <div style="background: url('{% static 'userprofile/images/header.jpg' %}'); background-repeat: no-repeat; background-size: 100%;  height: 90vh" >
     <br><br>
-    <div class="container">
-        <img src="{% static 'userprofile/images/logo.png' %}" width="150">
+    <div class="container" style="text-align: center">
+        <img src="{% static 'userprofile/images/logo.png' %}" width="150" >
 <br><br>
         <p class="flow-text" align="center">Are you a Registered Medic?</p>
 	 <div class="col s12">
@@ -78,7 +49,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
 
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
@@ -96,7 +67,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/event2.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/event2.jpeg' %}" alt ="sharing image">
 
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
@@ -114,7 +85,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
 
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
@@ -185,7 +156,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -202,7 +173,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -219,7 +190,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -237,7 +208,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -254,7 +225,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -271,7 +242,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">
 
 
             </div>
@@ -297,7 +268,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
 
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
@@ -315,7 +286,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
 
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
