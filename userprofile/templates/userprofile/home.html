@@ -1,10 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+ <head>
+        {% load material_form %}
+        {% load staticfiles %}
+        {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        <title>360 MedNet</title>
+        {% block favicon %}<link href="{% static 'userprofile/images/logo.png' %}">{% endblock %}
+        {% block css %}{% include 'material/frontend/includes/material_css.html' %}{% endblock css %}
+            <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+        {% block js %}{% include 'material/frontend/includes/material_js.html' %}{% endblock js %}
+        {% block extrahead %}{% endblock %}
+        {% endblock head %}
+    </head>
+    <body class="{% block bodyclass %}with-sidebar{% endblock %}">
+        {% block body %}
+        <header>
+            {% block header %}
+            <ul id="slide-out" class="side-nav fixed">
+                {% block sidenav_header %}
+                <li>
+                    <div class="userView">
+                        <img class="background" src="{% static 'userprofile/images/header.jpg' %}">
+                        <img src="{% static 'userprofile/images/logo.png' %}" width="150">
+                        {% block userphoto %}
+                        {% if user.photo.url %}
+                        <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
+                        {% else %}
+                        <a href="#"><img class="circle" src="{% static 'userprofile/images/john.jpg' %}"></a>
+                        {% endif %}
+                        {% endblock %}
+                        <span>Full Names</span><br>
+                        Specialisation<br>
+                        Heighest Level of training
+                        <a href="#"><span class="green-text name">{{ request.user.get_username|title }}</span></a>
+                        <a href="#"><span class="green-text email">{{ request.user.email }}</span></a>
+                    </div>
+                </li>
+                {% endblock %}
+                {% block sidenav_items %}
+                    <blockquote>
+                    <ul>
+                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
+                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
+                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
+                    </ul>
+                    </blockquote>
+                {% endblock sidenav_items %}
+            </ul>
+            {% endblock %}
+        </header>
+        <main>
+            {% block main %}
+                <div class="navbar-fixed">
+                    <nav>
+                      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
-</body>
+                        <div class="nav-wrapper">
+                        <div class="container">
+                          <a href="#!" class="brand-logo">360 MedNet</a>
+
+                          </div>
+                        </div>
+                       </nav>
+                </div>
+
+            {% endblock main %}
+        </main>
+
+            {% block footer %}
+        <footer class="page-footer">
+
+          <div class="container">
+
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">360MedNet</h5>
+                <p class="grey-text text-lighten-4">Connect, Collaborate, Create.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">&#8203</h5>
+                <ul align ="center">
+                  <li><a class="grey-text text-lighten-3" href="#!">www.360mednet.com | info@360mednet.com</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">+256-772-xxx-xxx | +256-772-xxx-xxx</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Developed in-house by TMCG</a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2017 360 MedNet
+            <a class="grey-text text-lighten-4 right" href="#!">TMCG</a>
+            </div>
+          </div>
+        </footer>
+            {% endblock footer %}
+
+        {% endblock %}
+    </body>
 </html>
