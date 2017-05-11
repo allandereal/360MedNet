@@ -21,7 +21,6 @@ def verify(request):
         elif Medic.objects.filter(reg_number=registration_number, surname=surname, other_name=other_name,
                                   status=True).exists():
             return HttpResponseRedirect("/accounts/login")
-
         else:
             qs = other_name
             return HttpResponseRedirect('/accounts/unverified_registration/', {'qs': qs})
@@ -107,7 +106,6 @@ class UpdateProfile(UpdateView):
 
     template_name = 'userprofile/doctor_profile_update.html'
     success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
-
 
 
 def home(request):
