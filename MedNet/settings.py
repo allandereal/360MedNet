@@ -163,7 +163,7 @@ if os.getcwd() == '/app':
     STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 
     MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
-    MEDIA_URL = "http://mednet360.herokuapp.com/None/"
+    MEDIA_URL = "http://mednet360.herokuapp.com/media/"
     MEDIAFILES_DIRS = (MEDIA_ROOT)
 
 
