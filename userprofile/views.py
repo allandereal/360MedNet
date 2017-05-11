@@ -110,3 +110,9 @@ class UpdateProfile(UpdateView):
 
 
 
+def home(request):
+    return render(request, 'userprofile/home.html')
+
+
+
+

@@ -29,15 +29,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # Third party apps
-
+    'material.theme.lightgreen',
     'material',
     'material.frontend',
     # 'material.admin',
 
     'jet',
     'jet.dashboard',
-    # Framework apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,12 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third party apps
-
-
     # My Apps
     'userprofile',
-    'website'
+    'website',
+    'post',
+    'medicalcase'
 ]
 
 MIDDLEWARE = [
@@ -142,6 +139,8 @@ EMAIL_HOST_PASSWORD = 'testing01'  # app specfic password generated from support
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '360MedNet Support Team <info360mednet@gmail.com>'
+
+LOGIN_REDIRECT_URL = '/post'
 
 #  Heroku Settings
 if os.getcwd() == '/app':

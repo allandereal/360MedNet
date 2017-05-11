@@ -19,6 +19,9 @@
     {% csrf_token %}
    {% form form=doctor_form %}{% endform %}
     {% form form=user_form %}{% endform %}
+{#        {% part user_form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}#}
+{#        {% part user_form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}#}
+{#        {% part user_form.password prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}#}
 
 
     <button type="submit" name="_submit" class="btn">Register</button>

@@ -1,0 +1,25 @@
+{% extends "website/base.html" %}
+{% load material_form %}
+
+{% block title_block %} SignUp | 360 MedNet {% endblock %}
+{% block content %}
+
+    <div class="container">
+{% for post in posts %}
+        {{ post.post_content }}
+        {{ post.doctor }}
+        {{ post.created_at }}
+
+    {% endfor %}
+
+    {% for medical_case in medical_cases %}
+        {{ medical_case.post_content }}
+        {{ medical_case.post_content }}
+        {{ medical_case.post_content }}
+        {{ medical_case.doctor }}
+        {{ medical_case.created_at }}
+
+    {% endfor %}
+    </div>
+
+{% endblock %}

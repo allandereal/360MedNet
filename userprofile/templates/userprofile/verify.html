@@ -1,26 +1,335 @@
+{#{% extends "website/base.html" %}#}
+{#{% load material_form %}#}
+{##}
+{#{% block title_block %} 360 MedNet {% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container">#}
+{##}
+{#<h4>Are you a medic?</h4>#}
+{#<div class="col-xs-2"></div>#}
+{##}
+{#<div class="col-xs-8">#}
+{##}
+{#<form method="post" class="viewform">#}
+{#    {% csrf_token %}#}
+{#    {% form form=form %}#}
+{#        {% part form.registration_number prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}#}
+{#        {% part form.surname prefix %}<i class="material-icons prefix">email</i>{% endpart %}#}
+{#        {% part form.other_name prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}#}
+{#    {% endform %}#}
+{#    <button type="submit" name="_submit" class="btn">Verify</button>#}
+{#</form>#}
+{##}
+{#</div>#}
+{##}
+{##}
+{#<div class="col-xs-2"></div>#}
+{#</div>#}
+{#{% endblock %}#}
+
 {% extends "website/base.html" %}
+{% load staticfiles %}
 {% load material_form %}
 
-{% block title_block %} 360 MedNet {% endblock %}
+{% block title_block %}360MedNet{% endblock %}
+
+{% block headerimg %}
+
+
+{% endblock %}
 
 {% block content %}
-<div class="container">
-
-<h4>Are you a medic?</h4>
-<div class="col-xs-2"></div>
-
-<div class="col-xs-8">
-
-<form method="post" class="viewform">
-    {% csrf_token %}
-    {% form form=form %}
+    <div style="background: url('{% static 'userprofile/images/header.jpg' %}'); background-repeat: no-repeat; background-size: 100%;  height: 90vh" >
+    <br><br>
+    <div class="container">
+        <img src="{% static 'userprofile/images/logo.png' %}" width="150">
+<br><br>
+        <p class="flow-text" align="center">Are you a Registered Medic?</p>
+	 <div class="col s12">
+      <div class="row">
+       <form method="post" class="viewform">
+        {% csrf_token %}
+       {% form form=form %}
+        {% part form.registration_number prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.surname prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.other_name prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}
     {% endform %}
-    <button type="submit" name="_submit" class="btn">Verify</button>
-</form>
 
+       <br><br>
+       <div class="row">
+       <div class="submit col s12 l4">
+		<button class="btn waves-effect waves-light" type="submit" name="_submit">Verify yourself
+    <i class="material-icons right">send</i>
+  </button>
+       </div></div>
+
+    </form>
+        </div>
+     </div>
+    </div>
+    </div>
+    <p>
+<div class ="container">
+       <div class="row">
+
+          <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+            <span class="card-title">Share Cases</span>
+              <p>Content Content Content Content Content Content Content Content Content
+              Content Content Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/event2.jpg' %}" alt ="sharing image">
+
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+             <span class="card-title">Medical Confrences</span>
+              <p>Content Content Content Content Content Content Content Content
+              Content Content Content Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+            <span class="card-title">Use any Device</span>
+              <p>Content Content Content Content Content Content Content Content Content Content
+              Content Content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
 </div>
+    </div>
+    </p>
 
 
-<div class="col-xs-2"></div>
+<p>
+<div class ="container">
+     <nav>
+
+    <div class="nav-wrapper">
+	<div class="container">
+	  <a href="#!" class="brand-logo"><i class="material-icons">comment</i>About 360MedNet</a>
+    </div></div>
+
+</nav>
+       <div class="row">
+
+          <div class="col s12 m12 l12">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+
+            <div class="card-content">
+            <span class="card-title"></span>
+              <p>Content Content Content Content Content Content Content Content Content
+              Content Content Content. Content Content Content Content Content Content Content Content Content
+              Content Content Content. Content Content Content Content Content Content Content Content Content
+              Content Content Content <br> Content Content Content Content Content Content Content Content Content
+              Content Content Content. Content Content Content Content Content Content Content Content Content
+              Content Content Content. Content Content Content Content Content Content Content Content Content
+              Content Content Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
 </div>
+    </div>
+    </p>
+
+ <p>
+<div class ="container">
+     <nav>
+
+    <div class="nav-wrapper">
+	<div class="container">
+	  <a href="#!" class="brand-logo"><i class="material-icons">perm_contact_calendar</i>The Team</a>
+    </div></div>
+
+</nav>
+    <p>
+       <div class="row">
+
+          <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+             <span class="card-title"></span>
+                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+             <span class="card-title"></span>
+               <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+             <span class="card-title"></span>
+                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+            </div>
+          </div>
+
+         <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+             <span class="card-title"></span>
+                <p><b>Dr.John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+             <span class="card-title"></span>
+                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s16 m3 l2">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/john.jpg' %}" alt ="sharing image">
+
+
+            </div>
+            <div class="card-content">
+            <span class="card-title"></span>
+                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+</div>
+    </div>
+    </p>
+
+
+<p>
+<div class ="container">
+       <div class="row">
+
+          <div class="col s12 m6 l6">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+            <span class="card-title">Share Cases</span>
+              <p>Content Content Content Content Content Content Content Content Content
+              Content Content Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+          <div class="col s12 m46 l6">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/sharing.jpg' %}" alt ="sharing image">
+
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+             <span class="card-title">Medical Confrences</span>
+              <p>Content Content Content Content Content Content Content Content
+              Content Content Content Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+</div>
+    </div>
+    </p>
+
 {% endblock %}

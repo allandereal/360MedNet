@@ -7,7 +7,7 @@ from PIL import Image
 
 
 class Doctor(models.Model):
-    username = models.OneToOneField(User)
+    user = models.OneToOneField(User)
     GENDER = (('Female', 'Female'), ('Male', 'Male'))
     first_name = models.CharField(max_length=100, blank=False, null=False)
     middle_name = models.CharField(max_length=100, blank=True, null=True)

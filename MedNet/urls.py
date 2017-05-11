@@ -5,6 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^', include('medicalcase.urls')),
+    url(r'^', include('post.urls')),
     url(r'^', include('userprofile.urls')),
     url(r'^', include('website.urls')),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS

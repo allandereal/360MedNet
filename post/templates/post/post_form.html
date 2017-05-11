@@ -1,0 +1,21 @@
+{% extends "website/base.html" %}
+{% load material_form %}
+
+{% block title_block %} SignUp | 360 MedNet {% endblock %}
+{% block content %}
+
+    <div class="container">
+<form method="POST">
+    {% csrf_token %}
+   {% form form=form %}{% endform %}
+
+    <button type="submit" name="_submit" class="btn">Post</button>
+</form>
+    </div>
+
+    {% for post in posts %}
+        {{ post.post_content }}
+        {{ post.doctor }}
+    {% endfor %}
+
+{% endblock %}
