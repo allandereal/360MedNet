@@ -15,7 +15,7 @@
 
     {% for post in posts %}
         {{ post.post_content }}
-        {{ post.doctor }}
+        {{ post.doctor.first_name }}
     {% endfor %}
 
 {% endblock %}
