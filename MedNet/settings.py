@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'material.theme.lightgreen',
+    #'material.theme.lightgreen',
     'material',
     'material.frontend',
     # 'material.admin',
