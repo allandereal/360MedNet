@@ -8,4 +8,4 @@ def about_us(request):
 
 
 def privacy_policy(request):
-    return render(request, 'website/privay_policy.html')
+    return render(request, 'website/privacy_policy.html')

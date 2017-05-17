@@ -8,10 +8,6 @@ class MedicalCaseCategory(models.Model):
     def __str__(self):
         return self.name
 
-    # @classmethod
-    # def get_category_list(cls):
-    #     return cls.objects.values('name')
-
 
 class MedicalCase(models.Model):
     GENDER = (('', ''),('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
@@ -30,7 +26,7 @@ class MedicalCase(models.Model):
     review_of_systems = models.TextField()
     physical_examination = models.TextField()
     diagnostic_tests = models.TextField()
-    medical_case_category = models.CharField(max_length=200)
+    medical_case_category = models.ForeignKey(MedicalCaseCategory)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     doctor = models.ForeignKey(Doctor, models.DO_NOTHING, blank=False, null=False)
