@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import csv
 from django.core.files.storage import default_storage
 from PIL import Image
+from django.urls import reverse
 
 
 class Doctor(models.Model):
@@ -36,6 +37,9 @@ class Doctor(models.Model):
     @classmethod
     def view_profile(cls):
         return cls.objects.all()
+
+    def get_absolute_url(self):
+        return reverse('doctor-detail', kwargs={'pk': self.pk})
 
 
 class SocialSite(models.Model):

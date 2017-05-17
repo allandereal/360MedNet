@@ -3,7 +3,10 @@
 
 {% block title_block %} 360 MedNet {% endblock %}
 {% block content %}
+     <div class="card">
+    <br>
 
+<div class="col s12 container">
     <div class="container">
 <form method="POST">
     {% csrf_token %}
@@ -11,11 +14,22 @@
 
     <button type="submit" name="_submit" class="btn">Post</button>
 </form>
+    <br>
     </div>
+</div>
+</div>
+<br>
+    <div class="card">
+    <br>
 
-    {% for post in posts %}
-        {{ post.post_content }}
-        {{ post.doctor.first_name }}
-    {% endfor %}
+    <div class="container">
+    <ul>
+        {% for post in object_list %}
+            <li>{{ post.post_content }}</li>
+            <li>{{ post.doctor.first_name }}{{ post.doctor.last_name }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    </div>
 
 {% endblock %}

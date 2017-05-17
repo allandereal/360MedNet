@@ -19,7 +19,7 @@ class MedicalCaseCreate(CreateView):
               'allergies', 'medications', 'review_of_systems', 'physical_examination', 'diagnostic_tests',
               'medical_case_category']
 
-    success_url = '/feed/'
+    success_url = '/medical_cases/'
     template_name = 'medicalcase/medicalcase_form.html'
 
     def form_valid(self, form):
@@ -28,7 +28,5 @@ class MedicalCaseCreate(CreateView):
         return super(MedicalCase, self).form_valid(form)
 
 
-def medical_case_list(request):
-    medical_cases = MedicalCase.list_medical_cases()
-
-    return render(request, 'post/feeds.html', locals())
+class MedicalCaseList(ListView):
+    model = MedicalCase

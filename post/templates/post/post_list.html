@@ -1,0 +1,34 @@
+{% extends "userprofile/home.html" %}
+{% load material_form %}
+
+{% block title_block %} 360 MedNet {% endblock %}
+{% block content %}
+
+{% if object_list.count > 0 %}
+        {% for post in object_list %}
+              <div class="card">
+            <div class="container">
+            <br><img class="mySlides card-img-top" src="{{ post.doctor.avatar.url }}" class="responsive-img img-fluid"
+                     style='max-height:50px;'>
+            {{ post.doctor.first_name }} {{ post.doctor.last_name }}
+            <br>{{ post.doctor.profession}}
+            <br>{{ post.created_at}}
+            <br>{{ post.post_content }}
+            <br><br>
+            </div>
+            </div>
+        {% endfor %}
+{% else %}
+    <div class="card">
+            <div class="container">
+                <br>
+                No posts yet!!
+                <br>
+            </div>
+    </div>
+{% endif %}
+
+
+
+
+{% endblock %}

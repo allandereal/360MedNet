@@ -1,0 +1,34 @@
+{% extends "userprofile/home.html" %}
+{% load material_form %}
+
+{% block title_block %} 360 MedNet {% endblock %}
+{% block content %}
+
+{% if object_list.count > 0 %}
+        {% for medical_case in object_list %}
+              <div class="card">
+            <div class="container">
+            <br><img class="mySlides card-img-top" src="{{medical_case.doctor.avatar.url }}" class="responsive-img img-fluid"
+                     style='max-height:50px;'>
+            {{ medical_case.doctor.first_name }} {{ medical_case.doctor.last_name }}
+            <br>{{ medical_case.doctor.profession}}
+            <br>{{ medical_case.created_at}}
+            <br>{{ medical_case.title }}
+            <br><br>
+            </div>
+            </div>
+        {% endfor %}
+{% else %}
+    <div class="card">
+            <div class="container">
+                <br>
+                No medical cases yet!!
+                <br>
+            </div>
+    </div>
+{% endif %}
+
+
+
+
+{% endblock %}

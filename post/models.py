@@ -1,6 +1,5 @@
 from django.db import models
 from userprofile.models import Doctor
-# Create your models here.
 
 
 class Post(models.Model):

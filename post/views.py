@@ -12,11 +12,8 @@ from django.views.generic.list import ListView
 
 class PostCreate(CreateView):
     model = Post
-    form = PostForm
-    fields = ['post_content']
-
-    success_url = '/post/'
-    # template_name = 'Vehicle/vehicle_form.html'
+    form_class = PostForm
+    success_url = '/feed/'
 
     def form_valid(self, form):
         form.instance.doctor = Doctor.objects.get(user=self.request.user)
@@ -24,8 +21,5 @@ class PostCreate(CreateView):
         return super(PostCreate, self).form_valid(form)
 
 
-
-def post_list(request):
-    posts = Post.list_posts()
-
-    return render(request, 'post/feeds.html', locals())
+class PostList(ListView):
+    model = Post

@@ -23,29 +23,31 @@
                 {% block sidenav_header %}
                 <li>
                     <div class="userView">
-                        <img class="background" src="{% static 'userprofile/images/header.jpg' %}">
-                        <img src="{% static 'userprofile/images/logo.png' %}" width="150">
+{#                        <img class="background" src="{% static 'userprofile/images/header.jpeg' %}">#}
+{#                        <img src="{% static 'userprofile/images/logo.png' %}" width="150" >#}
                         {% block userphoto %}
-                        {% if user.photo.url %}
-                        <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
+                        {% if user.doctor.avatar.url %}
+                        <a href="#"><img class="circle" src="{{ user.doctor.avatar.url }}" width="200"></a>
                         {% else %}
-                        <a href="#"><img class="circle" src="{% static 'userprofile/images/john.jpg' %}"></a>
+                        <a href="#"><img class="circle" src="{% static 'media/avatars/none/default.jpeg' %}"></a>
                         {% endif %}
                         {% endblock %}
-                        <span>Full Names</span><br>
-                        Specialisation<br>
-                        Heighest Level of training
-                        <a href="#"><span class="green-text name">{{ request.user.get_username|title }}</span></a>
-                        <a href="#"><span class="green-text email">{{ request.user.email }}</span></a>
+                        <ul>
+                            <li><span>{{ user.doctor.first_name }} {{ user.doctor.last_name }}</span></li>
+                            <li><span>{{ user.doctor.profession}}</span> at {{ user.doctor.hospital}}</li>
+                            <li><span>{{ user.doctor.specialization}}</span></li>
+{#                        <a href="#"><span class="green-text name">{{ request.user.get_username|title }}</span></a>#}
+{#                        <a href="#"><span class="green-text email">{{ request.user.email }}</span></a>#}
+                        </ul>
                     </div>
                 </li>
                 {% endblock %}
                 {% block sidenav_items %}
                     <blockquote>
                     <ul>
-                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
-                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
-                        <li><i class="material-icons prefix">email</i>Sidebar Link</li>
+                        <li><i class="material-icons prefix">email</i><a href="{% url 'medical_cases' %}">Medical Cases</a></li>
+                        <li><i class="material-icons prefix">email</i><a>Profile</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a><i class="material-icons prefix">email</i></li>
                     </ul>
                     </blockquote>
                 {% endblock sidenav_items %}
@@ -68,36 +70,35 @@
                 </div>
                 {% block content %}
                     {% endblock %}
-
+<br>
             {% endblock main %}
+        <br>
         </main>
-
+<br>
             {% block footer %}
+<br>
         <footer class="page-footer">
 
           <div class="container">
 
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">360MedNet</h5>
-                <p class="grey-text text-lighten-4">Connect, Collaborate, Create.</p>
+                <p class="grey-text text-lighten-4">Connect, Collaborate and Create.</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">&#8203</h5>
-                <ul align ="center">
-                  <li><a class="grey-text text-lighten-3" href="#!">www.360mednet.com | info@360mednet.com</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">+256-772-xxx-xxx | +256-772-xxx-xxx</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!"></a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Developed in-house by TMCG</a></li>
-
-                </ul>
+                <p align ="right" class="grey-text text-lighten-3">
+                    <a class="grey-text text-lighten-3" href="{% url 'about_us' %}">About</a> |
+                    <a class="grey-text text-lighten-3" href="#!">Help</a> |
+                    <a class="grey-text text-lighten-3" href="#!">Contact</a>
+                </p>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
             © 2017 360 MedNet
-            <a class="grey-text text-lighten-4 right" href="#!">TMCG</a>
+            <a class="grey-text text-lighten-4 right" href="{% url 'privacy_policy' %}">
+                Privacy Policy </a>
             </div>
           </div>
         </footer>

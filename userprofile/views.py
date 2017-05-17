@@ -14,11 +14,11 @@ def verify(request):
         registration_number = form.cleaned_data['registration_number']
         surname = form.cleaned_data['surname']
         other_name = form.cleaned_data['other_name']
-        if Medic.objects.filter(reg_number=registration_number, surname=surname, other_name=other_name,
+        if Medic.objects.filter(reg_number=registration_number, surname__iexact=surname, other_name__iexact=other_name,
                                 status=False).exists():
             qs = Medic.objects.get(reg_number=registration_number)
             return HttpResponseRedirect('/accounts/verified_registration/{}'.format(qs))
-        elif Medic.objects.filter(reg_number=registration_number, surname=surname, other_name=other_name,
+        elif Medic.objects.filter(reg_number=registration_number, surname__iexact=surname, other_name__iexact=other_name,
                                   status=True).exists():
             return HttpResponseRedirect("/accounts/login")
         else:
@@ -52,8 +52,7 @@ def register(request, medic_id):
         user_form = UserForm()
         doctor_form = DoctorForm()
 
-    return render(request, 'userprofile/register.html',
-                  {'user_form': user_form, 'doctor_form': doctor_form, 'registered': registered, 'qs': qs})
+    return render(request, 'userprofile/register.html', locals())
 
 
 def unverified_register(request):
@@ -79,8 +78,7 @@ def unverified_register(request):
         user_form = UserForm()
         doctor_form = DoctorForm()
 
-    return render(request, 'userprofile/unverified_register.html',
-                  {'user_form': user_form, 'doctor_form': doctor_form, 'registered': registered})
+    return render(request, 'userprofile/unverified_register.html', locals())
 
 
 # def view_profile(request):
@@ -105,7 +103,7 @@ class UpdateProfile(UpdateView):
               'about_me', 'hospital', 'work_number', 'avatar']
 
     template_name = 'userprofile/doctor_profile_update.html'
-    success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
+    #success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
 
 
 def home(request):

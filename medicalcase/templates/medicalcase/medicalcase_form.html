@@ -4,12 +4,20 @@
 {% block title_block %} Medical Case | 360 MedNet {% endblock %}
 {% block content %}
 
-    <div class="container">
+    <div class="card">
+    <br>
+
+<div class="col s12 container">
+<h2> Medical Case </h2>
 <form method="POST">
     {% csrf_token %}
    {% form form=form %}{% endform %}
 
     <button type="submit" name="_submit" class="btn">Publish</button>
 </form>
+<br>
  </div>
+
+    </div>
+<br>
 {% endblock %}

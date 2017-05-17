@@ -5,7 +5,7 @@ from userprofile import views as user_views
 urlpatterns = [
     url(r'^login/$', auth_views.login, name='login', kwargs={'redirect_authenticated_user': True,
                                                              'template_name': 'userprofile/login.html',
-                                                             'redirect_field_name': '/post'}),
+                                                             'redirect_field_name': 'post'}),
     url(r'^accounts/verified_registration/(?P<medic_id>[0-9]+)$', user_views.register, name='register'),
     url(r'^accounts/unverified_registration/$', user_views.unverified_register, name='unverified_register'),
     url(r'^$', user_views.verify, name='verify'),

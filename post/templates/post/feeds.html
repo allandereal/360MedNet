@@ -1,25 +1,31 @@
 {% extends "userprofile/home.html" %}
 {% load material_form %}
 
-{% block title_block %} SignUp | 360 MedNet {% endblock %}
+{% block title_block %} 360 MedNet {% endblock %}
 {% block content %}
+         <div class="card">
+    <br>
+
+<div class="col s12 container">
+    <div class="container">
+<form method="POST">
+    {% csrf_token %}
+   {% form form=form %}{% endform %}
+
+    <button type="submit" name="_submit" class="btn">Post</button>
+</form>
+    <br>
+    </div>
+</div>
+</div>
 
     <div class="container">
-{% for post in posts %}
-        {{ post.post_content }}
-        {{ post.doctor }}
-        {{ post.created_at }}
-
-    {% endfor %}
-
-    {% for medical_case in medical_cases %}
-        {{ medical_case.post_content }}
-        {{ medical_case.post_content }}
-        {{ medical_case.post_content }}
-        {{ medical_case.doctor }}
-        {{ medical_case.created_at }}
-
-    {% endfor %}
+    <ul>
+        {% for post in object_list %}
+            <li>{{ post.post_content }}</li>
+            <li>{{ post.doctor.first_name }}{{ post.doctor.last_name }}</li>
+        {% endfor %}
+    </ul>
     </div>
 
 {% endblock %}
