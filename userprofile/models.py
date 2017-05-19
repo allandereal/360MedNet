@@ -89,7 +89,7 @@ class Medic(models.Model):
     @classmethod
     def create_medic(cls, csv_file):
         medical_practitioner = 0
-        with default_storage.open(os.path.join(str(csv_file)), 'r') as f:
+        with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
             # f = default_storage.open(os.path.join(str(csv_file)), 'r', encoding="ISO-8859-1")
             reader = csv.reader(f)
             for row in reader:
