@@ -94,19 +94,19 @@ class Medic(models.Model):
 
         url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
         ftpstream = urllib.request.urlopen(url)
-        csvfile = csv.DictReader(ftpstream.read().decode('ISO-8859-1'), delimiter=",")
+        csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'), delimiter=",")
         # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
         #     f = default_storage.open(os.path.join(str(csv_file)), 'r', encoding="ISO-8859-1")
         #     csvfile = csv.reader(f)
         for row in csvfile:
-            reg_number = row['Reg No.']
+            reg_number = row[0]
             if Medic.medic_exists(reg_number):
-                Medic.objects.update(reg_number=row['Reg No.'], surname=row['Surname'], other_name=row['Other Name'],
-                                     sex=row['Sex'], employer=row['Employer'], postal_address=row['Postal Address'],
-                                     first_registration=row['First Registration'],
-                                     date_of_first_registration=row['Date of First Registration'],
-                                     additional_qualifications=row['Additional Qualification(s)'], speciality=row['Speciality'],
-                                     receipt_number=row['Receipt No.'], serial_number=row['Serial No.']
+                Medic.objects.update(reg_number=row[0], surname=row[1], other_name=row[2],
+                                     sex=row[3], employer=row[4], postal_address=row[5],
+                                     first_registration=row[6],
+                                     date_of_first_registration=row[7],
+                                     additional_qualifications=row[8], speciality=row[9],
+                                     receipt_number=row[10], serial_number=row[11]
                                      )
                 medical_practitioner = + 1
             else:
