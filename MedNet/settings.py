@@ -168,12 +168,6 @@ if os.getcwd() == '/app':
     #MEDIA_URL = "http://mednet360.herokuapp.com/media/"
     #MEDIAFILES_DIRS = (MEDIA_ROOT)
 
-    # AWS_QUERYSTRING_AUTH = False
-    # AWS_ACCESS_KEY_ID = 'AKIAIYR2GWMEJY4QRZCQ'
-    # AWS_SECRET_ACCESS_KEY = 'gVv1jN+LEd7fBbxAUx7d5lPeUMimuajJgpzK380P'
-    # AWS_STORAGE_BUCKET_NAME = '360mednet'
-    # MEDIA_URL = 'http://%s.s3.amazonaws.com/your-folder/' % AWS_STORAGE_BUCKET_NAME
-    # DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
     AWS_QUERYSTRING_AUTH = False
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
