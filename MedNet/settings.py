@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'material.theme.lightgreen',
+    # 'material.theme.lightgreen',
     'material',
     'material.frontend',
     # 'material.admin',
@@ -129,7 +129,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -147,27 +146,27 @@ LOGIN_REDIRECT_URL = '/feed'
 #  Heroku Settings
 if os.getcwd() == '/app':
     import dj_database_url
+
     DATABASES = {
-        'default':dj_database_url.config(default='postgres://localhost')
+        'default': dj_database_url.config(default='postgres://localhost')
     }
 
-    #Honor the 'X_Forwarded-Proto' header for request.is_secure().
+    # Honor the 'X_Forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    #Allow only heroku to host the project
+    # Allow only heroku to host the project
     ALLOWED_HOSTS = ['mednet360.herokuapp.com']
 
     DEBUG = False
 
-    #Static asset configuration
+    # Static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
     STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 
-    #MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
-    #MEDIA_URL = "http://mednet360.herokuapp.com/media/"
-    #MEDIAFILES_DIRS = (MEDIA_ROOT)
-
+    # MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
+    # MEDIA_URL = "http://mednet360.herokuapp.com/media/"
+    # MEDIAFILES_DIRS = (MEDIA_ROOT)
 
     AWS_QUERYSTRING_AUTH = False
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
@@ -175,6 +174,3 @@ if os.getcwd() == '/app':
     AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
     MEDIA_URL = 'http://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
-
-
-

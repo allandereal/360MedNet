@@ -16,7 +16,7 @@
           <div class="card">
             <div class="card-content">
              <span class="card-title">Login</span>
-              <p><form method="post" class="viewform">
+                <form method="post" class="viewform">
     {% csrf_token %}
     {% form form=form %}
         {% part form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
@@ -24,16 +24,15 @@
     {% endform %}
             <br><br>
 
-</form>
-<form method="POST" class="viewform">
-    {% csrf_token %}
     <div class="row">
        <div align="center">
         <button class="btn waves-effect waves-light" type="submit" name="_submit">Login<i class="material-icons right">send</i>
         </button>
        </div>
     </div>
-</form>
+
+                </form>
+
 
 </div>
       <br><br>
