@@ -92,12 +92,11 @@ class Medic(models.Model):
     def create_medic(cls, csv_file):
         medical_practitioner = 0
 
-        #url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
-        url = "https://360mednet.s3.amazonaws.com/records/Licenced_Medical_and_Dental_Practitioners_Autosaved.csv"
+        url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
         ftpstream = urllib.request.urlopen(url)
-        csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'), delimiter=",")
+        csvfile = csv.reader(ftpstream.read())
         # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
-        #     f = default_storage.open(os.path.join(str(csv_file)), 'r', encoding="ISO-8859-1")
+        #     f = default_storage.open(os.path.join(str(csv_file)), 'r')
         #     csvfile = csv.reader(f)
         for row in csvfile:
             reg_number = row[0]
@@ -112,12 +111,12 @@ class Medic(models.Model):
                 medical_practitioner = + 1
             else:
                 Medic.objects.filter(reg_number=row[0]).update(surname=row[1], other_name=row[2],
-                                     sex=row[3], employer=row[4], postal_address=row[5],
-                                     first_registration=row[6],
-                                     date_of_first_registration=row[7],
-                                     additional_qualifications=row[8], speciality=row[9],
-                                     receipt_number=row[10], serial_number=row[11]
-                                     )
+                                                               sex=row[3], employer=row[4], postal_address=row[5],
+                                                               first_registration=row[6],
+                                                               date_of_first_registration=row[7],
+                                                               additional_qualifications=row[8], speciality=row[9],
+                                                               receipt_number=row[10], serial_number=row[11]
+                                                               )
                 medical_practitioner = + 1
 
             Record.objects.filter(file=csv_file).update(synced=True)
