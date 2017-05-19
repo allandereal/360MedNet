@@ -99,7 +99,7 @@ class Medic(models.Model):
         #     f = default_storage.open(os.path.join(str(csv_file)), 'r', encoding="ISO-8859-1")
         #     csvfile = csv.reader(f)
         for row in csvfile:
-            reg_number = row[0]
+            reg_number = row['Reg No.']
             if Medic.medic_exists(reg_number):
                 Medic.objects.update(reg_number=row['Reg No.'], surname=row['Surname'], other_name=row['Other Name'],
                                      sex=row['Sex'], employer=row['Employer'], postal_address=row['Postal Address'],
