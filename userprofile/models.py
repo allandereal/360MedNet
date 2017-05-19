@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import csv
 from django.core.files.storage import default_storage
+import urllib.request
+import codecs
 from PIL import Image
 from django.urls import reverse
 
@@ -89,10 +91,15 @@ class Medic(models.Model):
     @classmethod
     def create_medic(cls, csv_file):
         medical_practitioner = 0
-        with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
+
+        url = "https://360mednet.s3.amazonaws.com/csv_file"
+        ftpstream = urllib.request.urlopen(url)
+        csvfile = csv.reader(codecs.iterdecode(ftpstream, 'utf-8'))
+        for line in csvfile:
+            # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
             # f = default_storage.open(os.path.join(str(csv_file)), 'r', encoding="ISO-8859-1")
-            reader = csv.reader(f)
-            for row in reader:
+            # reader = csv.reader(f)
+            for row in csvfile:
                 reg_number = row[0]
                 if Medic.medic_exists(reg_number):
                     Medic.objects.update(reg_number=row[0], surname=row[1], other_name=row[2],
