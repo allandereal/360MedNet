@@ -92,7 +92,8 @@ class Medic(models.Model):
     def create_medic(cls, csv_file):
         medical_practitioner = 0
 
-        url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
+        #url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
+        url = "https://360mednet.s3.amazonaws.com/records/Licenced_Medical_and_Dental_Practitioners_Autosaved.csv"
         ftpstream = urllib.request.urlopen(url)
         csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'), delimiter=",")
         # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
@@ -100,8 +101,8 @@ class Medic(models.Model):
         #     csvfile = csv.reader(f)
         for row in csvfile:
             reg_number = row[0]
-            if Medic.medic_exists(reg_number):
-                Medic.objects.update(reg_number=row[0], surname=row[1], other_name=row[2],
+            if not Medic.medic_exists(reg_number):
+                Medic.objects.create(reg_number=row[0], surname=row[1], other_name=row[2],
                                      sex=row[3], employer=row[4], postal_address=row[5],
                                      first_registration=row[6],
                                      date_of_first_registration=row[7],
@@ -110,7 +111,7 @@ class Medic(models.Model):
                                      )
                 medical_practitioner = + 1
             else:
-                Medic.objects.create(reg_number=row[0], surname=row[1], other_name=row[2],
+                Medic.objects.filter(reg_number=row[0]).update(surname=row[1], other_name=row[2],
                                      sex=row[3], employer=row[4], postal_address=row[5],
                                      first_registration=row[6],
                                      date_of_first_registration=row[7],
