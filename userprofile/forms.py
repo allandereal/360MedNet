@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
     username = forms.CharField(help_text=False)
     email = forms.EmailField(label="Email Address")
 
-    layout = Layout('email', 'username', 'password'
+    layout = Layout(Row('email', 'username', 'password')
 
                     )
 

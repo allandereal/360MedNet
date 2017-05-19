@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'letsencrypt',
+    'storages',
 
     # My Apps
     'userprofile',
@@ -163,9 +164,23 @@ if os.getcwd() == '/app':
     STATIC_ROOT = 'staticfiles'
     STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 
-    MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
-    MEDIA_URL = "http://mednet360.herokuapp.com/media/"
-    MEDIAFILES_DIRS = (MEDIA_ROOT)
+    #MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'Media')
+    #MEDIA_URL = "http://mednet360.herokuapp.com/media/"
+    #MEDIAFILES_DIRS = (MEDIA_ROOT)
+
+    # AWS_QUERYSTRING_AUTH = False
+    # AWS_ACCESS_KEY_ID = 'AKIAIYR2GWMEJY4QRZCQ'
+    # AWS_SECRET_ACCESS_KEY = 'gVv1jN+LEd7fBbxAUx7d5lPeUMimuajJgpzK380P'
+    # AWS_STORAGE_BUCKET_NAME = '360mednet'
+    # MEDIA_URL = 'http://%s.s3.amazonaws.com/your-folder/' % AWS_STORAGE_BUCKET_NAME
+    # DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+    AWS_QUERYSTRING_AUTH = False
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
+    MEDIA_URL = 'http://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
 
 

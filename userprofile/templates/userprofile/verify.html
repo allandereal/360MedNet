@@ -4,14 +4,11 @@
 
 {% block title_block %}360MedNet{% endblock %}
 
-{#{% block headerimg %}{% endblock %}#}
-
 {% block content %}
-{#    <div style="background: url('{% static 'userprofile/images/header.jpg' %}'); background-repeat: no-repeat;#}
-{#            background-size: 100%;  height: 90vh" >#}
+
     <br>
     <div class="container" style="text-align: center">
-{#        <img src="{% static 'userprofile/images/logo.png' %}" width="150" >#}
+
 <br>
         <p class="flow-text" align="center">Are you a Registered Medic?</p>
 
@@ -24,31 +21,119 @@
         {% part form.surname prefix %}<i class="material-icons prefix">email</i>{% endpart %}
         {% part form.other_name prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}
     {% endform %}
+       <br>
        <div class="submit col s12">
-		<button class="btn waves-effect waves-light" type="submit" name="_submit">Verify yourself
+		<button class="btn waves-effect waves-light" type="submit" name="_submit"> Verify yourself
     <i class="material-icons right">send</i>
   </button>
        </div>
     </form>
+      <br><br>
+          <a class="grey-text" href="{% url 'unverified_register' %}">Continue without Verification</a>
         </div>
      </div>
-     <div class="row">
-        <div class="col s12">
+
+
+    <p>
+    <br>
+    <img src="{% static 'userprofile/images/Why360Mednettitle.jpg' %}" alt ="sharing image" align="center" width="500">
+    <br><br>
+       <div class="row">
+
+          <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
           <div class="card">
-    <div class="card-image">
-        <br>
-        <img src="{% static 'userprofile/images/Why360Mednet5.jpg' %}" alt ="Why Join 360MedNet">
-        <br>
-    </div>
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet1.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
           </div>
         </div>
-    </div>
-    </div>
+      </div>
+          </div>
+     <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet2.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+     <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet3.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
     </div>
 
-    <div class="container">
+       <div class="row">
 
+          <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet4.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+     <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet5.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+     <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/Why360Mednet6.jpg' %}" alt ="sharing image">
+            </div>
+              <div class="card-content">
+            <span class="blue-grey-text">Read More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
     </div>
+
+
+    </p>
+    </div>
+
 {##}
 {#<div class ="container">#}
 {#       <div class="row">#}
@@ -131,7 +216,7 @@
 
             <div class="card-content">
             <span class="card-title"></span>
-              <p>The last two decades have seen an unprecedented growth and uptake of mobile and internet use in Africa.
+              <p class="blue-grey-text">The last two decades have seen an unprecedented growth and uptake of mobile and internet use in Africa.
                 Health care professionals are constantly faced with the challenge of keeping abreast of the latest
                 research and best practices in medicine. The global workforce, with dissimilar experiences and differing
                 approaches can deliver synergies. Platforms that bring together people who think differently; Have
@@ -276,35 +361,48 @@
 <div class ="container">
        <div class="row">
 
-          <div class="col s12 m46 l6">
+          <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/Email-button.jpg' %}" alt ="Email Alerts">
 
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
-             <span class="card-title">Connect with fellow medics</span>
-              <p>360MedNet brings together medical professionals from different medical fields.</p>
+             <span class="card-title"></span>
+              <p class="blue-grey-text">360MedNet will be sending you email alerts to notify you when a case of your interest has been posted.</p>
             </div>
           </div>
         </div>
       </div>
           </div>
-     <div class="col s12 m6 l6">
+     <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">
+              <img src="{% static 'userprofile/images/devices.jpg' %}" alt ="Devices">
 
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
-            <span class="card-title">Share Medical Cases</span>
-              <p>Collaborate to solve challenges through integration of diverse proficiencies.</p>
+            <span class="card-title"></span>
+              <p class="blue-grey-text">Are you using a Smartphone, Tablet or PC?,360 MedNet has got you covered with a custom user experience for your device</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+      <div class="col s12 m4 l4">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/secure.jpg' %}" alt ="360 MedNet is Secure">
+            </div>
+            <div class="card-content">
+            <span class="card-title"></span>
+              <p class="blue-grey-text">360 MedNet is secure and abides by the patient confidentiality act. No Personal Information will be publicised in any way.</p>
             </div>
           </div>
         </div>

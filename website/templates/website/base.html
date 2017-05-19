@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +20,8 @@
 
     <div class="nav-wrapper">
 	<div class="container">
-	  <a href="{% url 'verify' %}" class="brand-logo"><img src="{% static 'userprofile/images/logo.png' %}"
-                                                            class="responsive-img img-fluid" style='max-height:50px;' >
-          360MedNet</a>
+	  <a href="{% url 'verify' %}" class="brand-logo"><img src="{% static 'userprofile/images/logo2.jpg' %}" style='max-height:55px;padding-top:5px;'>
+      </a>
         <ul class="right hide-on-med-and-down">
           <li><a href="{% url 'about_us' %}">About Us</a></li>
             <li><a href="{% url 'verify' %}">Help</a></li>
@@ -41,15 +39,15 @@
 
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">360MedNet</h5>
-                <p class="grey-text text-lighten-4">Connect, Collaborate, Create.</p>
+                <img src="{% static 'userprofile/images/logo2.jpg' %}" width="150">
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
             © 2017 360MedNet
-            <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Terms of Use</a>
+                <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Help</a>
+            <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Terms of Use &nbsp | &nbsp</a>
                 <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Privacy Policy &nbsp | &nbsp</a>
             </div>
           </div>

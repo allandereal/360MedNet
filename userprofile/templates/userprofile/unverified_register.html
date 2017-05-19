@@ -5,27 +5,41 @@
 {% block content %}
     {% if registered  %}
         <div class="container">
-            <strong> Your account has been successfully registered with <strong>360 Med Net</strong> </strong>
+            <strong> Your account has been successfully registered with <strong>360 MedNet</strong> </strong>
         Click <a href="{% url 'login' %}"> here.</a> to proceed to login.<br />
         </div>
 
         {% else %}
     <div class="container">
-    <h5>Hello {{ qs }}there! </h5>
-    Your details have not been verified.
-        <br>You can register with <strong>360 Med Net</strong> and connect with other medics but you
-        will have limited access till you get verified.
+        <br><br>
+    <span class="flow-text">Hello {{ qs }}there! </span>
+        <br><span class="red-text">Your details have not been verified.</span>
+        <br><span class="blue-grey-text">However, you can still register with <strong>360 MedNet</strong> and connect with other medics but you
+        will have <span class="red-text">limited access</span> until you get verified.</span>
 <form method="POST">
     {% csrf_token %}
-   {% form form=doctor_form %}{% endform %}
-    {% form form=user_form %}{% endform %}
-{#        {% part user_form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}#}
-{#        {% part user_form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}#}
-{#        {% part user_form.password prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}#}
-
+    {% form form=doctor_form %}
+       {% part form.first_name prefix %}<i class="material-icons prefix">person_pin</i>{% endpart %}
+       {% part form.last_name prefix %}<i class="material-icons prefix">person_pin</i>{% endpart %}
+       {% part form.qualification prefix %}<i class="material-icons prefix">class</i>{% endpart %}
+       {% part form.profession prefix %}<i class="material-icons prefix">class</i>{% endpart %}
+       {% part form.specialization prefix %}<i class="material-icons prefix">class</i>{% endpart %}
+       {% part form.country prefix %}<i class="material-icons prefix">class</i>{% endpart %}
+   {% endform %}
+<br><br>
+    <h5>Account details</h5>
+    {% form form=user_form %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.password prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}
+    {% endform %}
+    <br>
+    <p><span class="red-text">Note</span>: Please remember to verify your identity as soon as possible to get the full experience of 360 MedNet</p>
+    <br>
 
     <button type="submit" name="_submit" class="btn">Register</button>
 </form>
     </div>
+        <br><br>
     {% endif %}
 {% endblock %}
