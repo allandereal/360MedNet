@@ -92,7 +92,7 @@ class Medic(models.Model):
     def create_medic(cls, csv_file):
         medical_practitioner = 0
 
-        url = "https://360mednet.s3.amazonaws.com/csv_file"
+        url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
         ftpstream = urllib.request.urlopen(url)
         csvfile = csv.reader(codecs.iterdecode(ftpstream, 'utf-8'))
         for line in csvfile:
