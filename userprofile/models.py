@@ -7,7 +7,6 @@ import urllib.request
 import codecs
 from PIL import Image
 from django.urls import reverse
-import pandas as pd
 import io
 
 
