@@ -93,8 +93,8 @@ class Medic(models.Model):
 
         url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
         ftpstream = urllib.request.urlopen(url)
-        # csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
-        csvfile = csv.reader(ftpstream)
+        csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
+        #csvfile = csv.reader(ftpstream)
         # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
         #     f = default_storage.open(os.path.join(str(csv_file)), 'r')
         #     csvfile = csv.reader(f)
