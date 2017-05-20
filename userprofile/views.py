@@ -18,18 +18,19 @@ def verify(request):
                                 status=False).exists():
             qs = Medic.objects.get(reg_number=registration_number)
             return HttpResponseRedirect('/accounts/verified_registration/{}'.format(qs))
-        elif Medic.objects.filter(reg_number=registration_number, surname__iexact=surname, other_name__iexact=other_name,
+        elif Medic.objects.filter(reg_number=registration_number, surname__iexact=surname,
+                                  other_name__iexact=other_name,
                                   status=True).exists():
             return HttpResponseRedirect("/accounts/login")
         else:
-            qs = other_name
+            qs = {'other_name': other_name}
             return HttpResponseRedirect('/accounts/unverified_registration/', {'qs': qs})
 
     return render(request, 'userprofile/verify.html', {'form': form, 'verified': verified})
 
 
-def register(request, medic_id):
-    qs = Medic.objects.filter(reg_number=medic_id).all()
+def register(request, reg_number):
+    qs = Medic.objects.filter(reg_number=reg_number).all()
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
@@ -103,12 +104,8 @@ class UpdateProfile(UpdateView):
               'about_me', 'hospital', 'work_number', 'avatar']
 
     template_name = 'userprofile/doctor_profile_update.html'
-    #success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
+    # success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
 
 
 def home(request):
     return render(request, 'userprofile/home.html')
-
-
-
-
