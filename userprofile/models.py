@@ -102,7 +102,7 @@ class Medic(models.Model):
         #     f = default_storage.open(os.path.join(str(csv_file)), 'r')
         #     csvfile = csv.reader(f)
         with closing(requests.get(url, stream=True)) as r:
-            csvfile = csv.reader(r.iter_lines(), delimiter=',', quotechar='"')
+            csvfile = csv.reader(codecs.iterdecode(r.iterlines(), 'ISO-8859-1'), delimiter=',', quotechar='"')
             for row in csvfile:
                 reg_number = row[0]
                 if not Medic.medic_exists(reg_number):
