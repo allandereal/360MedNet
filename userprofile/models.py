@@ -8,6 +8,8 @@ import codecs
 from PIL import Image
 from django.urls import reverse
 import io
+import requests
+from contextlib import closing
 
 
 class Doctor(models.Model):
@@ -93,34 +95,36 @@ class Medic(models.Model):
         medical_practitioner = 0
 
         url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
-        ftpstream = urllib.request.urlopen(url)
-        #csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
-        csvfile = csv.reader(io.TextIOWrapper(ftpstream))
+        # ftpstream = urllib.request.urlopen(url)
+        # #csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
+        # csvfile = csv.reader(io.TextIOWrapper(ftpstream))
         # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
         #     f = default_storage.open(os.path.join(str(csv_file)), 'r')
         #     csvfile = csv.reader(f)
-        for row in csvfile:
-            reg_number = row[0]
-            if not Medic.medic_exists(reg_number):
-                Medic.objects.create(reg_number=row[0], surname=row[1], other_name=row[2],
-                                     sex=row[3], employer=row[4], postal_address=row[5],
-                                     first_registration=row[6],
-                                     date_of_first_registration=row[7],
-                                     additional_qualifications=row[8], speciality=row[9],
-                                     receipt_number=row[10], serial_number=row[11]
-                                     )
-                medical_practitioner = + 1
-            else:
-                Medic.objects.filter(reg_number=row[0]).update(surname=row[1], other_name=row[2],
-                                                               sex=row[3], employer=row[4], postal_address=row[5],
-                                                               first_registration=row[6],
-                                                               date_of_first_registration=row[7],
-                                                               additional_qualifications=row[8], speciality=row[9],
-                                                               receipt_number=row[10], serial_number=row[11]
-                                                               )
-                medical_practitioner = + 1
+        with closing(requests.get(url, stream=True)) as r:
+            csvfile = csv.reader(r.iter_lines(), delimiter=',', quotechar='"')
+            for row in csvfile:
+                reg_number = row[0]
+                if not Medic.medic_exists(reg_number):
+                    Medic.objects.create(reg_number=row[0], surname=row[1], other_name=row[2],
+                                         sex=row[3], employer=row[4], postal_address=row[5],
+                                         first_registration=row[6],
+                                         date_of_first_registration=row[7],
+                                         additional_qualifications=row[8], speciality=row[9],
+                                         receipt_number=row[10], serial_number=row[11]
+                                         )
+                    medical_practitioner = + 1
+                else:
+                    Medic.objects.filter(reg_number=row[0]).update(surname=row[1], other_name=row[2],
+                                                                   sex=row[3], employer=row[4], postal_address=row[5],
+                                                                   first_registration=row[6],
+                                                                   date_of_first_registration=row[7],
+                                                                   additional_qualifications=row[8], speciality=row[9],
+                                                                   receipt_number=row[10], serial_number=row[11]
+                                                                   )
+                    medical_practitioner = + 1
 
-            Record.objects.filter(file=csv_file).update(synced=True)
+                Record.objects.filter(file=csv_file).update(synced=True)
         return medical_practitioner
 
     @classmethod
