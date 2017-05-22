@@ -30,7 +30,7 @@ class MedicalCase(models.Model):
     physical_examination = models.TextField()
     diagnostic_tests = models.TextField()
     medical_case_category = models.ForeignKey(MedicalCaseCategory)
-    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title', unique_with='created_at')
+    #slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title', unique_with='created_at')
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     doctor = models.ForeignKey(Doctor, models.DO_NOTHING, blank=False, null=False)
