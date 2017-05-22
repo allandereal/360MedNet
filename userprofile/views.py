@@ -41,6 +41,7 @@ def register(request, reg_number):
             user.save()
 
             doctor = doctor_form.save(commit=False)
+            doctor.verification_status = True
             doctor.user = user
             doctor.save()
             registered = True
@@ -104,7 +105,7 @@ class UpdateProfile(UpdateView):
               'about_me', 'hospital', 'work_number', 'avatar']
 
     template_name = 'userprofile/doctor_profile_update.html'
-    # success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
+    success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
 
 
 def home(request):

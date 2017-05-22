@@ -8,12 +8,12 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+from django.utils import timezone
 
 
 class MedicalCaseCreate(CreateView):
     model = MedicalCase
     form = MedicalCaseForm
-    #fields = "__all__"
     fields = ['title', 'chief_complaint', 'patient_age', 'patient_gender', 'patient_country_of_origin',
               'history_of_present_illness', 'medical_history', 'surgical_history', 'social_history', 'family_history',
               'allergies', 'medications', 'review_of_systems', 'physical_examination', 'diagnostic_tests',
@@ -30,3 +30,12 @@ class MedicalCaseCreate(CreateView):
 
 class MedicalCaseList(ListView):
     model = MedicalCase
+
+
+class MedicalCaseDetail(DetailView):
+    model = MedicalCase
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalCase, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context

@@ -25,14 +25,15 @@ class Doctor(models.Model):
     specialization = models.CharField(max_length=100, blank=False, null=False)
     year_of_first_medical_certification = models.CharField(max_length=4)
     mobile_number = models.CharField(max_length=30, blank=True, null=True)
-    about_me = models.TextField()
+    about_me = models.TextField(blank=True, null=True)
     country = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
     hospital = models.CharField(max_length=30, blank=True, null=True)
     work_number = models.CharField(max_length=30, blank=True, null=True)
     avatar = models.ImageField(upload_to="avatars", default='avatars/none/default.jpeg', height_field=None,
                                width_field=None, blank=True, null=True)
-    website = models.URLField()
+    website = models.URLField(blank=True, null=True)
+    verification_status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 

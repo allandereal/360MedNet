@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MedicalCase
+from .models import MedicalCase, MedicalCaseCategory, Comment, Reply, Photo
 
 
 class MedicalCaseAdmin(admin.ModelAdmin):
@@ -12,3 +12,7 @@ class MedicalCaseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MedicalCase, MedicalCaseAdmin)
+admin.site.register(MedicalCaseCategory)
+admin.site.register(Comment)
+admin.site.register(Reply)
+admin.site.register(Photo)

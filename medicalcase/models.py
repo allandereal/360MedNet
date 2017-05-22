@@ -1,9 +1,12 @@
 from django.db import models
 from userprofile.models import Doctor
+from autoslug import AutoSlugField
 
 
 class MedicalCaseCategory(models.Model):
     name = models.CharField(max_length=200, blank=False, default="General Medicine ")
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.name
@@ -27,12 +30,13 @@ class MedicalCase(models.Model):
     physical_examination = models.TextField()
     diagnostic_tests = models.TextField()
     medical_case_category = models.ForeignKey(MedicalCaseCategory)
+    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title', unique_with='created_at')
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     doctor = models.ForeignKey(Doctor, models.DO_NOTHING, blank=False, null=False)
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
         verbose_name_plural = "Medical Cases"
 
     @classmethod
@@ -43,6 +47,8 @@ class MedicalCase(models.Model):
 class Photo(models.Model):
     diagnotic_image = models.ImageField(upload_to="medical_cases", height_field=None, width_field=None, blank=True, null=True)
     medical_case = models.ForeignKey(MedicalCase)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
 
 class Comment(models.Model):
@@ -51,6 +57,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     medical_case = models.ForeignKey(MedicalCase)
     doctor = models.ForeignKey(Doctor, related_name="doctor_comments")
+
 
 
 class Reply(models.Model):
