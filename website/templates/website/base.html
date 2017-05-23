@@ -9,23 +9,27 @@
     {% include 'material/includes/material_js.html' %}
 
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'userprofile/images/logo.png' %}">
     <title>{% block title_block %} {% endblock %}</title>
 </head>
 <body>
-{#{% block headerimg %}{% endblock %}#}
 
 <div class="navbar-fixed">
 <nav>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
     <div class="nav-wrapper">
 	<div class="container">
-	  <a href="{% url 'verify' %}" class="brand-logo"><img src="{% static 'userprofile/images/logo2.jpg' %}" style='max-height:55px;padding-top:5px;'>
-      </a>
-        <ul class="right hide-on-med-and-down">
+
+        <ul class="left hide-on-small-and-down">
+            <li><img src="{% static 'userprofile/images/logo2.jpg' %}"
+                                        style='max-height:55px;padding-top:5px;'></li>
+            <li><a href="{% url 'verify' %}">360 MedNet</a></li>
+        </ul>
+        <ul class="right">
+
           <li><a href="{% url 'about_us' %}">About Us</a></li>
             <li><a href="{% url 'verify' %}">Help</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'login' %}"><i class="material-icons right">input</i>Login</a></li>
         </ul>
 	  </div>
     </div>

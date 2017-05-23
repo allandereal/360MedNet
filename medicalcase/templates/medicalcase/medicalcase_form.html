@@ -1,23 +1,62 @@
 {% extends "userprofile/home.html" %}
+{% load staticfiles %}
 {% load material_form %}
 
 {% block title_block %} Medical Case | 360 MedNet {% endblock %}
 {% block content %}
-
-    <div class="card">
     <br>
 
-<div class="col s12 container">
-<h2> Medical Case </h2>
-<form method="POST">
+    <div class ="container">
+       <div class="row">
+
+     <div class="col s12 m12 l12">
+            <div class="row">
+        <div class="col l12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/cardhdr.png' %}" alt ="Devices">
+
+            </div>
+            <div class="card-content">
+            <span class="card-title">New Medical Case</span>
+              <p class="blue-grey-text"><form method="POST">
     {% csrf_token %}
-   {% form form=form %}{% endform %}
+   {% form form=form %}
 
-    <button type="submit" name="_submit" class="btn">Publish</button>
-</form>
-<br>
- </div>
+       {% part form.title prefix %}<i class="material-icons prefix">turned_in</i>{% endpart %}
+       {% part form.chief_complaint prefix %}<i class="material-icons prefix">invert_colors</i>{% endpart %}
+       {% part form.patient_age prefix %}<i class="material-icons prefix">today</i>{% endpart %}
+       {% part form.patient_gender prefix %}<i class="material-icons prefix">youtube_searched_for</i>{% endpart %}
+       {% part form.patient_country_of_origin prefix %}<i class="material-icons prefix">room</i>{% endpart %}
+       {% part form.history_of_present_illness prefix %}<i class="material-icons prefix">replay</i>{% endpart %}
+       {% part form.medical_history prefix %}<i class="material-icons prefix">replay</i>{% endpart %}
+       {% part form.surgical_history prefix %}<i class="material-icons prefix">replay</i>{% endpart %}
+       {% part form.social_history prefix %}<i class="material-icons prefix">replay</i>{% endpart %}
+       {% part form.family_history prefix %}<i class="material-icons prefix">replay</i>{% endpart %}
+       {% part form.allergies prefix %}<i class="material-icons prefix">note_add</i>{% endpart %}
+       {% part form.medications prefix %}<i class="material-icons prefix">note_add</i>{% endpart %}
+       {% part form.review_of_systems prefix %}<i class="material-icons prefix">library_add</i>{% endpart %}
+       {% part form.physical_examination prefix %}<i class="material-icons prefix">library_add</i>{% endpart %}
+       {% part form.diagnostic_tests prefix %}<i class="material-icons prefix">library_add</i>{% endpart %}
+       {% part form.medical_case_category prefix %}<i class="material-icons prefix">view_list</i>{% endpart %}
 
+   {% endform %}
+    <br><br>
+   <div class="submit col s12">
+		<button class="btn waves-effect waves-light" type="submit" name="_submit"> share
+    <i class="material-icons right">send</i>
+  </button>
+       </div>
+            <br><br><br>
+
+</form></p>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
     </div>
+    </div>
+
 <br>
 {% endblock %}

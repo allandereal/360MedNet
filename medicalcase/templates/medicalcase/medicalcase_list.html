@@ -8,13 +8,22 @@
         {% for medical_case in object_list %}
               <div class="card">
             <div class="container">
-            <br><img class="mySlides card-img-top" src="{{medical_case.doctor.avatar.url }}" class="responsive-img img-fluid"
-                     style='max-height:50px;'>
-            {{ medical_case.doctor.first_name }} {{ medical_case.doctor.last_name }}
-            <br>{{ medical_case.doctor.profession}}
-            <br>{{ medical_case.created_at}}
-            <br>{{ medical_case.title }}
-            <br><br>
+                <br>
+                <br><span class="flow-text">{{ medical_case.title }}</span>
+            <br>{{ medical_case.chief_complaint }}
+            <br>
+                <table><tr><td>
+                    <br><img class="round" src="{{medical_case.doctor.avatar.url }}" class="responsive-img img-fluid"
+                     style='max-height:80px;'>
+                </td>
+                    <td>Shared by:<br>
+                        <br>Dr. {{ medical_case.doctor.first_name }} {{ medical_case.doctor.last_name }}
+            <br>{{ medical_case.doctor.profession}} at {{ medical_case.doctor.hospital}}
+            <br>on {{ medical_case.created_at}}
+                    </td>
+                </tr></table>
+
+                <br>
             </div>
             </div>
         {% endfor %}
