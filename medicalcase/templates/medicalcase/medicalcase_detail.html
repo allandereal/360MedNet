@@ -1,0 +1,73 @@
+{% extends "userprofile/home.html" %}
+{% load material_form %}
+
+{% block title_block %} 360 MedNet {% endblock %}
+{% block content %}
+
+              <div class="card">
+            <div class="container">
+                <br>
+                <h2>{{ object.title }}</h2>
+                <h5><span class="flow-text">Chief Complaint</span></h5>
+                {{ object.chief_complaint }}
+                <br><h5><span class="flow-text">Patient Details</span></h5>
+                Age: {{ object.patient_age }} &nbsp Gender: {{ object.patient_gender }} &nbsp
+                Country: {{ object.patient_country_of_origin}}
+                <br>
+                <br>history_of_present_illness
+                <br>{{ object.history_of_present_illness }}
+
+                <br>
+                <br>medical_history
+                <br>{{ object.medical_history }}
+
+                <br>
+                <br>surgical_history
+                <br>{{ object.surgical_history }}
+
+                <br>
+                <br>social_history
+                <br>{{ object.social_history}}
+
+                <br>
+                <br>family_history
+                <br>{{ object.family_history }}
+
+                <br>
+                <br>allergies
+                <br>{{ object.allergies }}
+
+                <br>
+                <br>medications
+                <br>{{ object.medications }}
+
+                <br>
+                <br>review_of_systems
+                <br>{{ object.review_of_systems }}
+
+                <br>
+                <br>physical_examination
+                <br>{{ object.physical_examination }}
+
+                <br>
+                <br>medical_case_category
+                <br>{{ object.medical_case_category }}
+
+                <table style="border-spacing:5px"><tr><td>
+                    <br><img class="circle" src="{{object.doctor.avatar.url }}" class="responsive-img img-fluid"
+                     style='max-height:80px;'>
+                </td>
+                    <td>Shared by:<br>
+                        <br>Dr. {{ object.doctor.first_name }} {{ object.doctor.last_name }}
+            <br>{{ object.doctor.profession}} at {{ object.doctor.hospital}}
+            <br>Posted on {{ object.created_at}}
+                       <br>Last updated on  {{ object.updated_at}}
+                    </td>
+                </tr></table>
+
+                <br>
+            </div>
+            </div>
+
+
+{% endblock %}

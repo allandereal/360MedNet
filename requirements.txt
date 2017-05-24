@@ -7,6 +7,7 @@ Django==1.10.6
 django-allauth==0.31.0
 django-autoslug==1.9.3
 django-bootstrap3==8.2.2
+django-friendship==1.5.0
 django-jet==1.0.5
 django-letsencrypt==2.0.0
 django-material==0.13.1

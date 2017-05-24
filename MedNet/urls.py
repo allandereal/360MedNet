@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^friendship/', include('friendship.urls')),
     url(r'^\.well-known/', include('letsencrypt.urls')),
     url(r'^', include('medicalcase.urls')),
     url(r'^', include('post.urls')),

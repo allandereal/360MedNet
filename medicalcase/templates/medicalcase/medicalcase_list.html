@@ -9,17 +9,18 @@
               <div class="card">
             <div class="container">
                 <br>
-                <br><span class="flow-text">{{ medical_case.title }}</span>
+                <br><span class="flow-text" ><a href="{% url 'medical_case-detail' medical_case.id %}">{{ medical_case.title }}</a></span>
             <br>{{ medical_case.chief_complaint }}
             <br>
                 <table><tr><td>
-                    <br><img class="round" src="{{medical_case.doctor.avatar.url }}" class="responsive-img img-fluid"
-                     style='max-height:80px;'>
+                    <br><a href="{% url 'doctor-detail' medical_case.doctor.id %}"><img class="circle" src="{{medical_case.doctor.avatar.url }}" class="responsive-img img-fluid"
+                                                                                        style='max-height:80px;'></a>
                 </td>
                     <td>Shared by:<br>
-                        <br>Dr. {{ medical_case.doctor.first_name }} {{ medical_case.doctor.last_name }}
+                        <br><a href="{% url 'doctor-detail' medical_case.doctor.id %}">Dr. {{ medical_case.doctor.first_name }} {{ medical_case.doctor.last_name }}</a>
             <br>{{ medical_case.doctor.profession}} at {{ medical_case.doctor.hospital}}
-            <br>on {{ medical_case.created_at}}
+            <br>Posted on {{ medical_case.created_at}}
+             <br>Last updated on {{ medical_case.updated_at}}
                     </td>
                 </tr></table>
 

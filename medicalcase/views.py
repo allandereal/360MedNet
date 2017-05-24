@@ -25,7 +25,7 @@ class MedicalCaseCreate(CreateView):
     def form_valid(self, form):
         form.instance.doctor = Doctor.objects.get(user=self.request.user)
         form.instance.save()
-        return super(MedicalCase, self).form_valid(form)
+        return super( MedicalCaseCreate, self).form_valid(form)
 
 
 class MedicalCaseList(ListView):
@@ -36,6 +36,6 @@ class MedicalCaseDetail(DetailView):
     model = MedicalCase
 
     def get_context_data(self, **kwargs):
-        context = super(MedicalCase, self).get_context_data(**kwargs)
+        context = super(MedicalCaseDetail, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context

@@ -30,7 +30,7 @@
                      style='max-height:150px;'>
 
       </div></div></li>
-        <li><a href="#!"><i class="material-icons">account_box</i><span class="green-text email">
+        <li><a href="{% url 'profile' user.username %}"><i class="material-icons">account_box</i><span class="green-text email">
             {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span></a></li>
         <li><a href="#!"><i class="material-icons">class</i><font size="2em">{{ user.doctor.profession }} at {{ user.doctor.hospital }}</font></a></li>
         <li><a href="#!"><i class="material-icons">email</i><span class="green-text email">{{ request.user.email }}</span></a></li>
@@ -86,18 +86,18 @@
             {% block main %}
                 <div class="navbar-fixed">
                     <nav>
-                        <div class="container">
+{#                        <div class="container">#}
                       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
-                        <div class="nav-wrapper">
-                          <a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/logo2.jpg' %}"
+                        <div class="nav-wrapper" style="max-width:70%">
+                          <a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/logo2.png' %}"
                                         style='max-height:55px;padding-top:5px;'></a>
                             <ul class="right">
                                 <li><a href="#"><i class="material-icons">notifications</i></a></li>
                                 <li><a href="#"><i class="material-icons">mail</i></a></li>
                             </ul>
                           </div>
-                        </div>
+{#                        </div>#}
                        </nav>
                 </div>
                 {% block content %}
@@ -112,6 +112,18 @@
                           {% block thin %}
 
                             <div class="col l12">
+                              <div class="card">
+                                <div class="card-image">
+                                  <img src="{% static 'userprofile/images/secure.jpg' %}" alt ="360 MedNet is Secure">
+                                </div>
+                                <div class="card-content">
+                                <span class="card-title"></span>
+                                  <p class="blue-grey-text">360 MedNet is secure and abides by the patient confidentiality act. No Personal Information will be publicised in any way.</p>
+                                </div>
+                              </div>
+                            </div>
+                              <br><br>
+                              <div class="col l12">
                               <div class="card">
                                 <div class="card-image">
                                   <img src="{% static 'userprofile/images/secure.jpg' %}" alt ="360 MedNet is Secure">

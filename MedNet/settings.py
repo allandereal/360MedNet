@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'letsencrypt',
     'storages',
+    'friendship',
 
     # My Apps
     'userprofile',

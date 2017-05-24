@@ -5,6 +5,8 @@ from .models import Medic, Doctor
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
+from django.utils import timezone
+from django.views.generic.detail import DetailView
 
 
 def verify(request):
@@ -107,6 +109,14 @@ class UpdateProfile(UpdateView):
     template_name = 'userprofile/doctor_profile_update.html'
     success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
 
+
+class DoctorDetail(DetailView):
+    model = Doctor
+
+    def get_context_data(self, **kwargs):
+        context = super(DoctorDetail, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 def home(request):
     return render(request, 'userprofile/home.html')

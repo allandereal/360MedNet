@@ -1,34 +1,34 @@
-{% extends "website/base.html" %}
+{% extends "userprofile/home.html" %}
 {% load staticfiles %}
-{% load material_form %}
+
 
 {% if user.is_authenticated %}
-{% block title_block %} {{ user.username }}| 360 MedNet {% endblock %}
+{% block title_block %} {{ user.doctor.first_name }} {{ user.doctor.last_name }} | 360 MedNet {% endblock %}
 
 {% block content %}
+    <br>
 <div class="row container">
 <div class="col-xs-4"></div>
 
 <div class="col-xs-4">
     {% for entry in read_profile %}
         <img src="{{ entry.avatar.url }}" width = "150" height = "150"  />
-        <br>Username {{ entry.username }}
-        <br>First name {{ entry.first_name }}
-        <br> Last Name {{ entry.last_name }}
-        <br> Middle Name {{ entry.middle_name }}
-        <br>Gender {{ entry.gender }}
-        <br> Date of Birth{{ entry.date_of_birth }}
-        <br> Qualification {{ entry.qualification }}
-        <br> Profession {{ entry.profession }}
-        <br> Specialization{{ entry.specialization }}
-        <br> year_of_first_medical_certification {{ entry.year_of_first_medical_certification }}
-        <br> mobile_number{{ entry.mobile_number }}
-        <br> about_me{{ entry.about_me }}
-        <br> country{{ entry.country }}
-        <br> city{{ entry.city }}
-        <br> hospital{{ entry.hospital }}
-        <br> work_number{{ entry.work_number }}
-        <br> Joined on {{ entry.created_at }}
+        <br>First name: {{ entry.first_name }}
+        <br> Last Name: {{ entry.last_name }}
+        <br> Middle Name: {{ entry.middle_name }}
+        <br>Gender: {{ entry.gender }}
+        <br> Date of Birth:{{ entry.date_of_birth }}
+        <br> Qualification: {{ entry.qualification }}
+        <br> Profession: {{ entry.profession }}
+        <br> Specialization:{{ entry.specialization }}
+        <br> year_of_first_medical_certification: {{ entry.year_of_first_medical_certification }}
+        <br> mobile_number:{{ entry.mobile_number }}
+        <br> about_me:{{ entry.about_me }}
+        <br> country:{{ entry.country }}
+        <br> city:{{ entry.city }}
+        <br> hospital:{{ entry.hospital }}
+        <br> work_number:{{ entry.work_number }}
+        <br> Joined on: {{ entry.created_at }}
     {% endfor %}
 </div>
 
@@ -37,24 +37,3 @@
  {% endif %}
 
 </div>
-
-{#sername = models.OneToOneField(User)#}
-{#    GENDER = (('Female', 'Female'), ('Male', 'Male'))#}
-{#    first_name = models.CharField(max_length=100, blank=False, null=False)#}
-{#    middle_name = models.CharField(max_length=100, blank=True, null=True)#}
-{#    last_name = models.CharField(max_length=100, blank=False, null=False)#}
-{#    gender = models.CharField(max_length=6, choices=GENDER)#}
-{#    date_of_birth = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)#}
-{#    qualification = models.CharField(max_length=100, blank=False, null=False)#}
-{#    profession = models.CharField(max_length=100, blank=False, null=False)#}
-{#    specialization = models.CharField(max_length=100, blank=False, null=False)#}
-{#    year_of_first_medical_certification = models.CharField(max_length=4)#}
-{#    mobile_number = models.CharField(max_length=30, blank=True, null=True)#}
-{#    about_me = models.TextField()#}
-{#    country = models.CharField(max_length=30, blank=True, null=True)#}
-{#    city = models.CharField(max_length=30, blank=True, null=True)#}
-{#    hospital = models.CharField(max_length=30, blank=True, null=True)#}
-{#    work_number = models.CharField(max_length=30, blank=True, null=True)#}
-{#    avatar = models.ImageField(upload_to=None, height_field=None, width_field=None, blank=True, null=True)#}
-{#    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)#}
-{#    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)#}
