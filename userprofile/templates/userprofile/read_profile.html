@@ -3,39 +3,108 @@
 
 
 {% if user.is_authenticated %}
-{% block title_block %} {{ user.doctor.first_name }} {{ user.doctor.last_name }} | 360 MedNet {% endblock %}
+{% block title_block %} Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }} | 360 MedNet {% endblock %}
 
 {% block content %}
     <br>
-<div class="row container">
-<div class="col-xs-4"></div>
-
-<div class="col-xs-4">
+<div class="card">
+<div class="row container ">
+<div class="col s12 m9 l9">
     {% for entry in read_profile %}
-        <img src="{{ entry.avatar.url }}" width = "150" height = "150"  />
-        <br>First name: {{ entry.first_name }}
-        <br> Last Name: {{ entry.last_name }}
-        <br> Middle Name: {{ entry.middle_name }}
-        <br>Gender: {{ entry.gender }}
-        <br> Date of Birth:{{ entry.date_of_birth }}
-        <br> Qualification: {{ entry.qualification }}
-        <br> Profession: {{ entry.profession }}
-        <br> Specialization:{{ entry.specialization }}
-        <br> year_of_first_medical_certification: {{ entry.year_of_first_medical_certification }}
-        <br> mobile_number:{{ entry.mobile_number }}
-        <br> about_me:{{ entry.about_me }}
-        <br> country:{{ entry.country }}
-        <br> city:{{ entry.city }}
-        <br> hospital:{{ entry.hospital }}
-        <br> work_number:{{ entry.work_number }}
-        <br> Joined on: {{ entry.created_at }}
+
+        <table>
+            <tr><td>
+                    <br><img src="{{entry.avatar.url }}" width = "150" class="responsive-img img-fluid"
+                     style='max-height:150px;'>
+                </td>
+                    <td>
+                        <br><font color="#4682b4">Dr. {{ entry.first_name }} {{ entry.last_name }}</font>
+            <br>{{ entry.profession}} at {{ entry.hospital}}
+            <br>{{ entry.qualification }}
+            <br>{{ entry.specialization }}
+           <br><br>Joined on {{ entry.created_at }}
+                    </td>
+                </tr></table>
+
+        <br><div class="divider"></div>
+{#        <img src="{{ entry.avatar.url }}" width = "150" height = "150"  />#}
+{#        <br><div class="divider"></div>#}
+        <br> About me:<br><font color="#4682b4">{{ entry.about_me }}</font><br><br><br>
+        <br><div class="divider"></div><br>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>First Name :</div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.first_name }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Last Name :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.last_name }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Middle Name :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.middle_name }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Gender :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.gender }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Date of Birth :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.date_of_birth }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Qualificcation :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.qualification }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Profession :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.profession }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Specialization :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.specialization }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Year of first medical certification :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.year_of_first_medical_certification }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Year of first medical certification :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.year_of_first_medical_certification }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Personal Telephone :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.mobile_number }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Country of work :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.country }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>City of work :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.city }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Hospital :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.hospital }}</div></font>
+        </div>
+        <div class="row">
+            <div class="col s12 m3 l4"><h6>Work Telephone :</h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">{{ entry.work_number }}</div></font>
+        </div>
+
+        <br><br>
     {% endfor %}
 </div>
-
-<div class="col-xs-4"></div>
-    <br>
+<br>
+<div class="col s12 m9 l9">
+    <div class="divider"></div>
+    <br> Last updated on: {{ entry.updated_at}}
+    <br><br>
     <div class="row container"><a class="btn" href="{% url 'update_doctor' user.doctor.id %}">Update Profile</a></div>
-{% endblock %}
- {% endif %}
 
 </div>
+</div>
+    </div>
+
+{% endblock %}
+{% endif %}
