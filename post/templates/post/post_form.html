@@ -20,24 +20,13 @@
     </div>
         <div class="card-action">
           <a href="#">Share Medical Case</a>
-          <a href="#">Some other Link</a>
-          <a href="#">Back Home</a>
+          <a href="#">Add Image</a>
+
         </div>
 </div>
             </div>
     </div>
 <br>
-    <div class="card">
-    <br>
 
-    <div class="container">
-    <ul>
-        {% for post in object_list %}
-            <li>{{ post.post_content }}</li>
-            <li>{{ post.doctor.first_name }}{{ post.doctor.last_name }}</li>
-        {% endfor %}
-    </ul>
-    </div>
-    </div>
 
 {% endblock %}

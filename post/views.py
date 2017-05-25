@@ -23,3 +23,4 @@ class PostCreate(CreateView):
 
 class PostList(ListView):
     model = Post
+
