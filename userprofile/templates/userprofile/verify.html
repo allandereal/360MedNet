@@ -6,11 +6,47 @@
 
 {% block content %}
 
+   <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'userprofile/images/hdr01.jpg' %}"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>Welcome to 360MedNet!</h3>
+          <h5 class="light grey-text text-lighten-3">Connect, Collaborate, Create.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'userprofile/images/hdr02.jpg' %}"> <!-- random image -->
+        <div class="caption left-align">
+          <h4>Share and Learn</h4>
+          <h6 class="light grey-text text-lighten-3">Share medical cases with hundreds
+              of other medical proffessionals <br> and make better diagnosis to save lives</h6>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'userprofile/images/hdr07.jpg' %}"> <!-- random image -->
+        <div class="caption right-align">
+          <h4>Medical Conferences and Events</h4>
+          <h6 class="light grey-text text-lighten-3">Never miss a Medical Conference
+              or Event.<br> Keep on top of all this anytime, anywhere.</h6>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'userprofile/images/hdr03.jpg' %}"> <!-- random image -->
+        <div class="caption center-align">
+          <h4>Meet other professionals</h4>
+          <h6 class="light grey-text text-lighten-3">Meet other professionals with similar
+              interests and specialisations</h6>
+        </div>
+      </li>
+    </ul>
+   </div>
+
     <br>
     <div class="container" style="text-align: center">
-
-<br>
-        <p class="flow-text" align="center">Are you a Registered Medic?</p>
+{#        <img src="{% static 'userprofile/images/logo.png' %}" width="150" >#}
+{#<br>#}
+        <p class="flow-text" align="center">Please fill the form below to be verified</p>
 
       <div class="row">
       <div class="col s12">
@@ -36,49 +72,61 @@
 
     <p>
     <br>
-    <img src="{% static 'userprofile/images/Why360Mednettitle.jpg' %}" alt ="sharing image" align="center" width="500">
+    <img class="responsive-img" src="{% static 'userprofile/images/Why360Mednettitle.jpg' %}" alt ="sharing image" align="center" width="500">
     <br><br>
        <div class="row">
 
           <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet1.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet1.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Details<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
-     <div class="col s12 m4 l4">
+       <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet2.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet2.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Details<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
-     <div class="col s12 m4 l4">
+       <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet3.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet3.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
@@ -89,42 +137,54 @@
           <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet4.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet4.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Details<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
-     <div class="col s12 m4 l4">
+       <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet5.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet5.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Details<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
-     <div class="col s12 m4 l4">
+       <div class="col s12 m4 l4">
             <div class="row">
         <div class="col l12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/Why360Mednet6.jpg' %}" alt ="sharing image">
-            </div>
-              <div class="card-content">
-            <span class="blue-grey-text">Read More</span>
-            </div>
-          </div>
+            <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="{% static 'userprofile/images/Why360Mednet6.jpg' %}" alt ="sharing image">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Read more<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
         </div>
       </div>
           </div>
@@ -133,69 +193,6 @@
 
     </p>
     </div>
-
-{##}
-{#<div class ="container">#}
-{#       <div class="row">#}
-{##}
-{#          <div class="col s12 m4 l4">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">#}
-{##}
-{#              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>#}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#            <span class="card-title">Share Cases</span>#}
-{#              <p>Content Content Content Content Content Content Content Content Content#}
-{#              Content Content Content</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s12 m4 l4">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/event2.jpeg' %}" alt ="sharing image">#}
-{##}
-{#              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>#}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title">Medical Confrences</span>#}
-{#              <p>Content Content Content Content Content Content Content Content#}
-{#              Content Content Content Content</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s12 m4 l4">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/sharing.jpeg' %}" alt ="sharing image">#}
-{##}
-{#              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>#}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#            <span class="card-title">Use any Device</span>#}
-{#              <p>Content Content Content Content Content Content Content Content Content Content#}
-{#              Content Content.</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#</div>#}
-{#    </div>#}
-{#    </p>#}
-
 
 <p>
 <div class ="container">
@@ -237,125 +234,6 @@
     </p>
 
  <p>
-{#<div class ="container">#}
-{#     <nav>#}
-{##}
-{#    <div class="nav-wrapper">#}
-{#	<div class="container">#}
-{#	  <a href="#!" class="brand-logo"><i class="material-icons">perm_contact_calendar</i>The Team</a>#}
-{#    </div></div>#}
-{##}
-{#</nav>#}
-{#    <p>#}
-{#       <div class="row">#}
-{##}
-{#          <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title"></span>#}
-{#                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title"></span>#}
-{#               <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title"></span>#}
-{#                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#            </div>#}
-{#          </div>#}
-{##}
-{#         <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title"></span>#}
-{#                <p><b>Dr.John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#             <span class="card-title"></span>#}
-{#                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#          <div class="col s16 m3 l2">#}
-{#            <div class="row">#}
-{#        <div class="col l12">#}
-{#          <div class="card">#}
-{#            <div class="card-image">#}
-{#              <img src="{% static 'userprofile/images/john.jpeg' %}" alt ="sharing image">#}
-{##}
-{##}
-{#            </div>#}
-{#            <div class="card-content">#}
-{#            <span class="card-title"></span>#}
-{#                <p><b>Dr. John Mark Bwanika</b> <br><br> Dr. John Mark Bwanika is a medical doctor ... bla bla bla</p>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#          </div>#}
-{#</div>#}
-{#    </div>#}
-{#    </p>#}
-
 
 <p>
 <div class ="container">
@@ -382,7 +260,7 @@
         <div class="col l12">
           <div class="card">
             <div class="card-image">
-              <img src="{% static 'userprofile/images/devices.jpg' %}" alt ="Devices">
+              <img src="{% static 'userprofile/images/devices.png' %}" alt ="Devices">
 
             </div>
             <div class="card-content">

@@ -3,8 +3,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from organizations.backends import invitation_backend
 
 urlpatterns = [
+    url(r'^accounts/', include('organizations.urls')),
+    url(r'^invitations/', include(invitation_backend().get_urls())),
     url(r'^friendship/', include('friendship.urls')),
     url(r'^\.well-known/', include('letsencrypt.urls')),
     url(r'^', include('medicalcase.urls')),

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +23,8 @@
 	<div class="container">
 
         <ul class="left hide-on-small-and-down">
-            <li><img src="{% static 'userprofile/images/logo2.jpg' %}"
-                                        style='max-height:55px;padding-top:5px;'></li>
+            <li><a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/logo2.jpg' %}"
+                                        style='max-height:55px;padding-top:5px;'></a></li>
             <li><a href="{% url 'verify' %}">360 MedNet</a></li>
         </ul>
         <ul class="right">
@@ -57,6 +59,11 @@
           </div>
         </footer>
 
+<script>
+$(document).ready(function(){
+      $('.slider').slider();
+    });
+</script>
 
 </body>
 </html>

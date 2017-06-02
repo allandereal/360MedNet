@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'jet.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
+    'organizations',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'letsencrypt',
     'storages',
     'friendship',
+    'django_extensions',
 
     # My Apps
     'userprofile',
@@ -123,6 +125,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+ORGS_INVITATION_BACKEND = 'myapp.backends.MyInvitationBackend'
+ORGS_REGISTRATION_BACKEND = 'myapp.backends.MyRegistrationBackend'
+ORGS_SLUGFIELD = 'django_extensions.db.fields.AutoSlugField'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
