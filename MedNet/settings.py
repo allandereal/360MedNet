@@ -43,16 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'letsencrypt',
     'storages',
     'friendship',
     'django_extensions',
+    'invitations',
+
 
     # My Apps
     'userprofile',
     'website',
     'post',
     'medicalcase'
+
 ]
 
 MIDDLEWARE = [
@@ -126,8 +130,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-ORGS_INVITATION_BACKEND = 'myapp.backends.MyInvitationBackend'
-ORGS_REGISTRATION_BACKEND = 'myapp.backends.MyRegistrationBackend'
+SITE_ID = 1
+
+AUTH_USER_MODEL = 'auth.User'
+
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+
 ORGS_SLUGFIELD = 'django_extensions.db.fields.AutoSlugField'
 
 # Static files (CSS, JavaScript, Images)
@@ -143,7 +151,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'info360mednet@gmail.com'
-EMAIL_HOST_PASSWORD = 'testing01'  # app specfic password generated from support.google.com/accounts/answer/185833
+EMAIL_HOST_PASSWORD = 'kspxanhvmakpupgf'  # app specfic password generated from support.google.com/accounts/answer/185833
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '360MedNet Support Team <info360mednet@gmail.com>'

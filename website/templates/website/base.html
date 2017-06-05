@@ -20,7 +20,7 @@
 <nav>
 
     <div class="nav-wrapper">
-	<div class="container">
+	<div class="container" style="width: 85%">
 
         <ul class="left hide-on-small-and-down">
             <li><a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/logo2.jpg' %}"
@@ -31,7 +31,8 @@
 
           <li><a href="{% url 'about_us' %}">About Us</a></li>
             <li><a href="{% url 'verify' %}">Help</a></li>
-            <li><a href="{% url 'login' %}"><i class="material-icons right">input</i>Login</a></li>
+            <li><a href="{% url 'login' %}"><font color="#faebd7"><i class="material-icons right">input</i>Login</font></a></li>
+            <li><a href="{% url 'login' %}"><font color="#7fffd4" size="4em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
         </ul>
 	  </div>
     </div>
@@ -52,9 +53,9 @@
           <div class="footer-copyright">
             <div class="container">
             © 2017 360MedNet
-                <a class="grey-text text-lighten-4 right" href="{% url 'privacy_policy' %}">Help</a>
-{#            <a class="grey-text text-lighten-4 right" href="{% url 'terms_of_use' %}">Terms of Use &nbsp | &nbsp</a>#}
-                <a class="grey-text text-lighten-4 right" href="{% url 'privacy_policy' %}">Privacy Policy &nbsp | &nbsp</a>
+                <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Help</a>
+            <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Terms of Use &nbsp | &nbsp</a>
+                <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Privacy Policy &nbsp | &nbsp</a>
             </div>
           </div>
         </footer>

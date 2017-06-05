@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -8,9 +7,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-            <link rel="shortcut icon" href="{% static 'userprofile/images/logo.jpg' %}">
-            <title>{% block title_block %}{% endblock %}</title>
-
+        <title>{% block title_block %}{% endblock %}</title>
+        {% block favicon %}<link href="{% static 'userprofile/images/logo.png' %}">{% endblock %}
         {% block css %}{% include 'material/frontend/includes/material_css.html' %}{% endblock css %}
             <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
         {% block js %}{% include 'material/frontend/includes/material_js.html' %}{% endblock js %}
@@ -71,14 +69,13 @@
         <li><div class="divider"></div></li>
             <br>
         <div align="center">
-		<button class="btn waves-effect waves-ripple btn-flat" type="logout" name="_logout">Logout
+		<a href="{% url 'logout' %}" class="btn waves-effect waves-ripple btn-flat" type="logout" name="_logout">Logout
     <i class="material-icons right">phonelink_lock</i>
-  </button>
+  </a>
        </div>
         <br>
         <p align="center"><font size="0.8em">info@360mednet.com | +256-000-000</font></p>
-        <p align="center"><font size="0.8em">Terms &nbsp| &nbsp Help &nbsp| &nbsp
-            <a href="{% url 'privacy_policy' %}">Privacy</a> &nbsp| &nbsp About</font></p>
+         <p align="center"><font size="0.8em">Terms &nbsp| &nbsp Help &nbsp| &nbsp Privacy &nbsp| &nbsp About</font></p>
         <p align="center"><font size="0.5em">2017 &copy; 360 MedNet</font></p>
     </ul>
 

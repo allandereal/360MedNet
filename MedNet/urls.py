@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from organizations.backends import invitation_backend
 
 urlpatterns = [
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^accounts/', include('organizations.urls')),
     url(r'^invitations/', include(invitation_backend().get_urls())),
     url(r'^friendship/', include('friendship.urls')),

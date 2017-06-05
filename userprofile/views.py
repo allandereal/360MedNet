@@ -2,11 +2,29 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import DoctorForm, UserForm, VerifyForm, SocialSiteForm
 from .models import Medic, Doctor
-from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.views.generic.detail import DetailView
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.forms import ValidationError
+
+
+class EmailAuthenticationForm(AuthenticationForm):
+    def clean_username(self):
+        username = self.data['username']
+        if '@' in username:
+            try:
+                username = User.objects.get(email=username).username
+            except ObjectDoesNotExist:
+                raise ValidationError(
+                    self.error_messages['invalid_login'],
+                    code='invalid_login',
+                    params={'username':self.username_field.verbose_name},
+                )
+        return username
 
 
 def verify(request):
@@ -94,10 +112,6 @@ def get_profile(request, username):
     user = User.objects.get(username=username)
     read_profile = Doctor.view_profile()
     return render(request, 'userprofile/read_profile.html', {'read_profile': read_profile, 'user': user})
-
-
-def logout(request):
-    return HttpResponseRedirect('/')
 
 
 class UpdateProfile(UpdateView):
