@@ -19,7 +19,6 @@ django-material==0.13.1
 django-organizations==0.9.1
 django-storages==1.5.2
 docutils==0.13.1
-get==0.0.0
 google-api-python-client==1.4.1
 gunicorn==19.7.1
 httplib2==0.10.3
@@ -29,9 +28,7 @@ oauthlib==2.0.2
 olefile==0.44
 packaging==16.8
 Pillow==4.0.0
-post==0.0.0
 psycopg2==2.7.1
-public==0.0.0
 pyasn1==0.2.3
 pyasn1-modules==0.0.8
 pyparsing==2.2.0
@@ -39,13 +36,10 @@ python-dateutil==2.6.0
 python3-openid==3.1.0
 pytz==2017.2
 PyYAML==3.12
-query-string==0.0.0
-request==0.0.0
 requests==2.13.0
 requests-oauthlib==0.8.0
 rsa==3.4.2
 s3transfer==0.1.10
-setupfiles==0.0.0
 six==1.10.0
 static3==0.7.0
 uritemplate==3.0.0
