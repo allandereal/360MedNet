@@ -59,7 +59,6 @@ class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, related_name="doctor_comments")
 
 
-
 class Reply(models.Model):
     reply_content = models.TextField()
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)

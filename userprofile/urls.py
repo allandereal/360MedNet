@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^accounts/verified_registration/(?P<reg_number>[a-zA-Z0-9]+)/$', user_views.register, name='register'),
     url(r'^accounts/unverified_registration/$', user_views.unverified_register, name='unverified_register'),
     url(r'^$', user_views.verify, name='verify'),
-    url(r'^md/(?P<username>[a-zA-Z0-9]+)/$', user_views.get_profile, name='profile'),
+    url(r'^medic/(?P<username>[a-zA-Z0-9]+)/$', user_views.get_profile, name='profile'),
     url(r'^accounts/update/(?P<pk>[\-\w]+)/$', user_views.UpdateProfile.as_view(), name='update_doctor'),
     url(r'^password_reset/$', auth_views.password_reset, {'template_name': 'userprofile/password_reset_form.html'},
         name='password_reset'),

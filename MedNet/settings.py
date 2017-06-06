@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'userprofile',
     'website',
     'post',
-    'medicalcase'
+    'medicalcase',
+    'invitation'
+
 
 ]
 
@@ -131,6 +133,7 @@ USE_L10N = True
 USE_TZ = True
 
 SITE_ID = 1
+SITE_HOST = '127.0.0.1:8000'
 
 AUTH_USER_MODEL = 'auth.User'
 
