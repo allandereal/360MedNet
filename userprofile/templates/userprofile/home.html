@@ -69,9 +69,9 @@
         <li><div class="divider"></div></li>
             <br>
         <div align="center">
-		<a href="{% url 'logout' %}" class="btn waves-effect waves-ripple btn-flat" type="logout" name="_logout">Logout
+		<button class="btn waves-effect waves-ripple btn-flat" type="logout" name="_logout">Logout
     <i class="material-icons right">phonelink_lock</i>
-  </a>
+  </button>
        </div>
         <br>
         <p align="center"><font size="0.8em">info@360mednet.com | +256-000-000</font></p>
@@ -109,7 +109,8 @@
                     <div class="row">
 
                       <div class="col s12 m8 l9">
-                        {% block large %}this is the wide box {% endblock large %}
+                        {% block large %}
+                             {% endblock large %}
                       </div>
 
                       <div class="col s12 m4 l3">
@@ -118,29 +119,29 @@
                               <div class="col l12">
                               <div class="card">
                                 <div class="card-image">
-                                  <img src="{% static 'userprofile/images/cardhdr.png' %}" alt ="360 MedNet is Secure">
+                                  <img src="{% static 'userprofile/images/eventheader.jpg' %}" alt ="360 MedNet is Secure">
                                 </div>
                                 <div class="card-content">
                                 <span class="deep-orange-text">Upcoming Events</span>
                                       <div class="row">
-                                                <div class="col l4 m4 s4"><span class="centred">JAN</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">FEB</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">MAR</span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">JAN</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">FEB</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">MAR</a></span></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col l4 m4 s4"><span class="centred">APR</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">MAY</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred current">JUN</span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">APR</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">MAY</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred current"><a onclick="showPopup('popup');">JUN</a></span></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col l4 m4 s4"><span class="centred">JUL</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">AUG</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">SEP</span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">JUL</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">AUG</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">SEP</a></span></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col l4 m4 s4"><span class="centred">OCT</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">NOV</span></div>
-                                                <div class="col l4 m4 s4"><span class="centred">DEC</span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">OCT</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">NOV</a></span></div>
+                                                <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">DEC</a></span></div>
                                             </div>
                                 </div>
                               </div>
@@ -184,6 +185,7 @@
                                 </div>
                               </div>
                             </div>
+
                           {% endblock thin %}
                       </div>
                     </div>
@@ -194,6 +196,84 @@
         </main>
 
         {% endblock %}
+
+                           <div class="col l12 m12 s12 popup" id="popup">
+          <div class="card card blue-grey darken-1 card-content white-text">
+            <div class="card-content">
+                <table>
+            <tr class="row text-lighten-1">
+                <td class="orange-text">SUN</td>
+                <td>MON</td>
+                <td>TUE</td>
+                <td>WED</td>
+                <td>THU</td>
+                <td>FRI</td>
+                <td>SAT</td>
+            </tr>
+                <tr class="row cyan-text">
+                <td class="orange-text"></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+                <tr class="row cyan-text">
+                <td class="orange-text">5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+                <tr class="row cyan-text">
+                <td class="orange-text">12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+            </tr>
+                <tr class="row cyan-text">
+                <td class="orange-text">19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+            </tr>
+                <tr>
+                    <td><a href="#" class="deep-orange-text">CLOSE</a></td>
+                </tr>
+                </table>
+
+                 <style type="text/css">
+                  .popup {
+                    width:500px;
+                    height:400px;
+                    position:absolute;
+                    top:35%;
+                    left:65%;
+                    margin:-50px 0 0 -100px; /* [-(height/2)px 0 0 -(width/2)px] */
+                    display:none;
+                  }
+                </style>
+
+                <script type="text/javascript">
+                  function showPopup(id) {
+                    var popup = document.getElementById(id);
+                    popup.style.display = 'block';
+                  }
+                </script>
+
+            </div>
+          </div>
+        </div>
+
         <br>
     </body>
 </html>

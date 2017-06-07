@@ -132,5 +132,27 @@ class DoctorDetail(DetailView):
         context['now'] = timezone.now()
         return context
 
+
 def home(request):
     return render(request, 'userprofile/home.html')
+
+
+def signup(request):
+    form = VerifyForm(data=request.POST)
+    verified = False
+    if request.method == 'POST' and form.is_valid():
+        registration_number = form.cleaned_data['registration_number']
+        surname = form.cleaned_data['surname']
+        other_name = form.cleaned_data['other_name']
+        if Medic.objects.filter(reg_number=registration_number, surname__iexact=surname, other_name__iexact=other_name,
+                                status=False).exists():
+            qs = Medic.objects.get(reg_number=registration_number)
+            return HttpResponseRedirect('/accounts/verified_registration/{}'.format(qs))
+        elif Medic.objects.filter(reg_number=registration_number, surname__iexact=surname,
+                                  other_name__iexact=other_name,
+                                  status=True).exists():
+            return HttpResponseRedirect("/accounts/login")
+        else:
+            qs = {'other_name': other_name}
+            return HttpResponseRedirect('/accounts/unverified_registration/', {'qs': qs})
+    return render(request, 'userprofile/signup.html', {'form': form, 'verified': verified})

@@ -9,6 +9,7 @@ urlpatterns = [
                                                              'authentication_form': EmailAuthenticationForm,
                                                              'redirect_field_name': 'post',
                                                              }),
+    url(r'^signup/$', user_views.signup, name='signup'),
     url(r'^accounts/verified_registration/(?P<reg_number>[a-zA-Z0-9]+)/$', user_views.register, name='register'),
     url(r'^accounts/unverified_registration/$', user_views.unverified_register, name='unverified_register'),
     url(r'^$', user_views.verify, name='verify'),
