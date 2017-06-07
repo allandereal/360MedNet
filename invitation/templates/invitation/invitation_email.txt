@@ -1,10 +1,11 @@
 Hi {{ name }},
 
-  You have been invited to join 360MedNet.
-  360MedNet is website where you can Connect, Collaborate  and Create with other Medics.
+You have been invited to join the 360MedNet Community.
+360MedNet is website where you can Connect, Collaborate and Create with other Medics.
 
 To accept the invitation, please click the link below:
 {{ link }}
 
 
+Kind regards,
 360MedNet Support Team

@@ -1,6 +1,6 @@
 Hi {{ name }},
 
-{{ sender.user.doctor.first_name}} {{ sender.user.doctor.last_name}} has invited you to join 360MedNet.
+{{ sender.doctor.first_name}} {{ sender.doctor.last_name}} has invited you to join 360MedNet.
 360MedNet is website where you can Connect, Collaborate and Create with other Medics.
 
 To accept the invitation, please click the link below:

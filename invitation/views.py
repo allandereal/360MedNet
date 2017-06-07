@@ -81,7 +81,7 @@ def register_invited_user(request):
             doctor.verification_status = True
             doctor.user = user
             doctor.save()
-            FriendInvitation.objects.filter(email=user_form.email).update(accepted=True)
+            FriendInvitation.objects.filter(email=user.email).update(accepted=True)
             registered = True
 
         else:

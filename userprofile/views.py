@@ -22,7 +22,7 @@ class EmailAuthenticationForm(AuthenticationForm):
                 raise ValidationError(
                     self.error_messages['invalid_login'],
                     code='invalid_login',
-                    params={'username':self.username_field.verbose_name},
+                    params={'username': self.username_field.verbose_name},
                 )
         return username
 
@@ -156,3 +156,4 @@ def signup(request):
             qs = {'other_name': other_name}
             return HttpResponseRedirect('/accounts/unverified_registration/', {'qs': qs})
     return render(request, 'userprofile/signup.html', {'form': form, 'verified': verified})
+
