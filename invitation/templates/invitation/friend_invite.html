@@ -1,0 +1,13 @@
+{% extends "userprofile/home.html" %}
+
+{% block title %}Invite a Medic Friend{% endblock %}
+
+{% block content %}
+Enter your friend name and email below,
+and click "send invite" to invite your friend to join the 360MedNet:
+<form method="post" action=".">
+{% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="send invite" />
+</form>
+{% endblock %}

@@ -176,6 +176,7 @@ if os.getcwd() == '/app':
     ALLOWED_HOSTS = ['mednet360.herokuapp.com']
 
     DEBUG = False
+    SITE_HOST = 'mednet360.herokuapp.com'
 
     # Static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
