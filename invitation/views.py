@@ -22,9 +22,15 @@ def invite_user(request):
             if invitation.email and not User.objects.filter(email=invitation.email).exists():
                 invitation.save()
                 invitation.send_invite()
-                messages.success(request, 'Invitation sent')
+                messages.success(request,
+                                 message='Invitation was successfully sent to %s.' %
+                                         invitation.email
+                                 )
             else:
-                messages.error(request, 'Invitation not sent, email already registered with 360MedNet')
+                messages.error(request,
+                               message='Invitation was not sent, %s is already registered with 360MedNet.' %
+                                       invitation.email
+                               )
     else:
         form = MedicInvitationForm()
 
@@ -81,7 +87,11 @@ def register_invited_user(request):
             doctor.verification_status = True
             doctor.user = user
             doctor.save()
-            FriendInvitation.objects.filter(email=user.email).update(accepted=True)
+            if FriendInvitation.objects.filter(email=user.email).exists():
+                FriendInvitation.objects.filter(email=user.email).update(accepted=True)
+            else:
+                Invitation.objects.filter(email=user.email).update(accepted=True)
+
             registered = True
 
         else:

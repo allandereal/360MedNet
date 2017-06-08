@@ -24,3 +24,14 @@ class PostCreate(CreateView):
 class PostList(ListView):
     model = Post
 
+
+class Posts(CreateView, ListView):
+    model = Post
+    form_class = PostForm
+    success_url = '/feeds/'
+
+    def form_valid(self, form):
+        form.instance.doctor = Doctor.objects.get(user=self.request.user)
+        form.instance.save()
+        return super(Posts, self).form_valid(form)
+

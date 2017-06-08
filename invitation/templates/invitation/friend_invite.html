@@ -1,6 +1,15 @@
 {% extends "userprofile/home.html" %}
 
 {% block title %}Invite a Medic Friend{% endblock %}
+{% block extrahead %}
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 Enter your friend name and email below,
