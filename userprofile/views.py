@@ -170,7 +170,7 @@ def signup(request):
             email.send()
             return HttpResponse('Check your email to activate your account')
 
-            #return HttpResponseRedirect('/accounts/verified_registration/{}'.format(qs))
+            #return HttpResponseRedirect(reverse('url_name'))
         elif Medic.objects.filter(email=email, surname__iexact=surname,
                                   other_name__iexact=other_name,
                                   status=True).exists():
