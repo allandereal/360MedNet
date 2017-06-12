@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +9,32 @@
     {% include 'material/includes/material_js.html' %}
 
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="{% static 'userprofile/images/logo.jpg' %}">
+    <link rel="shortcut icon" href="{% static 'userprofile/images/logo.png' %}">
     <title>{% block title_block %} {% endblock %}</title>
+
+    <style>
+    .buttons-wrapper {
+  position: absolute;
+  height: calc(70vh);
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 997;
+  top: 0;
+  pointer-events: none;
+  width: 100%;
+}
+.buttons-wrapper a {
+  pointer-events: auto;
+}
+.mg-rg {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}</style>
+
 </head>
 <body>
 
@@ -25,7 +47,7 @@
         <ul class="left hide-on-small-and-down">
             <li><a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/logo2.jpg' %}"
                                         style='max-height:55px;padding-top:5px;'></a></li>
-            <li><a href="{% url 'verify' %}">360 MedNet</a></li>
+            <li><a href="{% url 'verify' %}">360MedNet</a></li>
         </ul>
         <ul class="right">
 
@@ -45,8 +67,24 @@
           <div class="container">
 
             <div class="row">
-              <div class="col l6 s12">
+              <div class="col l4 m4 s12">
                 <img src="{% static 'userprofile/images/logo2.jpg' %}" width="150">
+              </div>
+                <div class="col l4 m4 s12">
+                    <ul>
+                        <li><a href="#!"><i class="material-icons">phone</i>&nbsp&nbspTelephone</a></li>
+                        <li><a href="#!"><i class="material-icons">email</i>&nbsp&nbspEmail</a></li>
+                        <li><a href="#!"><i class="material-icons">room</i>&nbsp&nbspAddress</a></li>
+                        <li><a href="#!"><i class="material-icons">phone_iphone</i>&nbsp&nbspSomething Else</a></li>
+                    </ul>
+              </div>
+                <div class="col l4 m4 s12">
+                    <ul>
+                        <li><a href="#!"><i class="material-icons">laptop</i>&nbsp&nbspfacebook</a></li>
+                        <li><a href="#!"><i class="material-icons">headset</i>&nbsp&nbsptwitter</a></li>
+                        <li><a href="#!"><i class="material-icons">ondemand_video</i>&nbsp&nbspyoutube</a></li>
+                        <li><a href="#!"><i class="material-icons">share</i>&nbsp&nbspsomething else</a></li>
+                    </ul>
               </div>
             </div>
           </div>
@@ -64,6 +102,7 @@
 $(document).ready(function(){
       $('.slider').slider();
     });
+$('.carousel.carousel-slider').carousel({fullWidth: true});
 </script>
 
 </body>

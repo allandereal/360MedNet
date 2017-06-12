@@ -137,6 +137,10 @@ SITE_HOST = '127.0.0.1:8000'
 
 AUTH_USER_MODEL = 'auth.User'
 
+#Enforce uniqueness of e-mail addresses.
+ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
+ACCOUNT_UNIQUE_EMAIL = True
+
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 
 ORGS_SLUGFIELD = 'django_extensions.db.fields.AutoSlugField'

@@ -5,12 +5,12 @@ from userprofile.models import Doctor, SocialSite
 
 
 class VerifyForm(forms.Form):
-    registration_number = forms.CharField(required=False)
+    other_name = forms.CharField(required=False, label="First Name")
     surname = forms.CharField(required=False)
-    other_name = forms.CharField(required=False)
+    email = forms.EmailField(required=False, label="Email Address")
 
     layout = Layout(
-        Row('registration_number', 'surname', 'other_name')
+        Row('email', 'surname', 'other_name')
     )
 
 
@@ -27,11 +27,15 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+
 
 class DoctorForm(forms.ModelForm):
+    country = forms.CharField(label="Country of Practice")
     layout = Layout(Fieldset('Personal details',
                     Row('first_name', 'last_name'),
-                    'qualification', 'profession', 'specialization', 'country'
+                     'profession',  'country'
                     ))
 
     class Meta:

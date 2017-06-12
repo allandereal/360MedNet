@@ -10,6 +10,10 @@ from django.urls import reverse
 import io
 import requests
 from contextlib import closing
+from django.core.mail import send_mail
+from django.template.loader import get_template
+from django.template import Context
+from django.conf import settings
 
 
 class Doctor(models.Model):
@@ -20,9 +24,9 @@ class Doctor(models.Model):
     last_name = models.CharField(max_length=100, blank=False, null=False)
     gender = models.CharField(max_length=6, choices=GENDER)
     date_of_birth = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
-    qualification = models.CharField(max_length=100, blank=False, null=False)
+    qualification = models.CharField(max_length=100, blank=True, null=True)
     profession = models.CharField(max_length=100, blank=False, null=False)
-    specialization = models.CharField(max_length=100, blank=False, null=False)
+    specialization = models.CharField(max_length=100, blank=True, null=True)
     year_of_first_medical_certification = models.CharField(max_length=4)
     mobile_number = models.CharField(max_length=30, blank=True, null=True)
     about_me = models.TextField(blank=True, null=True)
@@ -46,6 +50,24 @@ class Doctor(models.Model):
 
     def get_absolute_url(self):
         return reverse('doctor-detail', kwargs={'pk': self.pk})
+
+    def send_login_credentials(self):
+        subject = 'Complete Registration on 360MedNet'
+        link = 'http://%s/join/%s/' % (
+            settings.SITE_HOST,
+            self.code
+        )
+        template = get_template('invitation/invitation_email.html')
+        context = Context({
+            'name': self.name,
+            'organization': self.organization,
+            'link': link,
+        })
+        message = template.render(context)
+        send_mail(
+            subject, message,
+            settings.EMAIL_HOST_USER, [self.email]
+        )
 
 
 class SocialSite(models.Model):
@@ -80,6 +102,7 @@ class Medic(models.Model):
     reg_number = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     other_name = models.CharField(max_length=100)
+    email = models.EmailField()
     sex = models.CharField(max_length=1)
     employer = models.CharField(max_length=100)
     postal_address = models.CharField(max_length=100)

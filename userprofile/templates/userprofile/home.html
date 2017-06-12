@@ -29,18 +29,27 @@
             <img class="circle-clipper" src="{{user.doctor.avatar.url }}" class="responsive-img img-fluid"
                      style='max-height:150px;'>
 
-      </div></div></li>
-        <li><a href="{% url 'profile' user.username %}"><i class="material-icons">account_box</i><span class="green-text email">
-           Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span></a></li>
+      </div>
+         </div></li>
+{#        <li><a href="{% url 'profile' user.username %}"><i class="material-icons">account_box</i><span#}
+{#                class="green-text email">#}
+{#           Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span></a></li>#}
+{##}
+{#        <li><a href="#!"><i class="material-icons">class</i><font size="2em">{{ user.doctor.profession }}#}
+{#            at {{ user.doctor.hospital }}</font></a></li>#}
 
-        <li><a href="#!"><i class="material-icons">class</i><font size="2em">{{ user.doctor.profession }} at {{ user.doctor.hospital }}</font></a></li>
-{#        <li><a href="#!"><i class="material-icons">email</i><span class="green-text email">{{ request.user.email }}</span></a></li>#}
+        <div class="container" align="center">
+            <span class="blue-grey-text">Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span>
+            <span class="grey-text"><font size="2em"><br> {{ user.doctor.profession }}<br>{{ user.doctor.hospital }}
+                <br>{{ user.doctor.country }}</font></span>
+            <a href="{% url 'profile' user.username %}"class="deep-orange-text">View | Update Profile</a>
+        </div>
 
 
         <li><div class="divider"></div></li>
-        <li><a href="{% url 'medical-case' %}"><i class="material-icons">mode_edit</i>Share Medical Case</a></li>
-        <li><a href="{% url 'Post' %}"><i class="material-icons">loyalty</i>Make a Post</a></li>
-        <li><a href="#!"><i class="material-icons">chat</i>Events & Conferences</a></li>
+        <li><a href="{% url 'medical-case' %}" class="blue-grey-text"><i class="material-icons">mode_edit</i>Share Medical Case</a></li>
+        <li><a href="{% url 'Post' %}" class="blue-grey-text"><i class="material-icons">loyalty</i>Make a Post</a></li>
+        <li><a href="#!" class="blue-grey-text"><i class="material-icons">chat</i>Events & Conferences</a></li>
         <li><div class="divider"></div></li>
 
           <li class="no-padding">
@@ -69,9 +78,10 @@
         <li><div class="divider"></div></li>
             <br>
         <div align="center">
-		<a href="{% url 'logout' %}" class="btn waves-effect waves-ripple btn-flat" type="logout" name="_logout">Logout
+		<a href="{% url 'logout' %}" class="btn red waves-effect waves-yellow" type="logout" name="_logout">Logout
     <i class="material-icons right">phonelink_lock</i>
   </a>
+
        </div>
         <br>
         <p align="center"><font size="0.8em">info@360mednet.com | +256-000-000</font></p>
@@ -122,7 +132,7 @@
                                   <img src="{% static 'userprofile/images/eventheader.jpg' %}" alt ="360 MedNet is Secure">
                                 </div>
                                 <div class="card-content">
-                                <span class="deep-orange-text">Upcoming Events</span>
+                                <span class="deep-orange-text"></span>
                                       <div class="row">
                                                 <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">JAN</a></span></div>
                                                 <div class="col l4 m4 s4"><span class="centred"><a onclick="showPopup('popup');">FEB</a></span></div>

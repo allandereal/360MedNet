@@ -24,7 +24,7 @@ class Invitation(models.Model):
             settings.SITE_HOST,
             self.code
         )
-        template = get_template('invitation/invitation_email.txt')
+        template = get_template('invitation/invitation_email.html')
         context = Context({
             'name': self.name,
             'organization': self.organization,
@@ -55,7 +55,7 @@ class FriendInvitation(models.Model):
             settings.SITE_HOST,
             self.code
         )
-        template = get_template('invitation/friend_invitation_email.txt')
+        template = get_template('invitation/friend_invitation_email.html')
         context = Context({
             'name': self.name,
             'sender': self.sender,
