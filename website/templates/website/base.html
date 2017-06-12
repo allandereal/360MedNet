@@ -3,6 +3,7 @@
 <head>
 
 {% load staticfiles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
 {% include 'material/includes/material_css.html' %}
     <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
@@ -16,7 +17,7 @@
     .buttons-wrapper {
   position: absolute;
   height: calc(70vh);
-  margin-top: 64px;
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,10 +81,9 @@
               </div>
                 <div class="col l4 m4 s12">
                     <ul>
-                        <li><a href="#!"><i class="material-icons">laptop</i>&nbsp&nbspfacebook</a></li>
-                        <li><a href="#!"><i class="material-icons">headset</i>&nbsp&nbsptwitter</a></li>
-                        <li><a href="#!"><i class="material-icons">ondemand_video</i>&nbsp&nbspyoutube</a></li>
-                        <li><a href="#!"><i class="material-icons">share</i>&nbsp&nbspsomething else</a></li>
+                        <li><a href="#!"><i class="fa fa-facebook fa-lg"></i>&nbsp&nbsp facebook</a></li>
+                        <li><a href="#!"><i class="fa fa-twitter fa-lg"></i>&nbsp&nbsp twitter</a></li>
+                        <li><a href="#!"><i class="fa fa-youtube-play fa-lg"></i>&nbsp&nbsp youtube</a></li>
                     </ul>
               </div>
             </div>
