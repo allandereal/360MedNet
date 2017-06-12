@@ -19,9 +19,9 @@
        <form method="post" class="viewform">
         {% csrf_token %}
        {% form form=form %}
-        {% part form.email prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
-        {% part form.surname prefix %}<i class="material-icons prefix">email</i>{% endpart %}
-        {% part form.other_name prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.surname prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.other_name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
     {% endform %}
        <br>
        <div class="submit col s12">
