@@ -10,7 +10,8 @@ class VerifyForm(forms.Form):
     email = forms.EmailField(required=False, label="Email Address")
 
     layout = Layout(
-        Row('email', 'surname', 'other_name')
+        Row('other_name', 'surname'),
+        'email'
     )
 
 

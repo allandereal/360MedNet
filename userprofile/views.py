@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
-
+from django.urls import reverse
 from .forms import DoctorForm, UserForm, VerifyForm, SocialSiteForm
 from .models import Medic, Doctor
 from django.views.generic.edit import UpdateView
@@ -168,7 +168,8 @@ def signup(request):
             to_email = email
             email = EmailMessage(subject, message, to=[to_email])
             email.send()
-            return HttpResponse('Check your email to activate your account')
+            # return HttpResponse('Check your email to activate your account')
+            return HttpResponseRedirect(reverse('signup_activate'))
 
             #return HttpResponseRedirect(reverse('url_name'))
         elif Medic.objects.filter(email=email, surname__iexact=surname,
