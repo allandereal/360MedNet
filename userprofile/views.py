@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.urls import reverse
-
 from .forms import DoctorForm, UserForm, VerifyForm, SocialSiteForm
 from .models import Medic, Doctor
 from django.views.generic.edit import UpdateView
