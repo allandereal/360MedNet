@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^invitations/', include(invitation_backend().get_urls())),
     url(r'^friendship/', include('friendship.urls')),
     url(r'^\.well-known/', include('letsencrypt.urls')),
+    url(r'^', include('event.urls')),
     url(r'^', include('medicalcase.urls')),
     url(r'^', include('post.urls')),
     url(r'^', include('userprofile.urls')),

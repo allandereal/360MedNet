@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'website',
     'post',
     'medicalcase',
-    'invitation'
+    'invitation',
+    'event'
 
 
 ]
