@@ -163,7 +163,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '360MedNet Support Team <info360mednet@gmail.com>'
 
-LOGIN_REDIRECT_URL = '/feeds'
+LOGIN_REDIRECT_URL = '/feed'
 
 #  Heroku Settings
 if os.getcwd() == '/app':
