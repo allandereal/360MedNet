@@ -108,11 +108,6 @@ def unverified_register(request):
     return render(request, 'userprofile/unverified_register.html', locals())
 
 
-def view_profile(request):
-    user = User.objects.get(username=request.user.username)
-    return HttpResponseRedirect('/accounts/profile/{}'.format(user))
-
-
 def get_profile(request, username):
     user = User.objects.get(username=username)
     read_profile = Doctor.objects.get(user=user)
