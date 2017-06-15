@@ -11,8 +11,8 @@ def privacy_policy(request):
     return render(request, 'website/privacy_policy.html')
 
 
-# def terms_of_use(request):
-#     return render(request, 'website/terms_of_use.html')
+def terms_of_use(request):
+    return render(request, 'website/terms_of_use.html')
 
 
 def help(request):

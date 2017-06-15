@@ -4,6 +4,9 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 class Invitation(models.Model):
@@ -24,17 +27,22 @@ class Invitation(models.Model):
             settings.SITE_HOST,
             self.code
         )
-        template = get_template('invitation/invitation_email.html')
+        html_content = render_to_string('invitation/invitation_email.html', {"name": self.name, 'link': link})
+        text_content = strip_tags(html_content)
         context = Context({
             'name': self.name,
             'organization': self.organization,
             'link': link,
         })
-        message = template.render(context)
-        send_mail(
+        message = html_content
+        msg = EmailMultiAlternatives(
             subject, message,
             settings.EMAIL_HOST_USER, [self.email]
         )
+        msg.content_subtype = "html"
+        # msg.attach_alternative(html_content, "text/html")
+        # msg.mixed_subtype = 'related'
+        msg.send()
 
 
 class FriendInvitation(models.Model):
@@ -66,4 +74,4 @@ class FriendInvitation(models.Model):
             subject, message,
             settings.EMAIL_HOST_USER, [self.email]
         )
-
+        message.content_subtype = 'html'

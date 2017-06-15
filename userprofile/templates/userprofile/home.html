@@ -42,14 +42,14 @@
             <span class="blue-grey-text">Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span>
             <span class="grey-text"><font size="2em"><br> {{ user.doctor.profession }}<br>{{ user.doctor.hospital }}
                 <br>{{ user.doctor.country }}</font></span>
-            <a href="{% url 'profile' user.username %}"class="deep-orange-text">View | Update Profile</a>
+            <a href="{% url 'profile' user.get_username  %}"class="deep-orange-text">My Profile</a>
         </div>
 
 
         <li><div class="divider"></div></li>
         <li><a href="{% url 'medical-case' %}" class="blue-grey-text"><i class="material-icons">mode_edit</i>Share Medical Case</a></li>
         <li><a href="{% url 'Post' %}" class="blue-grey-text"><i class="material-icons">loyalty</i>Make a Post</a></li>
-        <li><a href="#!" class="blue-grey-text"><i class="material-icons">chat</i>Events & Conferences</a></li>
+        <li><a href="{% url 'events' %}" class="blue-grey-text"><i class="material-icons">chat</i>Events & Conferences</a></li>
         <li><div class="divider"></div></li>
 
           <li class="no-padding">
