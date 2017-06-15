@@ -25,7 +25,7 @@ class MedicalCaseCreate(CreateView):
     def form_valid(self, form):
         form.instance.doctor = Doctor.objects.get(user=self.request.user)
         form.instance.save()
-        return super( MedicalCaseCreate, self).form_valid(form)
+        return super(MedicalCaseCreate, self).form_valid(form)
 
 
 class MedicalCaseList(ListView):

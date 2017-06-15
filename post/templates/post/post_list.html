@@ -19,12 +19,15 @@
             <div class="card-content">
              <span class="card-title">Events</span>
               <p class="blue-grey-text">Ongoing & Upcoming Events and Conferences .</p>
+            {% if top_five_latest_events %}
                  <ul class="cyan-text">
-                <li>Event 1</li>
-                <li>conference 1</li>
-                <li>Event 2</li>
-                <li>Conference 2</li>
+                     {% for event in top_five_latest_events %}
+                         <li>{{ event }}</li>
+                     {% endfor %}
             </ul>
+                {% else %}
+                No events available yet.
+            {% endif %}
             </div>
           </div>
         </div>
@@ -40,12 +43,15 @@
             <div class="card-content">
             <span class="card-title">Medical Cases</span>
                 <p class="blue-grey-text">The newest 5 shared medical cases will be listed here.</p>
+            {% if top_five_latest_medical_cases %}
                   <ul class="cyan-text">
-                <li>Medical Case 1</li>
-                <li>Medical Case 2</li>
-                <li>Medical Case 3</li>
-                <li>Medical Case 4</li>
+                      {% for medical_case in top_five_latest_medical_cases %}
+                         <li>{{ medical_case.title }}</li>
+                     {% endfor %}
             </ul>
+                {% else %}
+                No Medical cases yet.
+            {% endif %}
             </div>
           </div>
         </div>
