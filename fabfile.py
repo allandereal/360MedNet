@@ -9,14 +9,14 @@ def deploy(dest='dev', user='faith', git_hash=None, syncdb=False, restart_celery
         print("Deploying to prod")
         proc_name = '360MedNet'
         path = '/var/www/prod/360MedNet/'
-        workon = '/var/www/env/360MedNet/bin/'
+        workon = ' /home/faith/.virtualenvs/prod_360MedNet/bin/'
         port = prod.SERVER_PORT
         pip = 'requirements.txt'
     else:
         print("Deploying to dev")
         proc_name = '360MedNet'
         path = '/var/www/dev/360MedNet/'
-        workon = '/var/www/env/360MedNet/bin/'
+        workon = ' /home/faith/.virtualenvs/dev_360MedNet/bin/'
         port = dev.SERVER_PORT
         pip = 'requirements.txt'
 
