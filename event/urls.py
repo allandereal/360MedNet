@@ -8,5 +8,4 @@ urlpatterns = [
     url(r'^events/search/', views.get_events),
     url(r'^events/([0-9]+)/', views.event),
     url(r'^events/$', views.index, name='events'),
-    #url(r'^events/$', views.index),
 ]
