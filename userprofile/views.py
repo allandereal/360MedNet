@@ -114,16 +114,6 @@ def get_profile(request, username):
     return render(request, 'userprofile/read_profile.html', {'read_profile': read_profile, 'user': user})
 
 
-class UpdateProfile(UpdateView):
-    model = Doctor
-    fields = ['first_name', 'middle_name', 'last_name', 'gender', 'date_of_birth', 'qualification', 'profession',
-              'specialization', 'country', 'city', 'year_of_first_medical_certification', 'mobile_number',
-              'about_me', 'hospital', 'work_number', 'avatar']
-
-    template_name = 'userprofile/doctor_profile_update.html'
-    success_url = '/accounts/profile/(?P<username>[a-zA-Z0-9]+)'
-
-
 class DoctorDetail(DetailView):
     model = Doctor
 
@@ -131,6 +121,16 @@ class DoctorDetail(DetailView):
         context = super(DoctorDetail, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+
+class UpdateProfile(UpdateView):
+    model = Doctor
+    fields = ['first_name', 'middle_name', 'last_name', 'gender', 'date_of_birth', 'qualification', 'profession',
+              'specialization', 'country', 'city', 'year_of_first_medical_certification', 'mobile_number',
+              'about_me', 'hospital', 'work_number', 'avatar']
+
+    template_name = 'userprofile/doctor_profile_update.html'
+    DoctorDetail()
 
 
 def home(request):

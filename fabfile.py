@@ -7,16 +7,16 @@ def deploy(dest='dev', user='faith', git_hash=None, syncdb=False, restart_celery
            source='https://github.com/faithNassiwa/360MedNet.git'):
     if dest == 'prod':
         print("Deploying to prod")
-        proc_name = '360MedNet'
-        path = '/var/www/prod/360MedNet/'
-        workon = ' /home/faith/.virtualenvs/prod_360MedNet/bin/'
+        proc_name = 'MedNet'
+        path = '/var/www/prod/360MedNet'
+        workon = ' /home/faith/.virtualenvs/prod_360MedNet/bin'
         port = prod.SERVER_PORT
         pip = 'requirements.txt'
     else:
         print("Deploying to dev")
         proc_name = '360MedNet'
-        path = '/var/www/dev/360MedNet/'
-        workon = ' /home/faith/.virtualenvs/dev_360MedNet/bin/'
+        path = '/var/www/dev/360MedNet'
+        workon = ' /home/faith/.virtualenvs/dev_360MedNet/bin'
         port = dev.SERVER_PORT
         pip = 'requirements.txt'
 
