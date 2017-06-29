@@ -16,6 +16,24 @@ from django.template import Context
 from django.conf import settings
 
 
+class Profession(models.Model):
+    profession = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return str(self.profession)
+
+
+class Specialization(models.Model):
+    specialization = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return str(self.specialization)
+
+
 class Doctor(models.Model):
     user = models.OneToOneField(User)
     GENDER = (('Female', 'Female'), ('Male', 'Male'))
@@ -24,9 +42,9 @@ class Doctor(models.Model):
     last_name = models.CharField(max_length=100, blank=False, null=False)
     gender = models.CharField(max_length=6, choices=GENDER)
     date_of_birth = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
-    qualification = models.CharField(max_length=100, blank=True, null=True)
-    profession = models.CharField(max_length=100, blank=False, null=False)
-    specialization = models.CharField(max_length=100, blank=True, null=True)
+    #qualification = models.CharField(max_length=100, blank=True, null=True)
+    profession = models.ForeignKey(Profession)
+    specialization = models.ForeignKey(Specialization)
     year_of_first_medical_certification = models.CharField(max_length=4)
     mobile_number = models.CharField(max_length=30, blank=True, null=True)
     about_me = models.TextField(blank=True, null=True)
@@ -68,6 +86,18 @@ class Doctor(models.Model):
             subject, message,
             settings.EMAIL_HOST_USER, [self.email]
         )
+
+
+class Qualification(models.Model):
+    qualification = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=200)
+    university = models.CharField(max_length=200)
+    doctor = models.ForeignKey(Doctor)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return str(self.qualification)
 
 
 class SocialSite(models.Model):

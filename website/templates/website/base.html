@@ -3,15 +3,19 @@
 <head>
 
 {% load staticfiles %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
-{% include 'material/includes/material_css.html' %}
+    {% include 'material/includes/material_css.html' %}
     <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
     {% include 'material/includes/material_js.html' %}
 
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="{% static 'userprofile/images/logo.png' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+    <link rel="shortcut icon" href="{% static 'userprofile/images/favicon.png' %}"/>
     <title>{% block title_block %} {% endblock %}</title>
+
 
     <style>
     .buttons-wrapper {

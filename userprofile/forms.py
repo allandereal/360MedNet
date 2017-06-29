@@ -1,17 +1,20 @@
 from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
-from userprofile.models import Doctor, SocialSite
+from userprofile.models import Doctor, SocialSite, Qualification
 
 
 class VerifyForm(forms.Form):
-    other_name = forms.CharField(required=False, label="First Name")
+    other_name = forms.CharField(required=False, label="First Name(s)")
     surname = forms.CharField(required=False)
     email = forms.EmailField(required=False, label="Email Address")
+    alternative_email = forms.EmailField(required=False, label="Alternative Email Address")
 
     layout = Layout(
         Row('other_name', 'surname'),
-        'email'
+        'email',
+        'alternative_email'
+
     )
 
 
@@ -35,13 +38,13 @@ class UserForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     country = forms.CharField(label="Country of Practice")
     layout = Layout(Fieldset('Personal details',
-                    Row('first_name', 'last_name'),
-                     'profession',  'country'
-                    ))
+                             Row('first_name', 'last_name'),
+                             'profession', 'specialization', 'country'
+                             ))
 
     class Meta:
         model = Doctor
-        fields = ('first_name', 'last_name', 'qualification', 'profession', 'specialization', 'country')
+        fields = ('first_name', 'last_name', 'profession', 'specialization', 'country')
 
 
 class SocialSiteForm(forms.ModelForm):
@@ -53,6 +56,12 @@ class SocialSiteForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('first_name', 'middle_name', 'last_name', 'gender', 'date_of_birth', 'qualification', 'profession',
+        fields = ('first_name', 'middle_name', 'last_name', 'gender', 'date_of_birth', 'profession',
                   'specialization', 'country', 'city', 'year_of_first_medical_certification', 'mobile_number',
                   'about_me', 'hospital', 'work_number', 'avatar')
+
+
+class QualificationForm(forms.ModelForm):
+    class Meta:
+        model = Qualification
+        fields = ('field_of_study', 'qualification', 'university')

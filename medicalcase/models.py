@@ -13,9 +13,10 @@ class MedicalCaseCategory(models.Model):
 
 
 class MedicalCase(models.Model):
-    GENDER = (('', ''),('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
+    GENDER = (('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
     title = models.CharField(max_length=200)
     chief_complaint = models.CharField(max_length=200)
+    purpose = models.CharField(max_length=250)
     patient_age = models.CharField(max_length=200)
     patient_gender = models.CharField(max_length=6, choices=GENDER)
     patient_country_of_origin = models.CharField(max_length=200)

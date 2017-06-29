@@ -7,3 +7,4 @@ staticfiles
 MedNet/settings.py
 .idea
 .env
+

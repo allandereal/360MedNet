@@ -1,23 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import MedicalCase, MedicalCaseCategory
+from .models import MedicalCase, MedicalCaseCategory, Comment
 from userprofile.models import Doctor
 from .forms import MedicalCaseForm
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, ModelFormMixin
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
+from django.core.urlresolvers import reverse_lazy, reverse
 
 
 class MedicalCaseCreate(CreateView):
     model = MedicalCase
-    form = MedicalCaseForm
-    fields = ['title', 'chief_complaint', 'patient_age', 'patient_gender', 'patient_country_of_origin',
-              'history_of_present_illness', 'medical_history', 'surgical_history', 'social_history', 'family_history',
-              'allergies', 'medications', 'review_of_systems', 'physical_examination', 'diagnostic_tests',
-              'medical_case_category']
+    form_class = MedicalCaseForm
 
     success_url = '/medical_cases/'
     template_name = 'medicalcase/medicalcase_form.html'
@@ -32,10 +31,38 @@ class MedicalCaseList(ListView):
     model = MedicalCase
 
 
-class MedicalCaseDetail(DetailView):
+# class MedicalCaseDetail(DetailView):
+#     model = MedicalCase
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(MedicalCaseDetail, self).get_context_data(**kwargs)
+#         context['now'] = timezone.now()
+#         return context
+
+
+class MedicalCaseDetail(ModelFormMixin, DetailView):
     model = MedicalCase
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse('medical_case-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(MedicalCaseDetail, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
+        context['form'] = self.get_form()
         return context
+
+    def comments(self):
+        return Comment.objects.filter(medical_case=MedicalCase.objects.get(pk=self.object.pk)).all().order_by('-created_at')
+
+
+@login_required
+def medical_case_comment_add_view(request, pk):
+    form = CommentForm(request.POST or None)
+
+    if form.is_valid() and pk:
+        form.instance.doctor = Doctor.objects.get(user=request.user)
+        form.instance.medical_case = MedicalCase.objects.get(pk=pk)
+        form.save()
+        return HttpResponseRedirect(reverse('medical_case-detail', kwargs={'pk': pk}))
+    return HttpResponseRedirect(reverse('medical_case-detail', kwargs={'pk': pk}))

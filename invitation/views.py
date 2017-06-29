@@ -6,8 +6,10 @@ from .models import Invitation, FriendInvitation
 from django.contrib.auth.models import User
 from userprofile.forms import DoctorForm, UserForm
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 
+@staff_member_required
 def invite_user(request):
     if request.method == 'POST':
         form = MedicInvitationForm(request.POST)
@@ -37,7 +39,6 @@ def invite_user(request):
     return render(request, 'invitation/user_invite.html', {'form': form})
 
 
-@login_required
 def invite_friend(request):
     if request.method == 'POST':
         form = FriendInvitationForm(request.POST)

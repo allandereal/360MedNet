@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from event import views
 
+
 urlpatterns = [
     url(r'^scholarships/', views.scholarships),
     url(r'^jobs/', views.jobs),

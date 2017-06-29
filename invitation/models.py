@@ -70,8 +70,9 @@ class FriendInvitation(models.Model):
             'link': link,
         })
         message = template.render(context)
-        send_mail(
+        msg = send_mail(
             subject, message,
             settings.EMAIL_HOST_USER, [self.email]
         )
         message.content_subtype = 'html'
+        msg.send()

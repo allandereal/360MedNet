@@ -40,11 +40,9 @@ class UserForm(forms.ModelForm):
 
 class DoctorForm(forms.ModelForm):
     layout = Layout(Fieldset('Personal details',
-                    Row('first_name', 'last_name'),
-                    'qualification', 'profession', 'specialization', 'country'
-                    ))
+                             'profession', 'specialization', 'country'
+                             ))
 
     class Meta:
         model = Doctor
-        fields = ('first_name', 'last_name', 'qualification', 'profession', 'specialization', 'country')
-
+        fields = ('first_name', 'last_name', 'profession', 'specialization', 'country')

@@ -51,8 +51,13 @@
             <font color="#4682b4"><div class="col s12 m5 l6">{{ read_profile.date_of_birth }}</div></font>
         </div>
         <div class="row">
-            <div class="col s12 m3 l4"><h6>Qualificcation :</h6></div>
-            <font color="#4682b4"><div class="col s12 m5 l6">{{ read_profile.qualification }}</div></font>
+            <div class="col s12 m3 l4"><h6>Qualification <a class="button" href="{% url 'add_qualification' %}">Add</a></h6></div>
+            <font color="#4682b4"><div class="col s12 m5 l6">
+                {% for rq in read_qualification %}
+                <br>Qualification:{{ rq.qualification }} &nbsp Field of Study:{{ rq.field_of_study }} &nbsp University:{{ rq.university }}
+                {% endfor %}
+                </div></font>
+
         </div>
         <div class="row">
             <div class="col s12 m3 l4"><h6>Profession :</h6></div>
