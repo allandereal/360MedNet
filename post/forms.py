@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
-from post.models import Post, Comment
+from post.models import Post, Comment, Photo
 
 
 class PostForm(forms.ModelForm):
@@ -18,3 +18,14 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment_content',)
+
+
+class PhotoForm(forms.ModelForm):
+    image = forms.ImageField()
+
+    class Meta:
+        model = Photo
+        fields = ('image',)
+
+
+ImageInlineFormset = forms.inlineformset_factory(Post, Photo, fields=('image',), extra=2, min_num=1)

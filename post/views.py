@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Post, Comment
 from userprofile.models import Doctor
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, PhotoForm
 from django.views.generic.edit import DeleteView, ModelFormMixin
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
@@ -96,3 +96,17 @@ def add_comment_to_post(request, pk):
     else:
         form = CommentForm()
     return render(request, 'post/add_comment_to_post.html', {'form': form})
+
+
+@login_required
+def add_image_on_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.post = post
+            image.doctor = Doctor.objects.get(user=request.user)
+            image.save()
+            return HttpResponseRedirect(reverse('post-detail', kwargs={'pk': pk}))
+

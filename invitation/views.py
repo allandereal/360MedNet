@@ -1,12 +1,18 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from .forms import MedicInvitationForm, FriendInvitationForm
+from django.template.loader import render_to_string
+from django.urls import reverse
+from userprofile.models import Doctor
+from .forms import MedicInvitationForm, FriendInvitationForm, RegistrationForm1, RegistrationForm2, RegistrationForm3
 from .models import Invitation, FriendInvitation
 from django.contrib.auth.models import User
 from userprofile.forms import DoctorForm, UserForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from formtools.wizard.views import SessionWizardView
 
 
 @staff_member_required
@@ -19,7 +25,7 @@ def invite_user(request):
                 name=form.cleaned_data['name'],
                 organization=form.cleaned_data['organization'],
                 email=form.cleaned_data['email'],
-                code=User.objects.make_random_password(20)
+                code="360MedNet" + User.objects.make_random_password(8)
             )
             if invitation.email and not User.objects.filter(email=invitation.email).exists():
                 invitation.save()
@@ -47,7 +53,7 @@ def invite_friend(request):
             friend_invitation = FriendInvitation(
                 name=form.cleaned_data['name'],
                 email=form.cleaned_data['email'],
-                code=User.objects.make_random_password(20),
+                code=User.objects.make_random_password(8),
                 sender=request.user
             )
             if friend_invitation.email and not User.objects.filter(email=friend_invitation.email).exists():
@@ -96,10 +102,70 @@ def register_invited_user(request):
             registered = True
 
         else:
-            print (user_form.errors, doctor_form.errors)
+            print(user_form.errors, doctor_form.errors)
 
     else:
         user_form = UserForm()
         doctor_form = DoctorForm()
 
     return render(request, 'userprofile/register.html', locals())
+
+
+class RegistrationWizard(SessionWizardView):
+    def done(self, form_list, **kwargs):
+        # do_something_with_the_form_data(form_list)
+        return HttpResponseRedirect('formwizard/done.html')
+
+
+def registration_one(request):
+    initial = {'first_name': request.session.get('first_name', None),
+               'last_name': request.session.get('last_name', None),
+               'invitation_code': request.session.get('invitation_code', None)}
+    form = RegistrationForm1(request.POST or None, initial=initial)
+    if request.method == 'POST':
+        if form.is_valid():
+            request.session['first_name'] = form.cleaned_data['first_name']
+            request.session['last_name'] = form.cleaned_data['last_name']
+            request.session['invitation_code'] = form.cleaned_data['invitation_code']
+            return HttpResponseRedirect(reverse('reg_2'))
+    return render(request, 'invitation/registration_one.html', {'form': form})
+
+
+def registration_two(request):
+    doctor_form = RegistrationForm3(request.POST or None)
+    user_form = RegistrationForm2(request.POST or None)
+    if request.method == 'POST':
+        if doctor_form.is_valid() and user_form.is_valid():
+            doctor = doctor_form.save(commit=False)
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            doctor = Doctor.objects.create(first_name=request.session['first_name'],
+                                           last_name=request.session['last_name'],
+                                           invitation_code=request.session['invitation_code'],
+                                           invitation_code_object=Invitation.objects.
+                                           get(code=request.session['invitation_code']),
+                                           profession=doctor.profession,
+                                           specialization=doctor.specialization, country=doctor.country, user=user,
+                                           verification_status=True)
+
+            # doctor.save()
+            current_site = get_current_site(request)
+            subject = 'Welcome to 360MedNet.'
+            message = render_to_string('invitation/thank_you_signup_email.html', {
+                'user': user,
+                'doctor': doctor,
+                'domain': current_site.domain,
+
+            })
+            to_email = user.email
+            email = EmailMessage(subject, message, to=[to_email])
+            email.content_subtype = "html"
+            email.send()
+
+            return HttpResponseRedirect(reverse('finished'))
+    return render(request, 'invitation/registration_two.html', {'doctor_form': doctor_form, 'user_form': user_form})
+
+
+def done(request):
+    return render(request, 'invitation/done.html')

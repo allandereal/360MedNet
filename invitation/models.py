@@ -13,7 +13,7 @@ class Invitation(models.Model):
     name = models.CharField(max_length=100)
     organization = models.CharField(max_length=100)
     email = models.EmailField()
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=17)
     accepted = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -27,12 +27,19 @@ class Invitation(models.Model):
             settings.SITE_HOST,
             self.code
         )
-        html_content = render_to_string('invitation/invitation_email.html', {"name": self.name, 'link': link})
+        website = 'http://%s/' % (
+            settings.SITE_HOST,
+
+        )
+        html_content = render_to_string('invitation/invitation_email.html', {'name': self.name, 'link': link,
+                                                                             'website': website, 'code': self.code })
         text_content = strip_tags(html_content)
         context = Context({
             'name': self.name,
             'organization': self.organization,
             'link': link,
+            'website': website,
+            'code': self.code
         })
         message = html_content
         msg = EmailMultiAlternatives(

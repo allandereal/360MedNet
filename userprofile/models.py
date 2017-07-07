@@ -14,12 +14,16 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+from invitation.models import Invitation
 
 
 class Profession(models.Model):
     profession = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    class Meta:
+        verbose_name_plural = 'Professions'
 
     def __str__(self):
         return str(self.profession)
@@ -30,6 +34,9 @@ class Specialization(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    class Meta:
+        verbose_name_plural = 'Specializations'
+
     def __str__(self):
         return str(self.specialization)
 
@@ -37,12 +44,12 @@ class Specialization(models.Model):
 class Doctor(models.Model):
     user = models.OneToOneField(User)
     GENDER = (('Female', 'Female'), ('Male', 'Male'))
-    first_name = models.CharField(max_length=100, blank=False, null=False)
-    middle_name = models.CharField(max_length=100, blank=True, null=True)
+    first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=False, null=False)
     gender = models.CharField(max_length=6, choices=GENDER)
     date_of_birth = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
-    #qualification = models.CharField(max_length=100, blank=True, null=True)
+    # qualification = models.CharField(max_length=100, blank=True, null=True)
     profession = models.ForeignKey(Profession)
     specialization = models.ForeignKey(Specialization)
     year_of_first_medical_certification = models.CharField(max_length=4)
@@ -55,6 +62,8 @@ class Doctor(models.Model):
     avatar = models.ImageField(upload_to="avatars", default='avatars/none/default.jpeg', height_field=None,
                                width_field=None, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
+    invitation_code = models.CharField(max_length=17, blank=True, null=True)
+    invitation_code_object = models.ForeignKey(Invitation, blank=True, null=True)
     verification_status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -98,6 +107,9 @@ class Qualification(models.Model):
 
     def __str__(self):
         return str(self.qualification)
+
+    def get_absolute_url(self):
+        return reverse('doctor-detail', kwargs={'doctor': self.doctor})
 
 
 class SocialSite(models.Model):

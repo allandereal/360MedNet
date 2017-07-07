@@ -160,17 +160,18 @@ class DoctorDetail(DetailView):
 
 class UpdateProfile(UpdateView):
     model = Doctor
-    second_model = Qualification
     form_class = ProfileForm
-    # second_form_class = QualificationForm
-    # fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'profession',
-    #           'specialization', 'country', 'city', 'year_of_first_medical_certification', 'mobile_number',
-    #           'about_me', 'hospital', 'work_number', 'avatar']
 
     template_name = 'userprofile/doctor_profile_update.html'
 
-    def get_object(self, *kwargs):
-        return Doctor.objects.get(user=self.request.user)
+    # def get_object(self, *kwargs):
+    #     return Doctor.objects.get(user=self.request.user)
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.doctor = Doctor.objects.get(user=self.request.user)
+        #form.instance.save()
+        return super(UpdateProfile, self).form_valid(form)
 
     # def get_context_data(self, **kwargs):
     #     context = super(UpdateProfile, self).get_context_data(**kwargs)
@@ -191,11 +192,16 @@ class UpdateProfile(UpdateView):
 class QualificationCreate(CreateView):
     model = Qualification
     form_class = QualificationForm
-    success_url = reverse_lazy('profile')
+    # success_url = reverse_lazy('profile')
+
+    def get_success_url(self):
+        doctor = self.object.doctor.user.username
+        return reverse('profile', doctor)
 
     def form_valid(self, form):
-        form.instance.doctor = Doctor.objects.get(user=self.request.user)
-        form.instance.save()
+        instance = form.save(commit=False)
+        instance.doctor = Doctor.objects.get(user=self.request.user)
+        #form.instance.save()
         return super(QualificationCreate, self).form_valid(form)
 
 
@@ -205,8 +211,14 @@ class UpdateQualification(UpdateView):
 
     template_name = 'userprofile/doctor_profile_update.html'
 
-    def get_object(self):
-        return Doctor.objects.get(user=self.request.user)
+    # def get_object(self):
+    #     return Doctor.objects.get(user=self.request.user)
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.doctor = Doctor.objects.get(user=self.request.user)
+        #form.instance.save()
+        return super(UpdateQualification, self).form_valid(form)
 
 
 def home(request):

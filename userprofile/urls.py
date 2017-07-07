@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^accounts/verified_registration/(?P<reg_number>[a-zA-Z0-9]+)/$', user_views.register, name='register'),
     url(r'^accounts/unverified_registration/$', user_views.unverified_register, name='unverified_register'),
     url(r'^$', user_views.verify, name='verify'),
-    url(r'^medic/(?P<username>[a-zA-Z0-9]+)/$', user_views.get_profile, name='profile'),
+    url(r'^medic/(?P<username>[\w.@+-]+)/$', user_views.get_profile, name='profile'),
     url(r'^update/(?P<pk>[\-\w]+)/$', login_required(user_views.UpdateProfile.as_view()), name='update_doctor'),
     url(r'^complete/registration/(?P<pk>[\-\w]+)/$', user_views.RegisterUpdateView.as_view(),
         name='update_registration'),

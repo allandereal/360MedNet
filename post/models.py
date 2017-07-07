@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from userprofile.models import Doctor
 from django.contrib.auth.models import User
 
@@ -12,7 +13,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name_plural = "Medical Cases"
+        verbose_name_plural = "Posts/Dicussions"
+
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.id})
 
     @classmethod
     def list_posts(cls):
@@ -22,6 +26,7 @@ class Post(models.Model):
 class Photo(models.Model):
     image = models.ImageField(upload_to="posts", height_field=None, width_field=None)
     post = models.ForeignKey(Post, default=None)
+    doctor = models.ForeignKey(Doctor)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
