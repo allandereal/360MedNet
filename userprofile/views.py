@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -17,6 +18,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from invitation.models import Invitation
 
 
 class EmailAuthenticationForm(AuthenticationForm):
@@ -226,43 +228,36 @@ def home(request):
 
 
 def signup(request):
-    form = VerifyForm(data=request.POST)
+    form = VerifyForm(request.POST or None)
     verified = False
     if request.method == 'POST' and form.is_valid():
-        email = form.cleaned_data['email']
         surname = form.cleaned_data['surname']
         other_name = form.cleaned_data['other_name']
         alternative_email = form.cleaned_data['alternative_email']
-        if Medic.objects.filter(email=email, surname__iexact=surname, other_name__iexact=other_name,
+        organization = form.cleaned_data['organization']
+        if Medic.objects.filter(surname__iexact=surname, other_name__iexact=other_name,
                                 status=False).exists():
-            qs = Medic.objects.get(email=email)
-            generate_password = User.objects.make_random_password(8)
-            user = User.objects.create_user(username=surname + other_name, email=email,
-                                            password=generate_password)
-            doctor = Doctor.objects.create(last_name=surname, first_name=other_name, user=user)
-            current_site = get_current_site(request)
-            subject = 'Welcome to 360MedNet.'
-            message = render_to_string('userprofile/activate_email.html', {
-                'user': user,
-                'doctor': doctor,
-                'domain': current_site.domain,
-                'password': generate_password
-
-            })
-            to_email = [email, alternative_email]
-            email = EmailMessage(subject, message, to=[to_email])
-            email.send()
-            # return HttpResponse('Check your email to activate your account')
-            return HttpResponseRedirect(reverse('signup_activate'))
-
-            # return HttpResponseRedirect(reverse('url_name'))
-        elif Medic.objects.filter(email=email, surname__iexact=surname,
-                                  other_name__iexact=other_name,
-                                  status=True).exists():
-            return HttpResponseRedirect("/accounts/login")
+            medic = Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name, status=False)
+            invitation = Invitation(
+                name=medic.other_name,
+                organization=organization,
+                email=alternative_email,
+                code=User.objects.make_random_password(6)
+            )
+            if invitation.email and not User.objects.filter(email=invitation.email).exists():
+                invitation.save()
+                invitation.send_invite()
+                messages.success(request,
+                                 message='An invitation has been sent to  %s.' %
+                                         invitation.email
+                                 )
+            else:
+                messages.error(request,
+                               message='An invitation was not sent, %s is already registered with 360MedNet.' %
+                                       invitation.email
+                               )
         else:
-            qs = {'other_name': other_name}
-            return HttpResponseRedirect('/accounts/unverified_registration/', {'qs': qs})
+            form = VerifyForm()
     return render(request, 'userprofile/signup.html', {'form': form, 'verified': verified})
 
 

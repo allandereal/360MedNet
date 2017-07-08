@@ -5,25 +5,25 @@ from userprofile.models import Doctor, SocialSite, Qualification
 
 
 class VerifyForm(forms.Form):
-    other_name = forms.CharField(required=False, label="First Name(s)")
-    surname = forms.CharField(required=False)
-    email = forms.EmailField(required=False, label="Email Address")
-    alternative_email = forms.EmailField(required=False, label="Alternative Email Address")
+    other_name = forms.CharField(max_length=200, label="First Name(s)")
+    surname = forms.CharField(max_length=200)
+    alternative_email = forms.EmailField(required=False, label="Your primary email address")
+    organization = forms.CharField(required=False, label="Organization, Hostpital or Company")
 
     layout = Layout(
         Row('other_name', 'surname'),
-        'email',
-        'alternative_email'
+        'alternative_email',
+        'organization'
+
 
     )
 
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    username = forms.CharField(help_text=False)
     email = forms.EmailField(label="Email Address")
 
-    layout = Layout(Row('email', 'username', 'password')
+    layout = Layout(Row('email', 'password')
 
                     )
 

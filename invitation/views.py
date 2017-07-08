@@ -146,6 +146,7 @@ def registration_two(request):
         if doctor_form.is_valid() and user_form.is_valid():
             doctor = doctor_form.save(commit=False)
             user = user_form.save(commit=False)
+            user.username = first_name + "-" + last_name + "-" + User.objects.make_random_password(8)
             user.set_password(user.password)
             user.save()
             doctor = Doctor.objects.create(first_name=request.session['first_name'],
