@@ -2,9 +2,11 @@
 {% load staticfiles %}
 {% load material_form %}
 
-{% block title_block %} Post | 360 MedNet {% endblock %}
+{% block title %} {{ object.title }} | Discussion | 360 MedNet {% endblock %}
 {% block content %}
     <div class="row container">
+    {{ object.title }}
+    <br>
 {{ object.post_content }}
     <br>{{ object.doctor.first_name }}{{ object.doctor.last_name }}
 {#    <br><a href="{% url 'comment' object.id %}" class="button">Comment</a>#}

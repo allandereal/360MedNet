@@ -14,11 +14,13 @@ class MedicalCaseCategory(models.Model):
 
 class MedicalCase(models.Model):
     GENDER = (('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
+    PURPOSE = (('I need help!', 'I need help!'), ('I found this case interesting.', 'I found this case interesting.'),
+               ('I need help!', 'I need help!'))
     title = models.CharField(max_length=200)
     chief_complaint = models.CharField(max_length=200)
-    purpose = models.CharField(max_length=250)
+    purpose = models.CharField(max_length=250, choices=PURPOSE)
     patient_age = models.CharField(max_length=200)
-    patient_gender = models.CharField(max_length=6, choices=GENDER)
+    patient_gender = models.CharField(max_length=6, choices=GENDER, default='Female')
     patient_country_of_origin = models.CharField(max_length=200)
     history_of_present_illness = models.TextField()
     medical_history = models.TextField()
@@ -31,6 +33,7 @@ class MedicalCase(models.Model):
     physical_examination = models.TextField()
     diagnostic_tests = models.TextField()
     medical_case_category = models.ForeignKey(MedicalCaseCategory)
+    any_other_details = models.TextField()
     #slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title', unique_with='created_at')
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)

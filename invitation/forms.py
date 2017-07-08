@@ -69,16 +69,15 @@ class RegistrationForm1(forms.ModelForm):
 
 class RegistrationForm2(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), label="Create Password")
-    username = forms.CharField(help_text=False)
+    #username = forms.CharField(help_text=False)
     email = forms.EmailField(label="Email Address")
-    layout = Layout(email,
-                    username, password
+    layout = Layout(email, password
 
                     )
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password')
+        fields = ('email', 'password')
 
     def clean_email(self):
         email = self.cleaned_data['email']
