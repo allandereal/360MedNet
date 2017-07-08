@@ -1,20 +1,38 @@
 {% extends "website/base.html" %}
-
-{% block title %}Invite Medic | 360MedNet{% endblock %}
+{% load staticfiles %}
+{% load material_form %}
+{% block title %} Invite | 360MedNet{% endblock %}
 {% block content %}
-    {% if messages %}
+ <div class ="container">
+ <br>
+     {% if messages %}
     <ul class="messages">
       {% for message in messages %}
         <li>{{ message }}</li>
       {% endfor %}
     </ul>
-  {% else %}
-Enter your friend name and email below,
-and click "send invite" to invite your friend to join the site:
-<form method="post" action=".">
-{% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="send invite" />
-</form>
+    {% else %}
+    <div class="card blue-grey darken-1 card-content white-text">
+    <div class="container" style="text-align: center">
+    <br>
+        <p class="flow-text" align="center">Invite Medics</p>
+
+      <div class="row">
+       <form method="post" class="viewform">
+        {% csrf_token %}
+       {% form form=form %}
+
+    {% endform %}
+       <br>
+       <div class="submit col s12">
+		<button class="btn waves-effect waves-light" type="submit" name="_submit"> Invite
+    <i class="material-icons right">send</i>
+  </button><br><br><br>
+       </div>
+       </form><br><br>
+      <br><br></div></div></div>
     {% endif %}
+ </div>
+
+<br><br><br><br><br>
 {% endblock %}

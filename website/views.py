@@ -13,5 +13,5 @@ def terms_of_use(request):
     return render(request, 'website/terms_of_use.html')
 
 
-def help(request):
-    return render(request, 'website/terms_of_use.html')
+def website_help(request):
+    return render(request, 'website/help.html')

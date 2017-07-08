@@ -51,7 +51,7 @@ class Doctor(models.Model):
     date_of_birth = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     # qualification = models.CharField(max_length=100, blank=True, null=True)
     profession = models.ForeignKey(Profession)
-    specialization = models.ForeignKey(Specialization)
+    specialization = models.ForeignKey(Specialization, blank=True, null=True)
     year_of_first_medical_certification = models.CharField(max_length=4)
     mobile_number = models.CharField(max_length=30, blank=True, null=True)
     about_me = models.TextField(blank=True, null=True)

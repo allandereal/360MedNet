@@ -6,13 +6,13 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 from userprofile.models import Doctor
-from .forms import MedicInvitationForm, FriendInvitationForm, RegistrationForm1, RegistrationForm2, RegistrationForm3
+from .forms import MedicInvitationForm, FriendInvitationForm, RegistrationForm1, RegistrationForm2, RegistrationForm3, \
+    RegistrationForm4
 from .models import Invitation, FriendInvitation
 from django.contrib.auth.models import User
 from userprofile.forms import DoctorForm, UserForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from formtools.wizard.views import SessionWizardView
 
 
 @staff_member_required
@@ -25,7 +25,7 @@ def invite_user(request):
                 name=form.cleaned_data['name'],
                 organization=form.cleaned_data['organization'],
                 email=form.cleaned_data['email'],
-                code="360MedNet" + User.objects.make_random_password(8)
+                code=User.objects.make_random_password(6)
             )
             if invitation.email and not User.objects.filter(email=invitation.email).exists():
                 invitation.save()
@@ -111,12 +111,6 @@ def register_invited_user(request):
     return render(request, 'userprofile/register.html', locals())
 
 
-class RegistrationWizard(SessionWizardView):
-    def done(self, form_list, **kwargs):
-        # do_something_with_the_form_data(form_list)
-        return HttpResponseRedirect('formwizard/done.html')
-
-
 def registration_one(request):
     initial = {'first_name': request.session.get('first_name', None),
                'last_name': request.session.get('last_name', None),
@@ -127,6 +121,18 @@ def registration_one(request):
             request.session['first_name'] = form.cleaned_data['first_name']
             request.session['last_name'] = form.cleaned_data['last_name']
             request.session['invitation_code'] = form.cleaned_data['invitation_code']
+
+            current_site = get_current_site(request)
+            subject = 'Welcome to 360MedNet.'
+            message = render_to_string('invitation/signup_email.html', {
+                'first_name': request.session['first_name'],
+                'domain': current_site.domain,
+
+            })
+            to_email2 = Invitation.objects.filter(accepted=False).get(code=request.session['invitation_code'])
+            email = EmailMessage(subject, message, to=[to_email2.email])
+            email.content_subtype = "html"
+            email.send()
             return HttpResponseRedirect(reverse('reg_2'))
     return render(request, 'invitation/registration_one.html', {'form': form})
 
@@ -134,10 +140,12 @@ def registration_one(request):
 def registration_two(request):
     doctor_form = RegistrationForm3(request.POST or None)
     user_form = RegistrationForm2(request.POST or None)
+    first_name = request.session['first_name']
+    last_name = request.session['last_name']
     if request.method == 'POST':
         if doctor_form.is_valid() and user_form.is_valid():
             doctor = doctor_form.save(commit=False)
-            user = user_form.save()
+            user = user_form.save(commit=False)
             user.set_password(user.password)
             user.save()
             doctor = Doctor.objects.create(first_name=request.session['first_name'],
@@ -146,10 +154,9 @@ def registration_two(request):
                                            invitation_code_object=Invitation.objects.
                                            get(code=request.session['invitation_code']),
                                            profession=doctor.profession,
-                                           specialization=doctor.specialization, country=doctor.country, user=user,
+                                           country=doctor.country, user=user,
                                            verification_status=True)
 
-            # doctor.save()
             current_site = get_current_site(request)
             subject = 'Welcome to 360MedNet.'
             message = render_to_string('invitation/thank_you_signup_email.html', {
@@ -158,13 +165,14 @@ def registration_two(request):
                 'domain': current_site.domain,
 
             })
-            to_email = user.email
-            email = EmailMessage(subject, message, to=[to_email])
+            to_email1 = user.email
+            email = EmailMessage(subject, message, to=[to_email1])
             email.content_subtype = "html"
             email.send()
 
             return HttpResponseRedirect(reverse('finished'))
-    return render(request, 'invitation/registration_two.html', {'doctor_form': doctor_form, 'user_form': user_form})
+    return render(request, 'invitation/registration_two.html', {'doctor_form': doctor_form, 'user_form': user_form,
+                                                                'first_name': first_name, 'last_name': last_name })
 
 
 def done(request):

@@ -3,11 +3,8 @@ from invitation import views as invitation_views
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm1, RegistrationForm2, RegistrationForm3
 
-forms = [ RegistrationForm1, RegistrationForm2, RegistrationForm3 ]
-
 urlpatterns = [
     url(r'^invite/$', invitation_views.invite_user, name='invite'),
-    url(r'^invite/signup$', invitation_views.RegistrationWizard.as_view(forms), name='invite-registration'),
     url(r'^friend/invite/$', login_required(invitation_views.invite_friend), name='friend_invite'),
     url(r'^join/(?P<code>[a-zA-Z0-9]+)/$', invitation_views.join, name='join'),
     url(r'^join/friend/(?P<code>[a-zA-Z0-9]+)/$', invitation_views.join_friend_invite, name='join_friend_invite'),

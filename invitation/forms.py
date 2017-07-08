@@ -25,9 +25,9 @@ class FriendInvitationForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label="Create Password")
     username = forms.CharField(help_text=False)
-    email = forms.EmailField(label="Email Address")
+    email = forms.EmailField(label="Email address")
 
     layout = Layout(Row('email', 'username', 'password')
 
@@ -40,12 +40,12 @@ class UserForm(forms.ModelForm):
 
 class DoctorForm(forms.ModelForm):
     layout = Layout(Fieldset('Personal details',
-                             'profession', 'specialization', 'country'
+                             'profession', 'country'
                              ))
 
     class Meta:
         model = Doctor
-        fields = ('first_name', 'last_name', 'profession', 'specialization', 'country')
+        fields = ('first_name', 'last_name', 'profession', 'country')
 
 
 def invitation_code_exists(value):
@@ -57,6 +57,10 @@ def invitation_code_exists(value):
 
 class RegistrationForm1(forms.ModelForm):
     invitation_code = forms.CharField(max_length=17, validators=[invitation_code_exists])
+    layout = Layout(Row('first_name', 'last_name', ),
+                    'invitation_code'
+
+                    )
 
     class Meta:
         model = Doctor
@@ -64,7 +68,7 @@ class RegistrationForm1(forms.ModelForm):
 
 
 class RegistrationForm2(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label="Create Password")
     username = forms.CharField(help_text=False)
     email = forms.EmailField(label="Email Address")
     layout = Layout(email,
@@ -84,11 +88,18 @@ class RegistrationForm2(forms.ModelForm):
 
 
 class RegistrationForm3(forms.ModelForm):
+    country = forms.CharField(label="Country of Practice")
     layout = Layout(
-                    Fieldset('Medical details',
-                             'profession', 'specialization', 'country'
-                             ))
+        Fieldset('Medical details',
+                 'profession', 'country'
+                 ))
 
     class Meta:
         model = Doctor
-        fields = ('profession', 'specialization', 'country')
+        fields = ('profession', 'country')
+
+
+class RegistrationForm4(forms.Form):
+    tos = forms.BooleanField(required=True, label="Click here to indicate that you have read and agree to the "
+                                                  "360MedNet Terms of use and Privacy Policy",
+                             )

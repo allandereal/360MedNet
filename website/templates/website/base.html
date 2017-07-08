@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 
     <link rel="shortcut icon" href="{% static 'userprofile/images/favicon.png' %}"/>
-    <title>{% block title_block %} {% endblock %}</title>
+    <title>{% block title %} {% endblock %}</title>
 
 
     <style>
@@ -58,7 +58,7 @@
           <li><a href="{% url 'about_us' %}">About Us</a></li>
             <li><a href="{% url 'verify' %}">Help</a></li>
             <li><a href="{% url 'login' %}"><font color="#faebd7"><i class="material-icons right">input</i>Login</font></a></li>
-            <li><a href="{% url 'signup' %}"><font color="#7fffd4" size="4em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
+            <li><a href="{% url 'reg_1' %}"><font color="#7fffd4" size="4em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
         </ul>
 	  </div>
     </div>

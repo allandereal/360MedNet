@@ -1,21 +1,44 @@
 {% extends "website/base.html" %}
-
-{% block title %}Invite Medic | 360MedNet{% endblock %}
+{% load staticfiles %}
+{% load material_form %}
+{% block title %}Signup | 360MedNet{% endblock %}
 {% block content %}
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-Enter your friend name and email below,
-and click "send invite" to invite your friend to join the site:
-<form method="post" action=".">
-{% csrf_token %}
-  {{ doctor_form.as_p }}
+    <div class="container">
+    <br>
+        <span class="flow-text">Hello {{ first_name }}! </span>
+    <br><span class="green-text">Welcome to 360MedNet. </span>
+    <br> Please complete the final step of the registration.
+    <br>
+<form method="POST">
+    {% csrf_token %}
+    <br>
+    <div class="row">
+        <div class="col s12 m6 l6">
+    First name: <input type="text" value="{{ first_name }}"
+       class="field left" readonly="readonly">
+        </div>
+        <div class="col s12 m6 l6">
+    Last name:<input type="text" value="{{ last_name}}"
+       class="field left" readonly="readonly">
+            </div>
+    </div>
+    <br>
+    <h5>Account details</h5>
     {{ user_form.as_p }}
-  <input type="submit" value="send invite" />
+    <br>
+
+    <h5>Profession details</h5>
+    {{ doctor_form.as_p }}
+
+    <br>
+    <input type="checkbox" id="checkboxid" required><label for="checkboxid">&nbsp; Proceeding indicates that you have read and agree to the
+    360MedNet <a href="{% url 'terms_of_use' %}">Terms of use</a> and <a href="{% url 'privacy_policy' %}">
+            Privacy Policy.</a></label>
+
+    <br>
+    <br>
+    <button type="submit" name="_submit" class="btn">Register</button>
 </form>
-    {% endif %}
+    </div>
+        <br><br>
 {% endblock %}

@@ -159,10 +159,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'info360mednet@gmail.com'
-EMAIL_HOST_PASSWORD = 'kspxanhvmakpupgf'  # app specfic password generated from support.google.com/accounts/answer/185833
+EMAIL_HOST_PASSWORD = 'kspxanhvmakpupgf'  # app specfic password generated from
+# support.google.com/accounts/answer/185833
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = '360MedNet Support Team <info360mednet@gmail.com>'
+DEFAULT_FROM_EMAIL = '360MedNet <info360mednet@gmail.com>'
 
 LOGIN_REDIRECT_URL = '/feed'
 
