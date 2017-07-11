@@ -27,18 +27,13 @@ def invite_user(request):
                 email=form.cleaned_data['email'],
                 code=User.objects.make_random_password(6)
             )
-            if invitation.email and not User.objects.filter(email=invitation.email).exists():
+            if invitation.email:
                 invitation.save()
                 invitation.send_invite()
                 messages.success(request,
-                                 message='Invitation was successfully sent to %s.' %
+                                 message='Invitation successfully sent to %s.' %
                                          invitation.email
                                  )
-            else:
-                messages.error(request,
-                               message='Invitation was not sent, %s is already registered with 360MedNet.' %
-                                       invitation.email
-                               )
     else:
         form = MedicInvitationForm()
 

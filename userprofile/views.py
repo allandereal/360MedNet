@@ -172,28 +172,29 @@ class UpdateProfile(UpdateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.doctor = Doctor.objects.get(user=self.request.user)
-        #form.instance.save()
+        # form.instance.save()
         return super(UpdateProfile, self).form_valid(form)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(UpdateProfile, self).get_context_data(**kwargs)
-    #     pk = self.kwargs.get('pk', 0)
-    #     profile_instance = self.model.objects.get(id=pk)
-    #     qualification_instance = self.second_model.objects.get(doctor=profile_instance)
-    #     if 'form' not in context:
-    #         context['form'] = self.form_class()
-    #     if 'form2' not in context:
-    #         #form.instance.doctor = Doctor.objects.get(user=self.request.user)
-    #         context['form2'] = self.second_form_class(instance=qualification_instance)
-    #     else:
-    #         context['form2'] = self.second_form_class()
-    #     context['id'] = pk
-    #     return context
+        # def get_context_data(self, **kwargs):
+        #     context = super(UpdateProfile, self).get_context_data(**kwargs)
+        #     pk = self.kwargs.get('pk', 0)
+        #     profile_instance = self.model.objects.get(id=pk)
+        #     qualification_instance = self.second_model.objects.get(doctor=profile_instance)
+        #     if 'form' not in context:
+        #         context['form'] = self.form_class()
+        #     if 'form2' not in context:
+        #         #form.instance.doctor = Doctor.objects.get(user=self.request.user)
+        #         context['form2'] = self.second_form_class(instance=qualification_instance)
+        #     else:
+        #         context['form2'] = self.second_form_class()
+        #     context['id'] = pk
+        #     return context
 
 
 class QualificationCreate(CreateView):
     model = Qualification
     form_class = QualificationForm
+
     # success_url = reverse_lazy('profile')
 
     def get_success_url(self):
@@ -203,7 +204,7 @@ class QualificationCreate(CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.doctor = Doctor.objects.get(user=self.request.user)
-        #form.instance.save()
+        # form.instance.save()
         return super(QualificationCreate, self).form_valid(form)
 
 
@@ -219,7 +220,7 @@ class UpdateQualification(UpdateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.doctor = Doctor.objects.get(user=self.request.user)
-        #form.instance.save()
+        # form.instance.save()
         return super(UpdateQualification, self).form_valid(form)
 
 
@@ -228,37 +229,26 @@ def home(request):
 
 
 def signup(request):
-    form = VerifyForm(request.POST or None)
-    verified = False
-    if request.method == 'POST' and form.is_valid():
-        surname = form.cleaned_data['surname']
-        other_name = form.cleaned_data['other_name']
-        alternative_email = form.cleaned_data['alternative_email']
-        organization = form.cleaned_data['organization']
-        if Medic.objects.filter(surname__iexact=surname, other_name__iexact=other_name,
-                                status=False).exists():
-            medic = Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name, status=False)
+    if request.method == 'POST':
+        form = VerifyForm(request.POST)
+        if form.is_valid():
             invitation = Invitation(
-                name=medic.other_name,
-                organization=organization,
-                email=alternative_email,
+                name=form.cleaned_data['other_name'],
+                organization=form.cleaned_data['organization'],
+                email=form.cleaned_data['alternative_email'],
                 code=User.objects.make_random_password(6)
             )
-            if invitation.email and not User.objects.filter(email=invitation.email).exists():
-                invitation.save()
-                invitation.send_invite()
-                messages.success(request,
-                                 message='An invitation has been sent to  %s.' %
-                                         invitation.email
-                                 )
-            else:
-                messages.error(request,
-                               message='An invitation was not sent, %s is already registered with 360MedNet.' %
-                                       invitation.email
-                               )
-        else:
-            form = VerifyForm()
-    return render(request, 'userprofile/signup.html', {'form': form, 'verified': verified})
+
+            invitation.save()
+            invitation.send_invite()
+            messages.success(request, message='An invitation has been sent to  %s.' % invitation.email
+                             )
+            Medic.objects.filter(other_name=form.cleaned_data['other_name'], surname=form.cleaned_data['surname']).\
+                update(verification_status=True, invitation_status=True)
+
+    else:
+        form = VerifyForm()
+    return render(request, 'userprofile/signup.html', {'form': form})
 
 
 def signup_activate(request):

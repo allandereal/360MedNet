@@ -16,6 +16,13 @@
         <p class="flow-text" style="font-size: small" >Please provide details as they appear on your medical license.</p>
 
       <div class="row">
+{#      {% if messages %}#}
+{#      <ul class="messages">#}
+{#      {% for message in messages %}#}
+{#        <li>{{ message }}</li>#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#      {% else %}#}
        <form method="post" class="viewform">
         {% csrf_token %}
        {% form form=form %}
@@ -29,7 +36,9 @@
     <i class="material-icons right">send</i>
   </button><br><br><br>
        </div>
-       </form><br><br>
+       </form>
+{#          {% endif %}#}
+          <br><br>
       <br><br></div></div></div></div>
 
 <br><br><br><br><br>

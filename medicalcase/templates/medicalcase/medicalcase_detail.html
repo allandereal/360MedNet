@@ -8,6 +8,8 @@
             <div class="container">
                 <br>
                 <h2>{{ object.title }}</h2>
+                <h5><span class="flow-text">Reason for sharing</span></h5>
+                {{ object.purpose }}
                 <h5><span class="flow-text">Chief Complaint</span></h5>
                 {{ object.chief_complaint }}
                 <br><h5><span class="flow-text">Patient Details</span></h5>
@@ -51,7 +53,9 @@
 
                 <br>
                 <br>medical_case_category
-                <br>{{ object.medical_case_category }}
+                <br>{% for medical_case_category in object.medical_case_category.all %}
+                <ul><li>{{ medical_case_category}}</li></ul>
+                {% endfor %}
 
                 <table style="border-spacing:5px"><tr><td>
                     <br><img class="circle" src="{{object.doctor.avatar.url }}" class="responsive-img img-fluid"

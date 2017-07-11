@@ -1,14 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
-from .models import MedicalCase, Comment
+from .models import MedicalCase, Comment, MedicalCaseCategory
 
 
 class MedicalCaseForm(forms.ModelForm):
-    PURPOSE = (('I need help!', 'I need help!'), ('I found this case interesting.', 'I found this case interesting.'),
-               ('I need help!', 'I need help!'))
 
-    purpose = forms.CharField(label='Reason for sharing medical case', widget=forms.Select(choices=PURPOSE))
+    # medical_case_category = forms.ModelMultipleChoiceField(queryset=MedicalCaseCategory.objects.all(), required=True,
+    #                                                        widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = MedicalCase
@@ -16,7 +15,7 @@ class MedicalCaseForm(forms.ModelForm):
         fields = ('title', 'chief_complaint','patient_age', 'patient_gender', 'patient_country_of_origin',
                   'history_of_present_illness', 'medical_history', 'surgical_history', 'social_history',
                   'family_history', 'allergies', 'medications', 'review_of_systems', 'physical_examination',
-                  'diagnostic_tests', 'medical_case_category', 'any_other_details', 'purpose')
+                  'diagnostic_tests', 'any_other_details', 'medical_case_category', 'purpose')
 
 
 class CommentForm(forms.ModelForm):

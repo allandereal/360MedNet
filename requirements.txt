@@ -21,6 +21,7 @@ django-invitations==1.9.1
 django-jet==1.0.5
 django-letsencrypt==2.0.0
 django-material==0.13.1
+django-multiselectfield-0.1.7
 django-organizations==0.9.1
 django-storages==1.5.2
 docutils==0.13.1

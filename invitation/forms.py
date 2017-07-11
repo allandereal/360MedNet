@@ -5,10 +5,24 @@ from invitation.models import Invitation, FriendInvitation
 from userprofile.models import Doctor
 
 
+def email_already_invited(value):
+    if Invitation.objects.filter(email=value, accepted=False).exists():
+        raise forms.ValidationError("Email provided was already invited and has not net accepted the invitation")
+    elif Invitation.objects.filter(email=value, accepted=True).exists():
+        raise forms.ValidationError("Email provided was already invited and accepted the invitation")
+    else:
+        pass
+
+
+def email_already_registered(value):
+    if User.objects.filter(email=value).exists():
+        raise forms.ValidationError("Email provided is already registered with 360MedNet")
+
+
 class MedicInvitationForm(forms.ModelForm):
     name = forms.CharField(label='Invitee Name')
     organization = forms.CharField(label='Invitee Organization')
-    email = forms.EmailField(label='Invitee Email')
+    email = forms.EmailField(label='Invitee Email', validators=[email_already_invited, email_already_registered])
 
     class Meta:
         model = Invitation
@@ -17,7 +31,7 @@ class MedicInvitationForm(forms.ModelForm):
 
 class FriendInvitationForm(forms.ModelForm):
     name = forms.CharField(label='Invitee Name')
-    email = forms.EmailField(label='Invitee Email')
+    email = forms.EmailField(label='Invitee Email', validators=[email_already_invited, email_already_registered])
 
     class Meta:
         model = FriendInvitation
@@ -52,11 +66,11 @@ def invitation_code_exists(value):
     invitee = Invitation.objects.filter(code=value).exists()
     if not invitee:
         raise forms.ValidationError("The invitation code provided does not exist. Please verify the code you have "
-                                    "entered with the one sent to your email")
+                                    "entered with the one sent to your email.")
 
 
 class RegistrationForm1(forms.ModelForm):
-    invitation_code = forms.CharField(max_length=17, validators=[invitation_code_exists])
+    invitation_code = forms.CharField(max_length=6, validators=[invitation_code_exists])
     layout = Layout(Row('first_name', 'last_name', ),
                     'invitation_code'
 

@@ -1,6 +1,27 @@
 from django.db import models
 from userprofile.models import Doctor
 from autoslug import AutoSlugField
+from multiselectfield import MultiSelectField
+
+
+GENDER = (('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
+
+PURPOSE = (('I need help to arrive at diagnosis', 'I need help to arrive at diagnosis'),
+           ('Interesting case, a lot to learn', 'Interesting case, a lot to learn'),
+           ('Rare case', 'Rare case'), ('Personal write up to improve skill', 'Personal write up to improve skill'))
+
+
+# class Purpose(models.Model):
+#     name = models.CharField(max_length=200, blank=False, default="General Medicine ")
+#     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+#
+#     class Meta:
+#         ordering = ['-created_at']
+#         verbose_name_plural = "Purpose"
+#
+#     def __str__(self):
+#         return self.name
 
 
 class MedicalCaseCategory(models.Model):
@@ -8,17 +29,18 @@ class MedicalCaseCategory(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = "Medical Case Categories"
+
     def __str__(self):
         return self.name
 
 
 class MedicalCase(models.Model):
-    GENDER = (('Female', 'Female'), ('Male', 'Male'), ('Others', 'Others'))
-    PURPOSE = (('I need help!', 'I need help!'), ('I found this case interesting.', 'I found this case interesting.'),
-               ('I need help!', 'I need help!'))
     title = models.CharField(max_length=200)
     chief_complaint = models.CharField(max_length=200)
-    purpose = models.CharField(max_length=250, choices=PURPOSE)
+    purpose = MultiSelectField(choices=PURPOSE, verbose_name="Reason for sharing medical case")
     patient_age = models.CharField(max_length=200)
     patient_gender = models.CharField(max_length=6, choices=GENDER, default='Female')
     patient_country_of_origin = models.CharField(max_length=200)
@@ -32,7 +54,7 @@ class MedicalCase(models.Model):
     review_of_systems = models.TextField()
     physical_examination = models.TextField()
     diagnostic_tests = models.TextField()
-    medical_case_category = models.ForeignKey(MedicalCaseCategory)
+    medical_case_category = models.ManyToManyField(MedicalCaseCategory)
     any_other_details = models.TextField()
     #slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title', unique_with='created_at')
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -54,6 +76,10 @@ class Photo(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = "Photos"
+
 
 class Comment(models.Model):
     comment_content = models.TextField()
@@ -61,6 +87,10 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     medical_case = models.ForeignKey(MedicalCase)
     doctor = models.ForeignKey(Doctor, related_name="doctor_comments")
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = "Comments"
 
 
 class Reply(models.Model):
@@ -70,4 +100,8 @@ class Reply(models.Model):
     parent_comment_id = models.ForeignKey(Comment)
     medical_case = models.ForeignKey(MedicalCase)
     doctor = models.ForeignKey(Doctor, related_name="doctor_replies")
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = "Replies"
 

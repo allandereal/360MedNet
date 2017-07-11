@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
-from userprofile.models import Doctor, SocialSite, Qualification
+from userprofile.models import Doctor, SocialSite, Qualification, Medic
 
 
 class VerifyForm(forms.Form):
@@ -15,8 +15,17 @@ class VerifyForm(forms.Form):
         'alternative_email',
         'organization'
 
-
     )
+
+    def clean(self):
+        cleaned_data = super(VerifyForm, self).clean()
+        other_name = cleaned_data.get("other_name")
+        surname = cleaned_data.get("surname")
+
+        if not Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name):
+            raise forms.ValidationError("%s %s does not exist in our database. Please provide your registered name as "
+                                        "per on the medical license" % (other_name, surname))
+        return self.cleaned_data
 
 
 class UserForm(forms.ModelForm):

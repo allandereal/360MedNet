@@ -7,13 +7,14 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from userprofile.models import Doctor
 
 
 class Invitation(models.Model):
     name = models.CharField(max_length=100)
     organization = models.CharField(max_length=100)
     email = models.EmailField()
-    code = models.CharField(max_length=17)
+    code = models.CharField(max_length=6)
     accepted = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -83,3 +84,12 @@ class FriendInvitation(models.Model):
         )
         message.content_subtype = 'html'
         msg.send()
+
+
+class SuggestedInvitee(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    doctor = models.ForeignKey(Doctor)
+    created_on = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True, auto_now_add=False)
+
