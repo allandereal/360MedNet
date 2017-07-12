@@ -12,17 +12,17 @@
     <div class="container" style="text-align: center">
     <br>
         <p class="flow-text" align="center">Request to join the Community</p>
-    <br>
+      <div class="row">
+      {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+      {% else %}
+          <br>
         <p class="flow-text" style="font-size: small" >Please provide details as they appear on your medical license.</p>
 
-      <div class="row">
-{#      {% if messages %}#}
-{#      <ul class="messages">#}
-{#      {% for message in messages %}#}
-{#        <li>{{ message }}</li>#}
-{#      {% endfor %}#}
-{#    </ul>#}
-{#      {% else %}#}
        <form method="post" class="viewform">
         {% csrf_token %}
        {% form form=form %}
@@ -37,7 +37,7 @@
   </button><br><br><br>
        </div>
        </form>
-{#          {% endif %}#}
+          {% endif %}
           <br><br>
       <br><br></div></div></div></div>
 

@@ -2,6 +2,18 @@ from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
 from userprofile.models import Doctor, SocialSite, Qualification, Medic
+from invitation.models import Invitation
+
+
+def email_already_registered_or_invited(value):
+    if User.objects.filter(email=value).exists():
+        raise forms.ValidationError("Email provided is already registered with 360MedNet.")
+    elif Invitation.objects.filter(email=value, accepted=False).exists():
+        raise forms.ValidationError("Email provided was already invited and has not net accepted the invitation.")
+    elif Invitation.objects.filter(email=value, accepted=True).exists():
+        raise forms.ValidationError("Email provided was already invited and accepted the invitation")
+    else:
+        pass
 
 
 class VerifyForm(forms.Form):
@@ -22,9 +34,18 @@ class VerifyForm(forms.Form):
         other_name = cleaned_data.get("other_name")
         surname = cleaned_data.get("surname")
 
-        if not Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name):
+        try:
+            Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name)
+            pass
+
+        except Medic.DoesNotExist:
             raise forms.ValidationError("%s %s does not exist in our database. Please provide your registered name as "
-                                        "per on the medical license" % (other_name, surname))
+                                        "they appear on your medical license" % (other_name, surname))
+
+        # except Medic.objects.get(surname__iexact=surname, other_name__iexact=other_name, invitation_status=True,
+        #                          verification_status=True):
+        #     raise forms.ValidationError("%s %s was already invited to join 360MedNet. Please check your email for "
+        #                                 "the invitation." % (other_name, surname))
         return self.cleaned_data
 
 

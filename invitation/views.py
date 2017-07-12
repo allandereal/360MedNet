@@ -7,12 +7,13 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from userprofile.models import Doctor
 from .forms import MedicInvitationForm, FriendInvitationForm, RegistrationForm1, RegistrationForm2, RegistrationForm3, \
-    RegistrationForm4
-from .models import Invitation, FriendInvitation
+    RegistrationForm4, SuggestedInviteeForm
+from .models import Invitation, FriendInvitation, SuggestedInvitee
 from django.contrib.auth.models import User
 from userprofile.forms import DoctorForm, UserForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.edit import UpdateView, CreateView
 
 
 @staff_member_required
@@ -142,6 +143,8 @@ def registration_two(request):
             doctor = doctor_form.save(commit=False)
             user = user_form.save(commit=False)
             user.username = first_name + "-" + last_name + "-" + User.objects.make_random_password(8)
+            user.first_name = request.session['first_name']
+            user.last_name = request.session['last_name']
             user.set_password(user.password)
             user.save()
             doctor = Doctor.objects.create(first_name=request.session['first_name'],
@@ -168,8 +171,22 @@ def registration_two(request):
 
             return HttpResponseRedirect(reverse('finished'))
     return render(request, 'invitation/registration_two.html', {'doctor_form': doctor_form, 'user_form': user_form,
-                                                                'first_name': first_name, 'last_name': last_name })
+                                                                'first_name': first_name, 'last_name': last_name})
 
 
 def done(request):
     return render(request, 'invitation/done.html')
+
+
+def send_suggested_invitee(request):
+    form = SuggestedInviteeForm()
+    if request.method == 'POST':
+        form = SuggestedInviteeForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.doctor = request.user
+            instance.save()
+            messages.success(request, message="%s's invite request has been received and will be invited once "
+                                              "verified." % instance.name)
+
+    return render(request, 'invitation/suggest_invitee.html', locals())

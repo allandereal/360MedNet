@@ -241,9 +241,10 @@ def signup(request):
 
             invitation.save()
             invitation.send_invite()
-            messages.success(request, message='An invitation has been sent to  %s.' % invitation.email
+            messages.success(request, message='An invitation has been sent to  %s, please check your email to '
+                                              'access next steps.' % invitation.email
                              )
-            Medic.objects.filter(other_name=form.cleaned_data['other_name'], surname=form.cleaned_data['surname']).\
+            Medic.objects.filter(other_name__iexact=form.cleaned_data['other_name'], surname__iexact=form.cleaned_data['surname']).\
                 update(verification_status=True, invitation_status=True)
 
     else:

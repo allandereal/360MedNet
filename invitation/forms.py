@@ -1,28 +1,30 @@
 from django import forms
 from django.contrib.auth.models import User
 from material.base import Layout, Row, Fieldset
-from invitation.models import Invitation, FriendInvitation
+from invitation.models import Invitation, FriendInvitation, SuggestedInvitee
 from userprofile.models import Doctor
 
 
-def email_already_invited(value):
-    if Invitation.objects.filter(email=value, accepted=False).exists():
-        raise forms.ValidationError("Email provided was already invited and has not net accepted the invitation")
+def email_already_registered_or_invited(value):
+    if User.objects.filter(email=value).exists():
+        raise forms.ValidationError("Email provided is already registered with 360MedNet.")
+    elif Invitation.objects.filter(email=value, accepted=False).exists():
+        raise forms.ValidationError("Email provided was already invited and has not net accepted the invitation.")
     elif Invitation.objects.filter(email=value, accepted=True).exists():
         raise forms.ValidationError("Email provided was already invited and accepted the invitation")
     else:
         pass
 
 
-def email_already_registered(value):
-    if User.objects.filter(email=value).exists():
-        raise forms.ValidationError("Email provided is already registered with 360MedNet")
+def email_already_suggested(value):
+    if SuggestedInvitee.objects.filter(email=value).exists():
+        raise forms.ValidationError("Email provided already exists among our suggested doctors.")
 
 
 class MedicInvitationForm(forms.ModelForm):
     name = forms.CharField(label='Invitee Name')
     organization = forms.CharField(label='Invitee Organization')
-    email = forms.EmailField(label='Invitee Email', validators=[email_already_invited, email_already_registered])
+    email = forms.EmailField(label='Invitee Email', validators=[email_already_registered_or_invited])
 
     class Meta:
         model = Invitation
@@ -31,10 +33,20 @@ class MedicInvitationForm(forms.ModelForm):
 
 class FriendInvitationForm(forms.ModelForm):
     name = forms.CharField(label='Invitee Name')
-    email = forms.EmailField(label='Invitee Email', validators=[email_already_invited, email_already_registered])
+    email = forms.EmailField(label='Invitee Email', validators=[email_already_registered_or_invited])
 
     class Meta:
         model = FriendInvitation
+        fields = ('name', 'email')
+
+
+class SuggestedInviteeForm(forms.ModelForm):
+    name = forms.CharField(label='Name')
+    email = forms.EmailField(label='Email address', validators=[email_already_registered_or_invited,
+                                                                email_already_suggested])
+
+    class Meta:
+        model = SuggestedInvitee
         fields = ('name', 'email')
 
 

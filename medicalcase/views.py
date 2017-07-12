@@ -31,15 +31,6 @@ class MedicalCaseList(ListView):
     model = MedicalCase
 
 
-# class MedicalCaseDetail(DetailView):
-#     model = MedicalCase
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(MedicalCaseDetail, self).get_context_data(**kwargs)
-#         context['now'] = timezone.now()
-#         return context
-
-
 class MedicalCaseDetail(ModelFormMixin, DetailView):
     model = MedicalCase
     form_class = CommentForm
