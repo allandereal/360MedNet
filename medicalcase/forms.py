@@ -24,3 +24,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment_content',)
+
+
+class MedicalCaseSearchForm(forms.ModelForm):
+    class Meta:
+        model = MedicalCase
+
+        fields = ('medical_case_category',)

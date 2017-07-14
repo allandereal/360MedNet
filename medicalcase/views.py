@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm
+from .forms import CommentForm, MedicalCaseSearchForm
 from django.core.urlresolvers import reverse_lazy, reverse
 
 
@@ -29,6 +29,23 @@ class MedicalCaseCreate(CreateView):
 
 class MedicalCaseList(ListView):
     model = MedicalCase
+    form_class = MedicalCaseSearchForm
+    template_name = 'medicalcase/medicalcase_list.html'
+
+    def get_queryset(self):
+        form = self.form_class(self.request.GET)
+        if form.is_valid():
+            return MedicalCase.objects.filter(medical_case_category__icontains=
+                                              form.cleaned_data['medical_case_category'])
+        return MedicalCase.objects.all()
+
+
+# def search_medicalcases(request):
+#     form = MedicalCaseSearchForm
+#     if request.method == 'GET':
+#         if form.is_valid():
+#             return MedicalCase.objects.filter(medical_case_category__icontains=
+#                                               form.cleaned_data['medical_case_category'])
 
 
 class MedicalCaseDetail(ModelFormMixin, DetailView):
@@ -44,7 +61,8 @@ class MedicalCaseDetail(ModelFormMixin, DetailView):
         return context
 
     def comments(self):
-        return Comment.objects.filter(medical_case=MedicalCase.objects.get(pk=self.object.pk)).all().order_by('-created_at')
+        return Comment.objects.filter(medical_case=MedicalCase.objects.get(pk=self.object.pk)).all().order_by(
+            '-created_at')
 
 
 @login_required

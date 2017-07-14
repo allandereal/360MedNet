@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'invitations',
     'multiselectfield',
+    'django_countries',
 
     # My Apps
     'userprofile',
