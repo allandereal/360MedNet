@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.urls import reverse
 from userprofile.models import Doctor
@@ -21,6 +23,11 @@ class Post(models.Model):
     @classmethod
     def list_posts(cls):
         return cls.objects.all()
+
+    @classmethod
+    def weekly_top_five_discussions(cls):
+        date_diff = datetime.datetime.now() - datetime.timedelta(days=7)
+        return cls.objects.filter(created_at__range=(date_diff, datetime.datetime.now())).order_by('-created_at')[:5]
 
 
 class Photo(models.Model):

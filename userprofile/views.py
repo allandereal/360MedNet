@@ -204,7 +204,7 @@ class QualificationCreate(CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.doctor = Doctor.objects.get(user=self.request.user)
-        # form.instance.save()
+        instance.save()
         return super(QualificationCreate, self).form_valid(form)
 
 

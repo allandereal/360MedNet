@@ -1,34 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+    .myButton {
+	background-color:#f50e0e;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #ed091c;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+    }
+    .myButton:hover {
+	background-color:#f01d1d;
+    }
+    .myButton:active {
+	position:relative;
+	top:1px;
+    }
 
-Dear {{ name }},
+</style>
+</head>
 
-{{ sender.doctor.first_name}} {{ sender.doctor.last_name}} has invited you to join 360MedNet.
+<body>
 
-Join and Be a part of a wonderful new world- 360MedNet.
+<div>
+<div style="width: 90%">
+    <img src="http://www.wen-parker.com/images/headers/medical-devices-and-equipment-header.jpg">
+</div>
+<br>
+<div style="width: 90%">
+    <br><br>Dear {{ name }},
 
-360MedNet is a professional networking platform for Doctors, Pharmacists, Nurses, Dentists, Laboratory specialists, Medical assistants and the like.
+    <p>{{ sender.doctor.first_name}} {{ sender.doctor.last_name}} has invited you to join 360MedNet.</p>
 
-As part of this community, you will be able to:
+    <p><font color="#228b22">Join and Be a part of a wonderful new world- 360MedNet.</font></p>
 
-(This will be in form of an inforgraphic)
-- Share interesting cases with other medical professionals
-- Engage in closed forums for medics
-- Get real time information on scholarships
-- Get information about upcoming trainings and workshops
-- Meet mentors and mentees
-- Get information about upcoming local and international conferences
-- Find local and international employment opportunities.
+<p><font color="#696969">360MedNet is a professional networking platform for Doctors, Pharmacists, Nurses, Dentists, Laboratory specialists,
+    Medical assistants and the like.</font></p>
 
-                           <div class="buttons-wrapper">
+</div>
+<br>
+<div style="width: 90%">
+    <p><h3><font color="#228b22">As part of this community, you will be able to:</font></h3></p>
+
+    <font color="green">
+        <ul>
+            <li>Share interesting cases with other medical professionals</li>
+            <li>Engage in closed forums for medics</li>
+            <li>Get real time information on scholarships</li>
+            <li>Get information about upcoming trainings and workshops</li>
+            <li>Meet mentors and mentees</li>
+            <li>Get information about upcoming local and international conferences</li>
+            <li>Find local and international employment opportunities</li>
+        </ul>
+    </font>
+
+
+</div>
+    <div style="width: 90%">
+         <div class="buttons-wrapper">
           <div class="row center">
               <a href="{{ link }}" class="red waves-effect waves-yellow btn hoverable mg-rg"><b>join the
                   community</b><i class="matergitial-icons right">bubble_chart</i></a>
           </div>
         </div>
+    </div>
+    <div style="width: 90%; background-color: #555555">
+        <p><font color="#f0fff0">This email is auto generated and cannot be replied to.
+            <br>Please email info@360MedNet for any inquiries</font></p>
+        <p><font color="#f0fff0">&copy 2018 360MedNet</font></p>
+    </div>
+</div>
 
+</body>
+</html>
 
+{##}
+{#<html>#}
+{##}
+{#Dear {{ name }},#}
+{##}
+{#{{ sender.doctor.first_name}} {{ sender.doctor.last_name}} has invited you to join 360MedNet.#}
+{##}
+{#Join and Be a part of a wonderful new world- 360MedNet.#}
+{##}
+{#360MedNet is a professional networking platform for Doctors, Pharmacists, Nurses, Dentists, Laboratory specialists, Medical assistants and the like.#}
+{##}
+{#As part of this community, you will be able to:#}
+{##}
+{#(This will be in form of an inforgraphic)#}
+{#- Share interesting cases with other medical professionals#}
+{#- Engage in closed forums for medics#}
+{#- Get real time information on scholarships#}
+{#- Get information about upcoming trainings and workshops#}
+{#- Meet mentors and mentees#}
+{#- Get information about upcoming local and international conferences#}
+{#- Find local and international employment opportunities.#}
+{##}
+{#                           <div class="buttons-wrapper">#}
+{#          <div class="row center">#}
+{#              <a href="{{ link }}" class="red waves-effect waves-yellow btn hoverable mg-rg"><b>join the#}
+{#                  community</b><i class="matergitial-icons right">bubble_chart</i></a>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{##}
 {#To accept the invitation, please click the link below:#}
 {#{{ link }}#}
-
-</html>
+{##}
+{#</html>#}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Record, Medic, Doctor, Profession, Specialization, Qualification
+from .models import Record, Medic, Doctor, Profession, Specialization, Qualification, MedicEmail
 
 
 class RecordAdmin(admin.ModelAdmin):
@@ -33,6 +33,7 @@ class QualificationAdmin(admin.ModelAdmin):
 
 admin.site.register(Record, RecordAdmin)
 admin.site.register(Medic)
+admin.site.register(MedicEmail)
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Profession, ProfessionAdmin)
 admin.site.register(Specialization, SpecializationAdmin)

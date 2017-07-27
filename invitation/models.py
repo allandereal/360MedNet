@@ -11,7 +11,7 @@ from django.utils.html import strip_tags
 
 class Invitation(models.Model):
     name = models.CharField(max_length=100)
-    organization = models.CharField(max_length=100)
+    organization = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField()
     code = models.CharField(max_length=6)
     accepted = models.BooleanField(default=False)

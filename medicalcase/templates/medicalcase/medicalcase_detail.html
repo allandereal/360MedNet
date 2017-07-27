@@ -1,61 +1,24 @@
 {% extends "userprofile/home.html" %}
 {% load material_form %}
 
-{% block title %} {{ object.title }} | 360 MedNet {% endblock %}
+{% block title_block %} 360 MedNet {% endblock %}
 {% block content %}
 
-              <div class="card">
+                            <div class="card">
             <div class="container">
                 <br>
-                <h2>{{ object.title }}</h2>
-                <h5><span class="flow-text">Reason for sharing</span></h5>
-                {{ object.purpose }}
-                <h5><span class="flow-text">Chief Complaint</span></h5>
-                {{ object.chief_complaint }}
-                <br><h5><span class="flow-text">Patient Details</span></h5>
-                Age: {{ object.patient_age }} &nbsp Gender: {{ object.patient_gender }} &nbsp
-                Country: {{ object.patient_country_of_origin}}
-                <br>
-                <br>history_of_present_illness
-                <br>{{ object.history_of_present_illness }}
+                <p class="flow-text green-text" style="font-weight: 500">{{ object.title }}</p>
+                <p class="blue-grey-text">Presenting Complaint : </p>
+                 <span class="green-text text-darken-4">{{ object.chief_complaint }}</span>
+                <br><br><span class="grey-text">Category:</span> <span class="blue-text">{{ object.medical_case_category }}</span>
+                <div class="blue-grey-text">
+                <br>A {{ object.patient_age }} year old {{ object.patient_gender }} from {{ object.patient_country_of_origin }}
+                presented with {{ object.chief_complaint }}. The patient has a history of {{ object.history_of_present_illness }}
+                and has been on {{ object.medications }}. The patient was physically examined on
+                    {{ object.physical_examination }}. He is allergic to {{ object.allergies }}.
+                <br><br><div class="divider"></div>
 
                 <br>
-                <br>medical_history
-                <br>{{ object.medical_history }}
-
-                <br>
-                <br>surgical_history
-                <br>{{ object.surgical_history }}
-
-                <br>
-                <br>social_history
-                <br>{{ object.social_history}}
-
-                <br>
-                <br>family_history
-                <br>{{ object.family_history }}
-
-                <br>
-                <br>allergies
-                <br>{{ object.allergies }}
-
-                <br>
-                <br>medications
-                <br>{{ object.medications }}
-
-                <br>
-                <br>review_of_systems
-                <br>{{ object.review_of_systems }}
-
-                <br>
-                <br>physical_examination
-                <br>{{ object.physical_examination }}
-
-                <br>
-                <br>medical_case_category
-                <br>{% for medical_case_category in object.medical_case_category.all %}
-                <ul><li>{{ medical_case_category}}</li></ul>
-                {% endfor %}
 
                 <table style="border-spacing:5px"><tr><td>
                     <br><img class="circle" src="{{object.doctor.avatar.url }}" class="responsive-img img-fluid"
@@ -74,19 +37,27 @@
             {% csrf_token %}
            {% form form=form %}{% endform %}
 
-            <button type="submit" name="_submit" class="btn">Comment</button>
+            <button type="submit" name="_submit" class="btn">Post Comment</button>
         </form>
+                    <br><br>
 
 
     {% for comment in view.comments %}
-        <br>{{ comment.comment_content }}
-        <br>{{ comment.doctor.first_name  }} &nbsp{{ comment.doctor.last_name  }}
-        <br>{{ comment.created_at }}
-        <br>
+        <br><span class="blue-grey-text">{{ comment.comment_content }}</span>
+        <br><br><span class="grey-text">Comment by:</span> Dr. {{ comment.doctor.first_name  }} &nbsp{{ comment.doctor.last_name  }}
+        <br><span class="grey-text">{{ comment.created_at }}</span>
+        <br><br>
+        <div class="divider"></div>
     {% endfor %}
             <br><br>
+
+
+
     </div>
             </div>
+                <div style="background-color: darkslategrey; height: 120px;" class="white-text" align="center">
+                  <br><br>&copy 2017 360MedNet - Medical Cases
+              </div>
             </div>
 
 

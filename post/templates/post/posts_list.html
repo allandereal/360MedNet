@@ -2,58 +2,143 @@
 {% load staticfiles %}
 {% load material_form %}
 
-{% block title %} Discussions | 360 MedNet {% endblock %}
-{% block large %}<br>
+{% block title_block %} 360 MedNet {% endblock %}
+{% block large %}
+<div style="min-height: 100vh; display: flex; flex-direction: column; background-color: #ffffff">
 
-{% if all_posts.count > 0 %}
+{#     <div class="card col s12 m12 l12">#}
+{#            <div class="card-image">#}
+{#            <a href="{% url 'medical_cases' %}"><img src="{% static 'userprofile/images/hdr3sml.jpg' %}"></a>#}
+{#                <br><span class="card-title" style="font-weight: 500">View All Shared Medical Cases</span>#}
+{#            </div>#}
+{#            <div class="card-action blue-grey" align="center">#}
+{#          <a href="{% url 'medical_cases' %}">View All Shared Medical Cases</a>#}
+{#        </div>#}
+{#        </div>#}
+{##}
+    <div class="row">
+
+          <div class="card col s12 m6 l6" style="height: 200px;">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/medisharedrk.jpeg' %}">
+                <br><span class="card-title" style="font-weight: 500">Upcoming Events</span>
+            </div>
+            <div class="card-content">
+            {% if top_five_latest_events %}
+                 <ul class="cyan-text">
+                     {% for event in top_five_latest_events %}
+                         <li>{{ event }}</li>
+                     {% endfor %}
+            </ul>
+                {% else %}
+                <br><span class="red-text">There are no upcoming Events or Conferences.</span>
+            {% endif %}
+            </div>
+          <br>
+          </div>
+
+{#    <div class="card col s12 m6 l6" style="height: 200px;">#}
+{#            <div class="card-image">#}
+{#              <img src="{% static 'userprofile/images/medisharedrk.jpeg' %}">#}
+{#                <br><span class="card-title" style="font-weight: 500">New Doctors</span>#}
+{#            </div>#}
+{#            <div class="card-content">#}
+{#            {% if top_five_latest_doctors %}#}
+{#                 <ul class="cyan-text">#}
+{#                     {% for doctor in top_five_latest_doctors %}#}
+{#                         <li>{{ doctor.first_name }}</li>#}
+{#                     {% endfor %}#}
+{#            </ul>#}
+{#                {% else %}#}
+{#                <br><span class="red-text">There are no upcoming Events or Conferences.</span>#}
+{#            {% endif %}#}
+{#            </div>#}
+{#          <br>#}
+{#          </div>#}
+
+          <div class="card col s12 m6 l6" style="height: 200px;">
+            <div class="card-image">
+              <img src="{% static 'userprofile/images/medisharedrk.jpeg' %}">
+                <br><span class="card-title" style="font-weight: 500">Latest Medical Cases</span>
+            </div>
+            <div class="card-content">
+
+            {% if top_five_latest_medical_cases %}
+                  <ul class="cyan-text">
+                      {% for medical_case in top_five_latest_medical_cases %}
+                          <li><a href="{% url 'medical_case-detail' medical_case.id %}">{{medical_case.title }}</a></li>
+                     {% endfor %}
+            </ul>
+                {% else %}
+                <br><span class="red-text">No Medical cases yet.</span>
+            {% endif %}
+            </div>
+          <br>
+          </div>
+    </div>
+
+    <div class="card" style="max-height: 100px">
+        <div class="card-image">
+            <a href="{% url 'posts' %}"><img src="{% static 'userprofile/images/medisharedrk.jpeg' %}"></a>
+                <br><span class="card-title" style="font-weight: 500">Forum</span>
+            </div>
+    </div>
+
+<div class="infinite-container">
         {% for post in all_posts %}
-
+        <div class="infinite-item" >
          <div class="col s12 m12 l12">
             <div class="row">
             <div class="col l12 m12 s12">
-              <div class="card">
+                <div class="card">
             <div class="container">
-                <br><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+
+                <h5 style="padding-top: 10px"> {{ post.title }} </h5>
+                {% if post.image %}
+                <img height="200px" width="350px" src="{{ post.image.url }}">
+                {% endif %}
             <br>{{ post.post_content }}
-            <br><br>
 
-                  <table><tr><td>
-                    <br><img class="round" src="{{post.doctor.avatar.url }}" class="responsive-img img-fluid"
-                     style='max-height:70px;'>
-                </td>
-                        <td><br>Dr. {{ post.doctor.first_name }} {{ post.doctor.last_name }}
-            <br>{{ post.doctor.profession}} at {{ post.doctor.hospital}}
-            <br>on {{ post.created_at}}
-                    </td>
-                </tr></table>
+        <table>
+              <tr>
+                  <td>
+                    <img class="round" src="{{post.doctor.avatar.url }}" class="responsive-img img-fluid" style='max-height:70px;'>
+                  </td>
+                  <td>Dr. {{ post.doctor.first_name }} {{ post.doctor.last_name }}
+                      <br>{{ post.doctor.profession}} at {{ post.doctor.hospital}}
+                      <br>on {{ post.created_at}}
+                  </td>
+              </tr>
+        </table>
+            <hr>
+                <p style="padding-bottom: 10px"><a href="{{ post.get_absolute_url }}">comment</a></p>
                  </div>
+
               </div>
-            </div>
-            </div>
-         </div>
-<br><br><br>
 
+     </div>
+            </div>
+            </div>
+            </div>
         {% endfor %}
-{% else %}
-
-     <div class="col s12 m12 l12">
-            <div class="row">
-        <div class="col l12 m12 s12">
-          <div class="card">
-            <div class="card-image">
-              <img src="{% static 'userprofile/images/secure.jpg' %}" alt ="360 MedNet is Secure">
+    </div>
+      {% if all_posts.has_next %}
+      <div class="col s12 m12 l12">
+        <div class="row">
+            <div class="col l12 m12 s12">
+                <a class="infinite-more-link" href="?page={{ all_posts.next_page_number }}">
+                    <div style="height: 50px; text-align: center; font-size: 2em" class="card">More</div>
+                </a>
             </div>
-            <div class="card-content">
-            <span class="card-title"></span>
-              <p class="blue-grey-text">Sorry. Nothing  has been posted. Please share something with us.</p>
-            </div>
-          </div>
         </div>
       </div>
-          </div>
 
+      {% endif %}
 
-{% endif %}
+      <div class="loading" style="display: none;">
+        Loading...
+      </div>
+
 
     <div class="col s12 m12 l12">
             <div class="row">
@@ -68,7 +153,86 @@
           </div>
         </div>
       </div>
-          </div>
+    </div>
+</div>
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+
+{#{% if all_posts.count > 0 %}#}
+{#        {% for post in all_posts %}#}
+{##}
+{#         <div class="col s12 m12 l12">#}
+{#            <div class="row">#}
+{#            <div class="col l12 m12 s12">#}
+{#              <div class="card">#}
+{#            <div class="container">#}
+{#                <br><h5 style="font-weight: 300"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h5>#}
+{#                <br><span class="blue-grey-text">{{ post.post_content }}</span>#}
+{#            <br>#}
+{#                <div class="divider"></div>#}
+{##}
+{#                  <table><tr><td>#}
+{#                    <br><img class="round" src="{{post.doctor.avatar.url }}" class="responsive-img img-fluid"#}
+{#                     style='max-height:70px;'>#}
+{#                </td>#}
+{#                      <td><br><span class="blue-text">Dr. {{ post.doctor.first_name }} {{ post.doctor.last_name }}</span>#}
+{#            <br><span class="grey-text">{{ post.doctor.profession}} at {{ post.doctor.hospital}}#}
+{#                              <br>on {{ post.created_at}}</span>#}
+{#                    </td>#}
+{#                </tr></table>#}
+{#                 </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            </div>#}
+{#         </div>#}
+{#<br><br><br>#}
+{##}
+{#        {% endfor %}#}
+{#{% else %}#}
+{##}
+{#     <div class="col s12 m12 l12">#}
+{#            <div class="row">#}
+{#        <div class="col l12 m12 s12">#}
+{#          <div class="card">#}
+{#            <div class="card-image">#}
+{#              <img src="{% static 'userprofile/images/secure.jpg' %}" alt ="360 MedNet is Secure">#}
+{#            </div>#}
+{#            <div class="card-content">#}
+{#            <span class="card-title"></span>#}
+{#              <p class="blue-grey-text">Sorry. Nothing  has been posted. Please share something with us.</p>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#          </div>#}
+{##}
+{##}
+{#{% endif %}#}
+{##}
+{#    <div class="col s12 m12 l12">#}
+{#            <div class="row">#}
+{#        <div class="col l12 m12 s12">#}
+{#          <div class="card card blue-grey darken-1 card-content white-text">#}
+{#            <div class="card-content">#}
+{#            <p>Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</p>#}
+{#                <p class="amber-text">{{ user.doctor.profession }} at {{ user.doctor.hospital }}</p>#}
+{#                <p class="white-text"><font size="1.5em"> &copy 2017 360MedNet</font></p>#}
+{##}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#          </div>#}
+
 
 
 {% endblock %}

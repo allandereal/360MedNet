@@ -375,15 +375,21 @@ class SocialSite(models.Model):
 
 
 class Record(models.Model):
+    FILE_CATEGORY = (('Medical Records DB File', 'Medical Records DB file'),
+                     ('Gathered inhouse emails', 'Gathered inhouse emails'))
     file = models.FileField(upload_to="records")
+    file_category = models.CharField(max_length=20, choices=FILE_CATEGORY)
     synced = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     @classmethod
     def get_record_file(cls):
-        if cls.objects.filter(synced=False).exists():
-            csv_file = cls.objects.filter(synced=False).first().file
+        if cls.objects.filter(synced=False, file_category='Medical Records DB File').exists():
+            csv_file = cls.objects.filter(synced=False, file_category='Medical Records DB File').first().file
             Medic.create_medic(csv_file=csv_file)
+        elif cls.objects.filter(synced=False, file_category='Gathered inhouse emails').exists():
+            csv_file = cls.objects.filter(synced=False, file_category='Medical Records DB File').first().file
+            MedicEmail.create_medic(csv_file=csv_file)
         else:
             print("All files synced")
 
@@ -396,7 +402,7 @@ class Medic(models.Model):
     surname = models.CharField(max_length=100)
     other_name = models.CharField(max_length=100)
     email = models.EmailField()
-    sex = models.CharField(max_length=1)
+    sex = models.CharField(max_length=6)
     employer = models.CharField(max_length=100)
     postal_address = models.CharField(max_length=100)
     first_registration = models.CharField(max_length=100)
@@ -414,14 +420,14 @@ class Medic(models.Model):
     def create_medic(cls, csv_file):
         medical_practitioner = 0
 
-        url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
-        ftpstream = urllib.request.urlopen(url)
-        csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
-        csvfile = csv.reader(url)
+        # url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
+        # ftpstream = urllib.request.urlopen(url)
+        # csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
+        # csvfile = csv.reader(url)
         # csvfile = csv.reader(io.TextIOWrapper(ftpstream))
-        # with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
-        #     f = default_storage.open(os.path.join(str(csv_file)), 'r')
-        #     csvfile = csv.reader(f)
+        with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
+            f = default_storage.open(os.path.join(str(csv_file)), 'r')
+            csvfile = csv.reader(f)
 
         for row in csvfile:
             reg_number = row[0]
@@ -453,3 +459,45 @@ class Medic(models.Model):
 
     def __str__(self):
         return self.reg_number
+
+
+class MedicEmail(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    profession = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField()
+    invitation_status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    @classmethod
+    def create_medic(cls, csv_file):
+        medical_practitioner = 0
+
+        # url = "https://360mednet.s3.amazonaws.com/%s" % csv_file
+        # ftpstream = urllib.request.urlopen(url)
+        # csvfile = csv.reader(ftpstream.read().decode('ISO-8859-1'))
+        # csvfile = csv.reader(url)
+        # csvfile = csv.reader(io.TextIOWrapper(ftpstream))
+        with default_storage.open(os.path.join(str(csv_file)), 'rt') as f:
+            f = default_storage.open(os.path.join(str(csv_file)), 'r')
+            csvfile = csv.reader(f)
+
+        for row in csvfile:
+            email = row[2]
+            if not Medic.medic_exists(email):
+                Medic.objects.create(name=row[0], profession=row[1], email=row[2])
+                medical_practitioner = + 1
+            else:
+                Medic.objects.filter(email=row[2]).update(name=row[0], profession=row[1])
+                medical_practitioner = + 1
+
+            Record.objects.filter(file=csv_file).update(synced=True)
+        return medical_practitioner
+
+    @classmethod
+    def medic_exists(cls, email):
+        return cls.objects.filter(email=email).exists()
+
+    def __str__(self):
+        return self.name
+

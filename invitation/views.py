@@ -1,6 +1,6 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -14,6 +14,7 @@ from userprofile.forms import DoctorForm, UserForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.edit import UpdateView, CreateView
+from userprofile.models import MedicEmail
 
 
 @staff_member_required
@@ -39,6 +40,26 @@ def invite_user(request):
         form = MedicInvitationForm()
 
     return render(request, 'invitation/user_invite.html', {'form': form})
+
+
+@staff_member_required
+def bulk_invite(request):
+    medics = MedicEmail.objects.filter(invitation_status=False).all()
+    invited_medics = 0
+    if medics.count() > 0:
+        for medic in medics:
+            invitation = Invitation(
+                name=medic.name,
+                email=medic.email,
+                code=User.objects.make_random_password(6)
+            )
+            if invitation.email and not User.objects.filter(email=invitation.email).exists():
+                invitation.save()
+                invitation.send_invite()
+                MedicEmail.objects.filter(email=invitation.email).update(invitation_status=True)
+                invited_medics += 1
+
+    return HttpResponse('Successfully invited %s medics via email' % invited_medics)
 
 
 def invite_friend(request):

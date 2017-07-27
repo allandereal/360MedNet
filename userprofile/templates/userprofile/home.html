@@ -3,16 +3,22 @@
  <head>
      {% load material_form %}
      {% load staticfiles %}
+        {% block head %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-        <link rel="shortcut icon"  type="image/png" href="{% static 'userprofile/images/favicon.png' %}">
-            <title>{% block title %}{% endblock %}</title>
+        <title>{% block title_block %}{% endblock %}</title>
+
+        {% block favicon %}<link href="{% static 'userprofile/images/logo.png' %}">{% endblock %}
 
         {% block css %}{% include 'material/frontend/includes/material_css.html' %}{% endblock css %}
             <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+            <script src="{% static 'material/js/jquery-3.2.1.min.js' %}"></script>
+            <script src="{% static 'material/js/jquery.waypoints.min.js' %}"></script>
+            <script src="{% static 'material/js/infinite.min.js' %}"></script>
         {% block js %}{% include 'material/frontend/includes/material_js.html' %}{% endblock js %}
         {% block extrahead %}{% endblock %}
+        {% endblock head %}
 
     </head>
     <body class="{% block bodyclass %}with-sidebar{% endblock %}">
@@ -25,55 +31,27 @@
          <li><div class="userView">
       <div align="center" >
 
-            <img class="circle-clipper" src="{{user.doctor.avatar.url }}" class="responsive-img img-fluid"
+            <img class="circle-clipper" src="{{ user.doctor.avatar.url }}" class="responsive-img img-fluid"
                      style='max-height:150px;'>
 
       </div>
          </div></li>
-{#        <li><a href="{% url 'profile' user.username %}"><i class="material-icons">account_box</i><span#}
-{#                class="green-text email">#}
-{#           Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span></a></li>#}
-{##}
-{#        <li><a href="#!"><i class="material-icons">class</i><font size="2em">{{ user.doctor.profession }}#}
-{#            at {{ user.doctor.hospital }}</font></a></li>#}
 
         <div class="container" align="center">
             <span class="blue-grey-text">Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</span>
-            <span class="grey-text"><font size="2em"><br> {{ user.doctor.profession }}<br>{{ user.doctor.hospital }}
+            <span class="grey-text"><font size="2em"><br> {{ qualification }}<br> {{ user.doctor.profession }}
+                <br>{{ user.doctor.hospital }}
                 <br>{{ user.doctor.country }}</font></span>
             <a href="{% url 'profile' user.get_username  %}"class="deep-orange-text">My Profile</a>
         </div>
 
 
         <li><div class="divider"></div></li>
-        <li><a href="{% url 'medical_cases' %}" class="blue-grey-text"><i class="material-icons">mode_edit</i>Medical Cases</a></li>
-        <li><a href="{% url 'all-discussions' %}" class="blue-grey-text"><i class="material-icons">loyalty</i>Discussion</a></li>
-        <li><a href="{% url 'events' %}" class="blue-grey-text"><i class="material-icons">chat</i>Events & Conferences</a></li>
+        <li><a href="{% url 'medical_cases' %}" class="blue-grey-text"><i class="material-icons">queue_play_next</i>View Medical Cases</a></li>
+        <li><a href="{% url 'Post' %}" class="blue-grey-text"><i class="material-icons">mode_edit</i>Post on Forum</a></li>
+        <li><a href="{% url 'events' %}" class="blue-grey-text"><i class="material-icons">insert_invitation</i>Events & Conferences</a></li>
         <li><div class="divider"></div></li>
 
-          <li class="no-padding">
-            <ul class="collapsible collapsible-accordion">
-              <li>
-                <a class="collapsible-header">View Medical Cases<i class="material-icons">arrow_drop_down</i></a>
-                <div class="collapsible-body">
-                  <ol>
-                    <li><a href="#!" class="green-text">Allergy & Immunology</a></li>
-                    <li><a href="#!" class="green-text">Cancer</a></li>
-                    <li><a href="#!" class="green-text">Cardiology</a></li>
-                    <li><a href="#!" class="green-text">Dermatology</a></li>
-                    <li><a href="#!" class="green-text">Endocrinology</a></li>
-                    <li><a href="#!" class="green-text">Gastroenterology</a></li>
-                    <li><a href="#!" class="green-text">Gynecology</a></li>
-                    <li><a href="#!" class="green-text">Neurology</a></li>
-                    <li><a href="#!" class="green-text">Pediatrics</a></li>
-                    <li><a href="#!" class="green-text">Plastic Surgery</a></li>
-                    <li><a href="#!" class="green-text">Dental & Oral</a></li>
-                    <li><a href="#!" class="green-text">Infrctious Diseases</a></li>
-                  </ol>
-                </div>
-              </li>
-            </ul>
-          </li>
         <li><div class="divider"></div></li>
             <br>
         <div align="center">
@@ -100,35 +78,27 @@
                       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
                             <div class="nav-wrapper" style="max-width:70%">
-                                    <a href="{% url 'medical-case' %}"><i class="material-icons left">mode_edit</i>New Medical Case</a>
-                                <ul class="right hide-on-large-only">
-                                <li><a href="#"><i class="material-icons left">notifications</i></a></li>
-                                <li><a href="#"><i class="material-icons right">mail</i></a></li>
-                              </ul>
-                              <ul class="right hide-on-med-and-down">
-                                <li><a href="#"><i class="material-icons left">notifications</i>Notifications</a></li>
-                                <li><a href="#"><i class="material-icons right">mail</i>Messages</a></li>
-                              </ul>
+                                    <a href="{% url 'posts' %}"><img src="{% static 'userprofile/images/textlogohome.png' %}"
+                                        style='max-height:55px;padding-top:5px;'></a>
                             </div>
                           </nav>
                 </div>
-                <div class="hide-on-med-and-up" style="background-color: steelblue; height:50px; position: static;"></div>
+{#                <div class="hide-on-med-and-up" style="background-color: steelblue; height:50px; position: static;"></div>#}
                 {% block content %}
 
                     <div class="row">
 
-                      <div class="col s12 m8 l8">
+                      <div class="col s12 m8 l9">
                         {% block large %}
                              {% endblock large %}
                       </div>
 
-                      <div class="col s12 m4 l4">
+                      <div class="col s12 m4 l3">
                           {% block thin %}
-                              <br>
-                              <div class="col l12">
-                              <div class="card">
-                                <div class="card-image">
-                                  <img src="{% static 'userprofile/images/eventheader.jpg' %}" alt ="360 MedNet is Secure">
+                              <div class="card col l12">
+                                <br>
+                                  <div class="card-image">
+                                  <img src="{% static 'userprofile/images/eventheader.jpg' %}">
                                 </div>
                                 <div class="card-content">
                                 <span class="deep-orange-text"></span>
@@ -154,46 +124,45 @@
                                             </div>
                                 </div>
                               </div>
-                            </div>
+
                               <br><br>
-                              <div class="col l12">
-                              <div class="card">
+
+                              <br><br>
+
+                              <br><br>
+
+
+                                <div class="card col s12 m12 l12">
+                                <ul>
+                                    <li><a href="{% url 'friend_invite' %}" class="blue-grey-text"><i class="material-icons">
+                                        queue_play_next</i>&nbsp;&nbsp;&nbsp;&nbsp; Invite Friend</a></li>
+                                    <li><a href="{% url 'suggest-doctor' %}" class="blue-grey-text"><i class="material-icons">
+                                        mode_edit</i>&nbsp;&nbsp;&nbsp;&nbsp;Suggest Doctor</a></li>
+                                    <li><a href="{% url 'all-discussions' %}" class="blue-grey-text"><i class="material-icons">
+                                        insert_invitation</i>&nbsp;&nbsp;&nbsp;&nbsp;Discussion Forum</a></li>
+                                </ul>
+                                </div>
+
+                              <div class="card col l12">
                                 <div class="card-image">
-                                  <img src="{% static 'userprofile/images/cardhdr.png' %}" alt ="360 MedNet is Secure">
+                                  <img src="{% static 'userprofile/images/cardhdr.png' %}">
                                 </div>
                                 <div class="card-content">
                                 <span class="deep-orange-text">New Doctors</span>
-                                  <p class="blue-grey-text">360 MedNet is secure and abides by the patient confidentiality act. No Personal Information will be publicised in any way.</p>
+                                  {% if top_five_latest_medics %}
+                                          <ul class="cyan-text">
+                                              {% for medic in top_five_latest_medics %}
+                                                  <li>Dr. {{ medic.first_name }} {{ medic.last_name }}</li>
+{#                                                  <li><a href="{% url 'doctor-detail' doctor.id %}">#}
+{#                                                      Dr. {{ user.doctor.first_name }} {{ user.doctor.last_name }}</a></li>#}
+                                             {% endfor %}
+                                    </ul>
+                                        {% else %}
+                                        <br><span class="red-text">No New Medics.</span>
+                                    {% endif %}
                                 </div>
                               </div>
-                            </div>
-                              <br><br>
-                              <div class="col l12">
-                              <div class="card">
-                                <div class="card-content">
-                                <span class="deep-orange-text">New Doctors</span>
-                                   <br>
-                                    {% for doctor in object_list %}
-                                       <table><tr><td><img class="circle" src="{{user.doctor.avatar.url }}"
-                                             class="responsive-img img-fluid"
-                                                    style='max-height:50px; max-width: 50px'></td><td><p class="blue-grey-text">Dr. {{ user.doctor.first_name }}
-                                           {{ user.doctor.last_name }}</p></td></tr></table>
-                                    {% endfor %}
-                                </div>
-                              </div>
-                            </div>
-                              <br><br>
-                              <div class="col l12">
-                              <div class="card">
-                                <div class="card-image">
-                                  <img src="{% static 'userprofile/images/cardhdr.png' %}" alt ="360 MedNet is Secure">
-                                </div>
-                                <div class="card-content">
-                                <span class="deep-orange-text">New Doctors</span>
-                                  <p class="blue-grey-text">360 MedNet is secure and abides by the patient confidentiality act. No Personal Information will be publicised in any way.</p>
-                                </div>
-                              </div>
-                            </div>
+
 
                           {% endblock thin %}
                       </div>

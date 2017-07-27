@@ -1,72 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+  <html>
+    <head>
+          {% load staticfiles %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
-{% load staticfiles %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        {% include 'material/includes/material_css.html' %}
+        <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+        <script src="{% static 'material/js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'material/js/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'material/js/infinite.min.js' %}"></script>
+        {% include 'material/includes/material_js.html' %}
 
-    {% include 'material/includes/material_css.html' %}
-    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
-    {% include 'material/includes/material_js.html' %}
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="{% static 'userprofile/images/logo.png' %}">
+        <title>{% block title_block %} {% endblock %}</title>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+     <style>
+            .buttons-wrapper {
+          position: absolute;
+          height: calc(70vh);
+          margin-top: 150px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 997;
+          top: 0;
+          pointer-events: none;
+          width: 100%;
+        }
+        .buttons-wrapper a {
+          pointer-events: auto;
+        }
+        .mg-rg {
+          margin-right: 1rem;
+          margin-left: 1rem;
+          margin-top: 1rem;
+        </style>
 
-    <link rel="shortcut icon" href="{% static 'userprofile/images/favicon.png' %}"/>
-    <title>{% block title %} {% endblock %}</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    </head>
 
-    <style>
-    .buttons-wrapper {
-  position: absolute;
-  height: calc(70vh);
-  margin-top: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 997;
-  top: 0;
-  pointer-events: none;
-  width: 100%;
-}
-.buttons-wrapper a {
-  pointer-events: auto;
-}
-.mg-rg {
-  margin-right: 1rem;
-  margin-left: 1rem;
-  margin-top: 1rem;
-}</style>
-
-</head>
-<body>
-
-<div class="navbar-fixed">
-<nav>
+    <body>
+	<nav>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
     <div class="nav-wrapper">
-	<div class="container" style="width: 85%">
-
-        <ul class="left hide-on-small-and-down">
+	<div class="container" style="width: 80%;">
+	   <ul class="left">
             <li><a href="{% url 'verify' %}"><img src="{% static 'userprofile/images/textlogo.png' %}"
                                         style='max-height:55px;padding-top:5px;'></a></li>
         </ul>
-        <ul class="right">
+
+      <ul class="right hide-on-med-and-down">
 
           <li><a href="{% url 'about_us' %}">About Us</a></li>
             <li><a href="{% url 'verify' %}">Help</a></li>
             <li><a href="{% url 'login' %}"><font color="#faebd7"><i class="material-icons right">input</i>Login</font></a></li>
-            <li><a href="{% url 'reg_1' %}"><font color="#7fffd4" size="4em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
+            <li><a href="{% url 'join' %}"><font color="#7fffd4" size="4em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
         </ul>
+
+	  <ul id="slide-out" class="side-nav">
+    <li>
+        <div align="center">
+          <img src="{% static 'userprofile/images/logo.png' %}" class="responsive-img" style="max-width: 180px">
+        </div>
+        </li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Menu</a></li>
+    <li><a href="{% url 'about_us' %}"><i class="material-icons">view_stream</i>About Us</a></li>
+    <li><a href="{% url 'privacy_policy' %}"><i class="material-icons">view_stream</i>Privacy Policy</a></li>
+    <li><a href="{% url 'terms_of_use' %}"><i class="material-icons">mode_edit</i>Terms of Use</a></li>
+	<li><a href="{% url 'website_help' %}"><i class="material-icons">today</i>Help</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Account</a></li>
+    <li><a class="waves-effect" href="{% url 'login' %}"><font color="#ff7f50"><i class="material-icons right">input</i>Login</font></a></li>
+    <li><a class="waves-effect" href="{% url 'join' %}"><font color="#008b8b" size="3em"><i class="material-icons right">bubble_chart</i>Sign Up</font></a></li>
+    <li><div class="divider"></div></li>
+      <li>
+        <div align="center">
+          <br><font color="#4682b4" size="2em">&copy 2017 360MedNet All rights reserved.</font>
+        </div>
+    </li>
+</ul>
 	  </div>
     </div>
-   </nav>
-</div>
-{% block content %}
-{% endblock %}
-<footer class="page-footer">
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+	<footer class="page-footer">
 
           <div class="container">
 
@@ -76,17 +100,20 @@
               </div>
                 <div class="col l4 m4 s12">
                     <ul>
-                        <li><a href="#!"><i class="material-icons">phone</i>&nbsp&nbspTelephone</a></li>
-                        <li><a href="#!"><i class="material-icons">email</i>&nbsp&nbspEmail</a></li>
-                        <li><a href="#!"><i class="material-icons">room</i>&nbsp&nbspAddress</a></li>
+                        <li><a href="#!"><i class="material-icons">phone</i>&nbsp&nbsp+256 782 764739</a></li>
+                        <li><a href="#!"><i class="material-icons">email</i>&nbsp&nbspinfo@360mednet.com</a></li>
+                        <li><a href="#!"><i class="material-icons">room</i>&nbsp&nbspJerrifer House, Nabunya road, Rubaga</a></li>
                         <li><a href="#!"><i class="material-icons">phone_iphone</i>&nbsp&nbspSomething Else</a></li>
                     </ul>
               </div>
                 <div class="col l4 m4 s12">
                     <ul>
-                        <li><a href="#!"><i class="fa fa-facebook fa-lg"></i>&nbsp&nbsp facebook</a></li>
+                        <li><a href="https://www.facebook.com/360MedNet-832252040266201/">
+                            <i class="fa fa-facebook fa-lg"></i>&nbsp&nbsp facebook</a></li>
                         <li><a href="#!"><i class="fa fa-twitter fa-lg"></i>&nbsp&nbsp twitter</a></li>
                         <li><a href="#!"><i class="fa fa-youtube-play fa-lg"></i>&nbsp&nbsp youtube</a></li>
+                        <li><a href="https://www.linkedin.com/company-beta/18147086/">
+                            <i class="fa fa-linkedin fa-lg"></i>&nbsp&nbsp LinkedIn</a></li>
                     </ul>
               </div>
             </div>
@@ -95,18 +122,31 @@
             <div class="container">
             © 2017 360MedNet
                 <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Help</a>
-            <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Terms of Use &nbsp | &nbsp</a>
+                 <a class="grey-text text-lighten-4 right"href="{% url 'terms_of_use' %}">Terms of Use &nbsp | &nbsp</a>
                 <a class="grey-text text-lighten-4 right"href="{% url 'privacy_policy' %}">Privacy Policy &nbsp | &nbsp</a>
             </div>
           </div>
         </footer>
 
-<script>
-$(document).ready(function(){
+      <!--Import jQuery before materialize.js-->
+
+	  <script>
+		$('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: false // Choose whether you can drag to open on touch screens
+    }
+  );
+		$(document).ready(function(){
       $('.slider').slider();
     });
-$('.carousel.carousel-slider').carousel({fullWidth: true});
-</script>
+		 $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+	  </script>
 
-</body>
-</html>
+
+    </body>
+
+  </html>

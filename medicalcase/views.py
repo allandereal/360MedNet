@@ -12,13 +12,18 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, MedicalCaseSearchForm
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from post.models import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class MedicalCaseCreate(CreateView):
     model = MedicalCase
     form_class = MedicalCaseForm
 
-    success_url = '/medical_cases/'
+    success_url = '/medical-cases/'
     template_name = 'medicalcase/medicalcase_form.html'
 
     def form_valid(self, form):
@@ -31,21 +36,20 @@ class MedicalCaseList(ListView):
     model = MedicalCase
     form_class = MedicalCaseSearchForm
     template_name = 'medicalcase/medicalcase_list.html'
+    context_object_name = 'medical_cases'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalCaseList, self).get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        return context
 
     def get_queryset(self):
         form = self.form_class(self.request.GET)
         if form.is_valid():
-            return MedicalCase.objects.filter(medical_case_category__icontains=
+            return MedicalCase.objects.filter(medical_case_category__in=
                                               form.cleaned_data['medical_case_category'])
         return MedicalCase.objects.all()
-
-
-# def search_medicalcases(request):
-#     form = MedicalCaseSearchForm
-#     if request.method == 'GET':
-#         if form.is_valid():
-#             return MedicalCase.objects.filter(medical_case_category__icontains=
-#                                               form.cleaned_data['medical_case_category'])
 
 
 class MedicalCaseDetail(ModelFormMixin, DetailView):
@@ -53,7 +57,7 @@ class MedicalCaseDetail(ModelFormMixin, DetailView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse('medical_case-detail', kwargs={'pk': self.object.pk})
+        return reverse('medical-case-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(MedicalCaseDetail, self).get_context_data(**kwargs)
@@ -75,3 +79,33 @@ def medical_case_comment_add_view(request, pk):
         form.save()
         return HttpResponseRedirect(reverse('medical_case-detail', kwargs={'pk': pk}))
     return HttpResponseRedirect(reverse('medical_case-detail', kwargs={'pk': pk}))
+
+
+def send_top_five_medical_cases_weekly(request):
+    weekly_five_medical_cases = MedicalCase.weekly_top_five_medical_case()
+    subject_medical_case = MedicalCase.objects.last()
+    weekly_top_five_discussions = Post.weekly_top_five_discussions()
+    registered_doctors = Doctor.objects.all()
+    #registered_doctors_mailing_list = []
+    for registered_doctor in registered_doctors:
+        # registered_doctors_mailing_list.append(registered_doctor.user.email) ## might need to accesss name of the docs
+
+        current_site = get_current_site(request)
+        subject = subject_medical_case.title
+        message = render_to_string('medicalcase/medicalcase_email_update.html', {
+            'weekly_five_medical_cases': weekly_five_medical_cases,
+            'weekly_top_five_discussions': weekly_top_five_discussions,
+            'doctor': registered_doctor,
+            'domain': current_site.domain,
+
+        })
+        to_email1 = registered_doctor.user.email
+        email = EmailMessage(subject, message, to=[to_email1])
+        email.content_subtype = "html"
+        email.send()
+
+    return HttpResponse("Successfully sent")
+
+
+def view_medical_case_email(request):
+    return render(request, 'medicalcase/medicalcase_email_update.html')

@@ -1,20 +1,54 @@
+
 {% extends "userprofile/home.html" %}
 
 {% block title %}Invite a Medic Friend{% endblock %}
-{% block content %}
-     {% if messages %}
+{% block large %}
+{#     <div class="container" style="position: fixed; top: 25%; left: 25%">#}
+    <div class="container col l12 m12 s12">
+    <div class="card">
+    <div class="container">
+         {% if messages %}
     <ul class="messages">
       {% for message in messages %}
         <li>{{ message }}</li>
       {% endfor %}
     </ul>
   {% else %}
-Enter your friend name and email below,
-and click "send invite" to invite your friend to join the 360MedNet:
+             <br><br>
+             <span class="blue-grey-text flow-text" style="font-weight: 500">Invite a Friend.</span>
+             <br>
+<span class="green-text" style="font-weight: 300">Enter your friend's Full names and email to send them an
+    invite to 360MedNet.</span>
 <form method="post" action=".">
 {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="send invite" />
+  <input class="btn green waves-effect waves-yellow" type="submit" value="send invite" />
 </form>
     {% endif %}
+    <br><br><br>
+    </div>
+    </div>
+</div>
+
 {% endblock %}
+
+{#{% extends "userprofile/home.html" %}#}
+{##}
+{#{% block title %}Invite a Medic Friend{% endblock %}#}
+{#{% block content %}#}
+{#     {% if messages %}#}
+{#    <ul class="messages">#}
+{#      {% for message in messages %}#}
+{#        <li>{{ message }}</li>#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#  {% else %}#}
+{#Enter your friend name and email below,#}
+{#and click "send invite" to invite your friend to join the 360MedNet:#}
+{#<form method="post" action=".">#}
+{#{% csrf_token %}#}
+{#  {{ form.as_p }}#}
+{#  <input type="submit" value="send invite" />#}
+{#</form>#}
+{#    {% endif %}#}
+{#{% endblock %}#}

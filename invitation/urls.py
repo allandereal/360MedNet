@@ -5,6 +5,7 @@ from .forms import RegistrationForm1, RegistrationForm2, RegistrationForm3
 
 urlpatterns = [
     url(r'^invite/$', invitation_views.invite_user, name='invite'),
+    url(r'^bulk/invite/$', invitation_views.bulk_invite, name='bulk-invite'),
     url(r'^friend/invite/$', login_required(invitation_views.invite_friend), name='friend_invite'),
     url(r'^join/(?P<code>[a-zA-Z0-9]+)/$', invitation_views.join, name='join'),
     url(r'^join/friend/(?P<code>[a-zA-Z0-9]+)/$', invitation_views.join_friend_invite, name='join_friend_invite'),
