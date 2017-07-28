@@ -4,6 +4,8 @@ staticfiles
 MedNet/settings.py
 .idea
 .env
+.DS_Store
+
 
 
 
