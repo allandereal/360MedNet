@@ -10,7 +10,7 @@ def email_already_registered_or_invited(value):
     if User.objects.filter(email=value).exists():
         raise forms.ValidationError("Email provided is already registered with 360MedNet.")
     elif Invitation.objects.filter(email=value, accepted=False).exists():
-        raise forms.ValidationError("Email provided was already invited and has not net accepted the invitation.")
+        raise forms.ValidationError("Email provided was already invited and has not yet accepted the invitation.")
     elif Invitation.objects.filter(email=value, accepted=True).exists():
         raise forms.ValidationError("Email provided was already invited and accepted the invitation")
     else:
