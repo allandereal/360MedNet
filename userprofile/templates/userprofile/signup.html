@@ -5,7 +5,7 @@
 {% block title_block %}360MedNet{% endblock %}
 
 {% block content %}
-<br><br><br><br><br>
+<br>
 
     <div class ="container">
     <div class="card blue-grey darken-1 card-content white-text">
@@ -20,7 +20,6 @@
       {% endfor %}
     </ul>
       {% else %}
-          <br>
         <p class="flow-text" style="font-size: small" >Please provide details as they appear on your medical license.</p>
 
        <form method="post" class="viewform">
@@ -32,13 +31,14 @@
     {% endform %}
        <br>
        <div class="submit col s12">
-		<button class="btn waves-effect waves-light" type="submit" name="_submit"> Join
+		<button class="btn waves-effect waves-light" type="submit" name="_submit"> Send Request
     <i class="material-icons right">send</i>
-  </button><br><br><br>
+  </button><br><br>
        </div>
        </form>
           {% endif %}
           <br><br>
       <br><br></div></div></div></div>
-    <br>
+
+<br>
 {% endblock %}

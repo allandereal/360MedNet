@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'invitations',
     'multiselectfield',
     'django_countries',
+    'django_wysiwyg',
+    'ckeditor',
 
     # My Apps
     'userprofile',
@@ -141,6 +143,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # app specfic password generated from support.google.com/accounts/answer/185833
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 #  Heroku Settings
 if os.getcwd() == '/app':

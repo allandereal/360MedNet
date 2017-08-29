@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'friendship',
     'django_extensions',
     'invitations',
-
+    'multiselectfield',
+    'django_countries',
+    'django_wysiwyg',
+    'ckeditor',
 
     # My Apps
     'userprofile',
@@ -166,6 +169,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = '360MedNet <info360mednet@gmail.com>'
 
 LOGIN_REDIRECT_URL = '/feed'
+#DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 #  Heroku Settings
 if os.getcwd() == '/app':
